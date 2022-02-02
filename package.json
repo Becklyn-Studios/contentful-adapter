@@ -1,0 +1,56 @@
+{
+    "name": "@mayd/contentful-adapter",
+    "version": "1.0.1",
+    "license": "UNLICENSED",
+    "homepage": "https://github.com/Becklyn-Studios/mayd-contentful-adapter",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Becklyn-Studios/mayd-contentful-adapter.git"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 0",
+        "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+        "lint": "prettier --check \"src/**/*.{ts,tsx}\"",
+        "build": "tsc && chmod +x lib/bin/mayd-contentful.js",
+        "prepublishOnly": "npm test && npm run lint && npm run build",
+        "preversion": "npm run lint"
+    },
+    "files": [
+        "lib/**/*",
+        "setup/**/*"
+    ],
+    "main": "lib/src/index.js",
+    "types": "lib/src/index.d.ts",
+    "bin": {
+        "mayd-contentful": "lib/bin/mayd-contentful.js"
+    },
+    "dependencies": {
+        "@contentful/rich-text-html-renderer": "^15.11.1",
+        "@contentful/rich-text-types": "^15.11.1",
+        "@mayd/ui-types": "^1.0.4",
+        "contentful": "^9.1.6",
+        "contentful-management": "^7.51.5",
+        "contentful-migration": "^4.7.0",
+        "dotenv": "^14.3.2",
+        "glob": "^7.2.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "ts-node": "^10.4.0",
+        "tsconfig-paths": "^3.12.0"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.2.0",
+        "@types/node": "^17.0.10",
+        "@types/react-dom": "^17.0.9",
+        "prettier": "^2.4.1",
+        "typescript": "^4.4.3"
+    },
+    "prettier": {
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "semi": true,
+        "printWidth": 100,
+        "singleQuote": false,
+        "arrowParens": "avoid"
+    }
+}

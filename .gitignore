@@ -1,0 +1,9 @@
+/.idea
+/node_modules
+
+# ignore build files
+/lib
+/public
+
+/package-lock.json
+/.DS_Store
