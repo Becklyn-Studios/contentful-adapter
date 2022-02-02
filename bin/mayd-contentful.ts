@@ -5,7 +5,7 @@ import { executeSetupCommand } from "../src/command/setup";
 const COMMAND_SETUP = "setup";
 const COMMAND_MIGRATE = "migrate";
 
-const arg = process.argv[3] ?? COMMAND_MIGRATE;
+const arg = process.argv[2] ?? COMMAND_MIGRATE;
 
 switch (arg) {
     case COMMAND_SETUP:
