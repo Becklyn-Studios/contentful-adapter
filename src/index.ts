@@ -32,17 +32,10 @@ export type {
     PageTreeNode,
     PageProps,
     ContentfulBasePage,
-    ContentfulEntry,
     ContentfulPage,
-    DetailedContentfulEntry,
-    BaseContentfulEntry,
     ContentfulPageSeo,
     FindEntryByIdsOptions,
     FindEntryOptions,
-    PageContent,
-    PageProperties,
-    SlotData,
-    BlockData,
 } from "./contentful/types";
 
 export {
@@ -63,4 +56,8 @@ export {
     ContentfulMigrationGenerator,
     ContentfulComponentMigrations,
 } from "./migrations/types";
+
+export { getPageMigration } from "./migrations/websites/page";
+
+export { getReferenceMigration } from "./migrations/websites/reference";
 //endregion

@@ -1,7 +1,6 @@
-import { Asset as ContentfulAsset } from "contentful";
-import { DetailedContentfulEntry, PageTreeNode } from "./types";
+import { Asset as ContentfulAsset, Entry } from "contentful";
+import { PageTreeNode } from "./types";
 import { Asset, LabeledLink, LinkReference } from "@mayd/ui-types";
-import page from "../migrations/websites/page";
 
 export const getContentfulSelectString = (select?: string[]): string | null => {
     if (!select) {
@@ -37,7 +36,7 @@ export const getAssetFromContentful = (data?: ContentfulAsset | null): Asset | n
 
 export const getLabeledLinkFromContentful = (
     pageTree: PageTreeNode,
-    data?: DetailedContentfulEntry<any> | null
+    data?: Entry<any> | null
 ): LabeledLink | null => {
     if (!data) {
         return null;

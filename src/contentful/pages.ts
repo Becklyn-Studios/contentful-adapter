@@ -1,11 +1,5 @@
-import { ContentfulClientApi } from "contentful";
-import {
-    ContentfulBasePage,
-    ContentfulEntry,
-    ContentfulPage,
-    PageProps,
-    PageTreeNode,
-} from "./types";
+import { ContentfulClientApi, Entry } from "contentful";
+import { ContentfulBasePage, ContentfulPage, PageProps, PageTreeNode } from "./types";
 import { findEntriesByIds, findOneEntry } from "./api";
 import { findPageBySlugInTree } from "./util";
 
@@ -27,7 +21,7 @@ export const loadPageData = async (
         };
     }
 
-    const data = findOneEntry<ContentfulPage>(client, {
+    const page = await findOneEntry<ContentfulPage>(client, {
         contentType: "page",
         where: {
             "sys.id": pageNode.id,
@@ -35,7 +29,7 @@ export const loadPageData = async (
         throwError: false,
     });
 
-    if (null === data) {
+    if (null === page) {
         return {
             pageTree,
             notFound: true,
@@ -44,6 +38,7 @@ export const loadPageData = async (
 
     return {
         pageTree,
+        page,
     };
 };
 
@@ -64,7 +59,7 @@ export const getSlugPathsFromPageTree = (
 
 export const loadPageTree = async (
     client: ContentfulClientApi,
-    page?: ContentfulEntry<ContentfulBasePage>
+    page?: Entry<ContentfulBasePage>
 ): Promise<PageTreeNode> => {
     page = !!page ? page : await findRootPage(client);
 
@@ -85,7 +80,7 @@ export const loadPageTree = async (
 
 export const findRootPage = async (
     client: ContentfulClientApi
-): Promise<ContentfulEntry<ContentfulBasePage>> => {
+): Promise<Entry<ContentfulBasePage>> => {
     const page = await findOneEntry<ContentfulBasePage>(client, {
         contentType: "page",
         select: ["fields.slug", "fields.childPages"],
@@ -103,8 +98,8 @@ export const findRootPage = async (
 
 const findChildPages = async (
     client: ContentfulClientApi,
-    parentPage: ContentfulEntry<ContentfulBasePage>
-): Promise<ContentfulEntry<ContentfulBasePage>[]> => {
+    parentPage: Entry<ContentfulBasePage>
+): Promise<Entry<ContentfulBasePage>[]> => {
     const childIds = getChildIdArray(parentPage);
 
     if (0 === childIds.length) {
@@ -118,7 +113,7 @@ const findChildPages = async (
     });
 };
 
-const getChildIdArray = (page: ContentfulEntry<ContentfulBasePage>): string[] => {
+const getChildIdArray = (page: Entry<ContentfulBasePage>): string[] => {
     const sysIds: string[] = [];
 
     if (page.fields && page.fields.childPages) {

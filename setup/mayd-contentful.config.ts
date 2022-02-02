@@ -13,6 +13,7 @@ const config: MaydContentfulAdapterConfigFile = {
     environmentId: process.env.CONTENTFUL_ENVIRONMENT_ID ?? "",
     backendLanguage: "en",
     components: [],
+    migrations: [],
 };
 
 export default config;

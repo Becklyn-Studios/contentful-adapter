@@ -2,6 +2,9 @@
 =====
 
 *   (bug) Fix `setup` command.
+*   (bug) Fix page api functions.
+*   (bug) Fix type declarations.
+*   (feature) Add `blockTextImage` migration.
 
 
 0.0.2

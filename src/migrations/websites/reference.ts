@@ -43,7 +43,9 @@ const translations = {
     },
 };
 
-const getMigration: ContentfulMigrationGenerator = (language): ContentfulComponentMigrations => {
+export const getReferenceMigration: ContentfulMigrationGenerator = (
+    language
+): ContentfulComponentMigrations => {
     return {
         component: "reference",
         migrations: {
@@ -100,5 +102,3 @@ const getMigration: ContentfulMigrationGenerator = (language): ContentfulCompone
         },
     };
 };
-
-export default getMigration;

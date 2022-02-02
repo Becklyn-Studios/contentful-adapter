@@ -1,8 +1,8 @@
 import { createClient, Environment } from "contentful-management";
 import { ContentfulClientConfig } from "../config/types";
 import { MIGRATIONS_MODEL_NAME } from "../migrations/migration";
-import { ContentfulClientApi } from "contentful";
-import { ContentfulEntry, FindEntryByIdsOptions, FindEntryOptions } from "./types";
+import { ContentfulClientApi, Entry } from "contentful";
+import { FindEntryByIdsOptions, FindEntryOptions } from "./types";
 import { getContentfulSelectString, getContentfulWhereObject } from "./util";
 import { createClient as createDeliveryClient } from "contentful";
 
@@ -58,7 +58,7 @@ export const connectToContentfulDeliveryApi = (
 export const findOneEntry = async <T extends {}>(
     client: ContentfulClientApi,
     { contentType, select, where, depth, throwError }: FindEntryOptions
-): Promise<ContentfulEntry<T> | null> => {
+): Promise<Entry<T> | null> => {
     const entries = await client.getEntries<T>({
         ...getContentfulWhereObject(where),
         content_type: contentType,
@@ -85,7 +85,7 @@ export const findOneEntry = async <T extends {}>(
 export const findEntriesByIds = async <T extends {}>(
     client: ContentfulClientApi,
     options: FindEntryByIdsOptions
-): Promise<ContentfulEntry<T>[]> => {
+): Promise<Entry<T>[]> => {
     return await findAllEntriesByIds(client, options);
 };
 
@@ -93,8 +93,8 @@ const findAllEntriesByIds = async <T extends {}>(
     client: ContentfulClientApi,
     options: FindEntryByIdsOptions,
     skip: number = 0,
-    foundEntries: ContentfulEntry<T>[] = []
-): Promise<ContentfulEntry<T>[]> => {
+    foundEntries: Entry<T>[] = []
+): Promise<Entry<T>[]> => {
     const { contentType, select, where, ids, depth } = options;
     const limit = 1000;
 
