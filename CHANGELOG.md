@@ -1,3 +1,9 @@
+vNext
+=====
+
+*   (bug) Fix `loadPageData` fetching depth.
+
+
 0.0.3
 =====
 

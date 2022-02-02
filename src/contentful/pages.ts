@@ -27,6 +27,7 @@ export const loadPageData = async (
             "sys.id": pageNode.id,
         },
         throwError: false,
+        depth: 10,
     });
 
     if (null === page) {
