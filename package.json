@@ -27,7 +27,7 @@
     "dependencies": {
         "@contentful/rich-text-html-renderer": "^15.11.1",
         "@contentful/rich-text-types": "^15.11.1",
-        "@mayd/ui-types": "^1.0.4",
+        "@mayd/ui-types": "^2.1.0",
         "contentful": "^9.1.6",
         "contentful-management": "^7.51.5",
         "contentful-migration": "^4.7.0",
@@ -39,6 +39,7 @@
         "tsconfig-paths": "^3.12.0"
     },
     "devDependencies": {
+        "@mayd/ui": "^0.0.7",
         "@types/glob": "^7.2.0",
         "@types/node": "^17.0.10",
         "@types/react-dom": "^17.0.9",

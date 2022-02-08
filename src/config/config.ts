@@ -1,8 +1,13 @@
 import findUp from "../../compiled/find-up";
 import { register } from "ts-node";
 import { config } from "dotenv";
-import { MaydContentfulAdapterConfig, MaydContentfulAdapterConfigFile } from "./types";
+import {
+    UiComponentDataConfig,
+    MaydContentfulAdapterConfig,
+    MaydContentfulAdapterConfigFile,
+} from "./types";
 import { getMigrationsFromGenerators } from "../migrations/migrator";
+import { BaseComponentConfig } from "@mayd/ui-types";
 
 export const TSCONFIG_FILE_NAME = "tsconfig.mayd-contentful.json";
 export const MAYD_CONFIG_FILE_NAME = "mayd-contentful.config.ts";
@@ -41,7 +46,7 @@ export const getConfigFromFile = async (
 
     return {
         backendLanguage,
-        components: file.components ?? [],
+        components: getComponentDataConfig(file.components),
         migrations: await getMigrationsFromGenerators(backendLanguage, file.migrations),
         clientConfig: {
             spaceId: file.spaceId,
@@ -50,4 +55,25 @@ export const getConfigFromFile = async (
             environmentId: file.environmentId,
         },
     };
+};
+
+const getComponentDataConfig = (
+    data?: (UiComponentDataConfig | BaseComponentConfig<any>)[]
+): UiComponentDataConfig[] => {
+    return data
+        ? data.map(component =>
+              isComponentDataConfig(component)
+                  ? component
+                  : {
+                        component,
+                        contentType: component.key,
+                    }
+          )
+        : [];
+};
+
+const isComponentDataConfig = (
+    data: UiComponentDataConfig | BaseComponentConfig<any>
+): data is UiComponentDataConfig => {
+    return (data as UiComponentDataConfig).contentType !== undefined;
 };

@@ -1,7 +1,8 @@
-vNext
+0.0.4
 =====
 
 *   (bug) Fix `loadPageData` fetching depth.
+*   (improvement) Allow direct use `BaseComponentConfig` as `component` in configuration.
 
 
 0.0.3

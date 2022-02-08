@@ -5,7 +5,7 @@ export type {
     ContentfulClientConfig,
     MaydContentfulAdapterConfig,
     MaydContentfulAdapterConfigFile,
-    ComponentDataConfig,
+    UiComponentDataConfig,
     BackendLanguage,
 } from "./config/types";
 //endregion
@@ -30,7 +30,7 @@ export {
 
 export type {
     PageTreeNode,
-    PageProps,
+    OriginalPageData,
     ContentfulBasePage,
     ContentfulPage,
     ContentfulPageSeo,

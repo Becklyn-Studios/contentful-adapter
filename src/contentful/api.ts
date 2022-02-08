@@ -1,7 +1,7 @@
 import { createClient, Environment } from "contentful-management";
 import { ContentfulClientConfig } from "../config/types";
 import { MIGRATIONS_MODEL_NAME } from "../migrations/migration";
-import { ContentfulClientApi, Entry } from "contentful";
+import { Asset, ContentfulClientApi, Entry } from "contentful";
 import { FindEntryByIdsOptions, FindEntryOptions } from "./types";
 import { getContentfulSelectString, getContentfulWhereObject } from "./util";
 import { createClient as createDeliveryClient } from "contentful";
@@ -55,7 +55,7 @@ export const connectToContentfulDeliveryApi = (
     });
 };
 
-export const findOneEntry = async <T extends {}>(
+export const findOneEntry = async <T>(
     client: ContentfulClientApi,
     { contentType, select, where, depth, throwError }: FindEntryOptions
 ): Promise<Entry<T> | null> => {
@@ -82,14 +82,38 @@ export const findOneEntry = async <T extends {}>(
     return entries.items[0];
 };
 
-export const findEntriesByIds = async <T extends {}>(
+export const findOneAsset = async <T>(
+    assetId: string,
+    client: ContentfulClientApi
+): Promise<Asset | null> => {
+    return await client.getAsset(assetId);
+};
+
+export const findOneEntryBySys = async <T>(
+    sys: any,
+    client: ContentfulClientApi,
+    { select, where, depth }: Omit<Omit<FindEntryOptions, "contentType">, "throwError">
+): Promise<Entry<T> | null> => {
+    if (!sys) {
+        return null;
+    }
+
+    return await client.getEntry<T>(sys.id, {
+        ...getContentfulWhereObject(where),
+        content_type: sys.contentType && sys.contentType.sys ? sys.contentType.sys.id : undefined,
+        select: getContentfulSelectString(select),
+        include: depth ? depth : 0,
+    });
+};
+
+export const findEntriesByIds = async <T>(
     client: ContentfulClientApi,
     options: FindEntryByIdsOptions
 ): Promise<Entry<T>[]> => {
     return await findAllEntriesByIds(client, options);
 };
 
-const findAllEntriesByIds = async <T extends {}>(
+const findAllEntriesByIds = async <T>(
     client: ContentfulClientApi,
     options: FindEntryByIdsOptions,
     skip: number = 0,

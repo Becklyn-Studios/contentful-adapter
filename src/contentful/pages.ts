@@ -1,5 +1,5 @@
 import { ContentfulClientApi, Entry } from "contentful";
-import { ContentfulBasePage, ContentfulPage, PageProps, PageTreeNode } from "./types";
+import { ContentfulBasePage, ContentfulPage, OriginalPageData, PageTreeNode } from "./types";
 import { findEntriesByIds, findOneEntry } from "./api";
 import { findPageBySlugInTree } from "./util";
 
@@ -10,7 +10,7 @@ export const loadPagePaths = async (client: ContentfulClientApi): Promise<Array<
 export const loadPageData = async (
     client: ContentfulClientApi,
     slugParts: string[]
-): Promise<PageProps> => {
+): Promise<OriginalPageData> => {
     const pageTree = await loadPageTree(client);
     const pageNode = findPageBySlugInTree(slugParts, pageTree);
 

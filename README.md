@@ -1,7 +1,7 @@
-Mayd UI Types
-=============
+Mayd contentful adapter
+=======================
 
-[![CI](https://github.com/Becklyn-Studios/mayd-ui-types/actions/workflows/ci.yml/badge.svg)](https://github.com/Becklyn-Studios/mayd-ui-types/actions/workflows/ci.yml)
+[![CI](https://github.com/Becklyn-Studios/mayd-contentful-adapter/actions/workflows/ci.yml/badge.svg)](https://github.com/Becklyn-Studios/mayd-contentful-adapter/actions/workflows/ci.yml)
 
 
 Usage
@@ -10,8 +10,16 @@ Usage
 Install this library into your project:
 
 ```shell
-npm i --save @mayd/ui-types
+npm i --save @mayd/contentful-adapter
 ```
+
+
+TODOs
+-----
+
+* configure `normalizeReference` to support custom internal references
+* get theme by ?????
+* Documentation for `mayd-contentful.config.ts`
 
 
 Migrations

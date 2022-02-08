@@ -42,7 +42,7 @@ export interface ContentfulPageSeo {
     description?: string;
 }
 
-export interface PageProps {
+export interface OriginalPageData {
     pageTree: PageTreeNode;
     notFound?: boolean;
     redirect?: {

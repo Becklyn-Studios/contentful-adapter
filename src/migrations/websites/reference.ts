@@ -6,6 +6,19 @@ const translations = {
             name: "Basic > External Reference",
             fields: {
                 url: "URL",
+                title: "Title",
+                inNewTab: {
+                    name: "Open in new tab",
+                    true: "Yes",
+                    false: "No",
+                },
+            },
+        },
+        internalReference: {
+            name: "Basic > Internal Reference",
+            fields: {
+                page: "Page",
+                title: "Title",
                 inNewTab: {
                     name: "Open in new tab",
                     true: "Yes",
@@ -26,6 +39,19 @@ const translations = {
             name: "Basic > Externe Referenz",
             fields: {
                 url: "URL",
+                title: "Titel",
+                inNewTab: {
+                    name: "In neuem Tab öffnen",
+                    true: "Ja",
+                    false: "Nein",
+                },
+            },
+        },
+        internalReference: {
+            name: "Basic > Interne Referenz",
+            fields: {
+                page: "Seite",
+                title: "Titel",
                 inNewTab: {
                     name: "In neuem Tab öffnen",
                     true: "Ja",
@@ -52,6 +78,7 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
             1: migration => {
                 const t = translations[language];
 
+                // external reference
                 const externalReference = migration.createContentType("externalReference", {
                     name: t.externalReference.name,
                 });
@@ -64,6 +91,12 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
 
                 externalReference.changeFieldControl("url", "builtin", "urlEditor");
 
+                externalReference.createField("title", {
+                    type: "Symbol",
+                    name: t.externalReference.fields.title,
+                    required: false,
+                });
+
                 externalReference.createField("inNewTab", {
                     type: "Boolean",
                     name: t.externalReference.fields.inNewTab.name,
@@ -75,6 +108,50 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     falseLabel: t.externalReference.fields.inNewTab.false,
                 });
 
+                externalReference.displayField("url");
+
+                // internal reference
+                const internalReference = migration.createContentType("internalReference", {
+                    name: t.internalReference.name,
+                });
+
+                internalReference.createField("page", {
+                    type: "Link",
+                    name: t.internalReference.fields.page,
+                    required: true,
+                    linkType: "Entry",
+                    validations: [
+                        {
+                            linkContentType: ["page"],
+                        },
+                    ],
+                });
+
+                internalReference.changeFieldControl("page", "builtin", "entryLinkEditor", {
+                    showLinkEntityAction: true,
+                    showCreateEntityAction: false,
+                });
+
+                internalReference.createField("title", {
+                    type: "Symbol",
+                    name: t.internalReference.fields.title,
+                    required: false,
+                });
+
+                internalReference.createField("inNewTab", {
+                    type: "Boolean",
+                    name: t.internalReference.fields.inNewTab.name,
+                    required: true,
+                });
+
+                internalReference.changeFieldControl("inNewTab", "builtin", "boolean", {
+                    trueLabel: t.internalReference.fields.inNewTab.true,
+                    falseLabel: t.internalReference.fields.inNewTab.false,
+                });
+
+                internalReference.displayField("page");
+
+                // labeled link
                 const labeledLink = migration.createContentType("labeledLink", {
                     name: t.labeledLink.name,
                 });
@@ -92,7 +169,7 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     linkType: "Entry",
                     validations: [
                         {
-                            linkContentType: ["page", "externalReference"],
+                            linkContentType: ["internalReference", "externalReference"],
                         },
                     ],
                 });
