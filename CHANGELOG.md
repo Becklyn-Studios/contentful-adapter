@@ -1,6 +1,7 @@
 0.0.4
 =====
 
+*   (feature) Add automatic data normalizer
 *   (bug) Fix `loadPageData` fetching depth.
 *   (improvement) Allow direct use `BaseComponentConfig` as `component` in configuration.
 
