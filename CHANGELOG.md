@@ -1,3 +1,9 @@
+0.0.5
+=====
+
+*   (bug) Fix block text image migration.
+
+
 0.0.4
 =====
 

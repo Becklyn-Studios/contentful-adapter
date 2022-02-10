@@ -1,5 +1,5 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
-import { INLINES, MARKS } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 
 export const THEME_BLOCK_TEXT_IMAGE = {
     en: {
@@ -138,13 +138,13 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
                     validations: [
                         { enabledMarks: [MARKS.BOLD, MARKS.ITALIC, MARKS.UNDERLINE] },
                         {
-                            enabledNodeTypes: [INLINES.EMBEDDED_ENTRY],
+                            enabledNodeTypes: [INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK],
                         },
                         {
                             nodes: {
-                                [INLINES.EMBEDDED_ENTRY]: [
+                                [INLINES.ENTRY_HYPERLINK]: [
                                     {
-                                        linkContentType: ["externalReference", "page"],
+                                        linkContentType: ["internalReference", "externalReference"],
                                     },
                                 ],
                             },

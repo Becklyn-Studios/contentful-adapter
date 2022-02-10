@@ -17,6 +17,9 @@ npm i --save @mayd/contentful-adapter
 TODOs
 -----
 
+* Page Component / Context that accepts the page data
+  * configure possible page types
+  * configure head
 * configure `normalizeReference` to support custom internal references
 * get theme by ?????
 * Documentation for `mayd-contentful.config.ts`
