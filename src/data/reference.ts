@@ -1,7 +1,5 @@
 import { ContentfulNormalizerService } from "./service";
 import { LabeledLink, LinkReference } from "@mayd/ui-types";
-import { loadPageTree } from "../contentful/pages";
-import { getPageSlug } from "../contentful/util";
 import { findOneEntryBySys } from "../contentful/api";
 
 export const normalizeLabeledLink = async (
@@ -45,14 +43,15 @@ export const normalizeReference = async (
     }
 
     if ("internalReference" === data.sys.contentType.sys.id) {
-        // @todo: implement this when internal references are ready
-        // @todo: allow fetching something else than just pages (use service for that)
-        const pageTree = await loadPageTree(service.client);
-        const pageSlug = getPageSlug(data.fields.page.sys.id, pageTree);
+        const referenceSlug = await service.resolveInternalReferencePath(data.fields.reference);
+
+        if (null === referenceSlug) {
+            return null;
+        }
 
         return {
             title: data.fields.title ?? null,
-            url: `/${pageSlug}`,
+            url: "/" === referenceSlug ? referenceSlug : `/${referenceSlug}`,
             inNewTab: data.fields.inNewTab ?? false,
         };
     }

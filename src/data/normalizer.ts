@@ -86,6 +86,8 @@ export const normalizeDataForDataConfig = async (
         }
     }
 
+    outputData["componentKey"] = getComponentKeyFromData(data, service);
+
     return outputData;
 };
 
@@ -107,8 +109,6 @@ const getDataValue = async (
             return await normalizeAssetData(data, service);
         case TYPE_LABELED_LINK:
             return await normalizeLabeledLink(data, service);
-        case TYPE_CONTENT_MODEL:
-            return getComponentKeyFromData(data, service);
         default:
             return await normalizeRelationTypeData(dataType, data, service);
     }

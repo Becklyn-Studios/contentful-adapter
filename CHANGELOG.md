@@ -3,6 +3,9 @@
 
 *   (improvement) Cleanup `mayd-contentful.config.ts` setup file.
 *   (improvement) Improve root exports.
+*   (bug) Fix page slug normalizer.
+*   (feature) Add automatic `componentKey` field to normalized data.
+*   (feature) Configure `internalReference` path resolvers.
 
 
 0.0.5

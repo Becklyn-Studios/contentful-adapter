@@ -115,7 +115,7 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     name: t.internalReference.name,
                 });
 
-                internalReference.createField("page", {
+                internalReference.createField("reference", {
                     type: "Link",
                     name: t.internalReference.fields.page,
                     required: true,
@@ -127,7 +127,7 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     ],
                 });
 
-                internalReference.changeFieldControl("page", "builtin", "entryLinkEditor", {
+                internalReference.changeFieldControl("reference", "builtin", "entryLinkEditor", {
                     showLinkEntityAction: true,
                     showCreateEntityAction: false,
                 });
@@ -149,7 +149,7 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     falseLabel: t.internalReference.fields.inNewTab.false,
                 });
 
-                internalReference.displayField("page");
+                internalReference.displayField("reference");
 
                 // labeled link
                 const labeledLink = migration.createContentType("labeledLink", {

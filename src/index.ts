@@ -92,7 +92,9 @@ export { normalizeAssetData } from "./data/asset";
 
 export { normalizeRelationTypeData, normalizeDynamicDataConfigData } from "./data/relation";
 
-export type { ContentfulNormalizerService } from "./data/service";
+export type { ContentfulNormalizerService, InternalReferenceResolver } from "./data/service";
 
 export { getContentfulNormalizerService } from "./data/service";
+
+export { getPageConfig } from "./data/component/page";
 //endregion
