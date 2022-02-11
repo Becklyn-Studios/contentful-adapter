@@ -1,3 +1,10 @@
+0.0.6
+=====
+
+*   (improvement) Cleanup `mayd-contentful.config.ts` setup file.
+*   (improvement) Improve root exports.
+
+
 0.0.5
 =====
 
