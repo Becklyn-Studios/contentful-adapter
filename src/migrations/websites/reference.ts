@@ -17,7 +17,7 @@ const translations = {
         internalReference: {
             name: "Basic > Internal Reference",
             fields: {
-                page: "Page",
+                reference: "Reference",
                 title: "Title",
                 inNewTab: {
                     name: "Open in new tab",
@@ -50,7 +50,7 @@ const translations = {
         internalReference: {
             name: "Basic > Interne Referenz",
             fields: {
-                page: "Seite",
+                reference: "Referenz",
                 title: "Titel",
                 inNewTab: {
                     name: "In neuem Tab öffnen",
@@ -117,7 +117,7 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
 
                 internalReference.createField("reference", {
                     type: "Link",
-                    name: t.internalReference.fields.page,
+                    name: t.internalReference.fields.reference,
                     required: true,
                     linkType: "Entry",
                     validations: [

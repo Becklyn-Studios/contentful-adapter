@@ -1,3 +1,9 @@
+0.0.7
+=====
+
+*   (bug) Fix translations for `internalReference` migration.
+
+
 0.0.6
 =====
 
