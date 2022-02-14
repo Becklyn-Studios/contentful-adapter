@@ -1,3 +1,9 @@
+0.0.16
+======
+
+*   (bug) Fix `blockFeatures` migration.
+
+
 0.0.15
 ======
 

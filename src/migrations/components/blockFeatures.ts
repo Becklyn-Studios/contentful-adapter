@@ -139,11 +139,21 @@ export const getBlockFeaturesMigration: ContentfulMigrationGenerator = (
                 });
 
                 blockFeatures.createField("entries", {
-                    type: "Link",
+                    type: "Array",
                     name: t.blockFeatures.fields.entries,
-                    linkType: "Entry",
-                    validations: [{ linkContentType: ["blockFeaturesEntry"] }],
+                    items: {
+                        type: "Link",
+                        linkType: "Entry",
+                        validations: [{ linkContentType: ["blockFeaturesEntry"] }],
+                    },
                     required: true,
+                    validations: [
+                        {
+                            size: {
+                                min: 1,
+                            },
+                        },
+                    ],
                 });
 
                 blockFeatures.createField("theme", {
