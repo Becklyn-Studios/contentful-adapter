@@ -15,7 +15,7 @@ export const THEME_BLOCK_FEATURES = {
 const translations = {
     en: {
         blockFeatures: {
-            name: "Block > Text Image",
+            name: "Block > Features",
             fields: {
                 overline: "Overline",
                 headline: "Headline",
@@ -31,7 +31,7 @@ const translations = {
             },
         },
         blockFeaturesEntry: {
-            name: "Block > Text Image > Entry",
+            name: "Block > Features > Entry",
             fields: {
                 icon: "Icon",
                 headline: "Headline",
@@ -41,7 +41,7 @@ const translations = {
     },
     de: {
         blockFeatures: {
-            name: "Block > Text Bild",
+            name: "Block > Features",
             fields: {
                 overline: "Overline",
                 headline: "Überschrift",
@@ -57,7 +57,7 @@ const translations = {
             },
         },
         blockFeaturesEntry: {
-            name: "Block > Text Bild > Eintrag",
+            name: "Block > Features > Eintrag",
             fields: {
                 icon: "Icon",
                 headline: "Überschrift",
