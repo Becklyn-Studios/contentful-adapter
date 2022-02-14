@@ -1,4 +1,3 @@
-import { ReferencesData, RteData } from "@mayd/ui-types";
 import { NodeData } from "@contentful/rich-text-types/dist/types/types";
 import { ContentfulNormalizerService } from "./service";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
@@ -6,6 +5,7 @@ import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { normalizeReference } from "./reference";
 import { normalizeAssetData } from "./asset";
 import safeJsonStringify from "safe-json-stringify";
+import { ReferencesData, RteData } from "../contentful/types";
 
 export const addAssetToReferenceList = async (
     references: ReferencesData,

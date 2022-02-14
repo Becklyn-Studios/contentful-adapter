@@ -110,35 +110,17 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
                     required: true,
                 });
 
-                blockTextImage.createField("anchor", {
-                    type: "Symbol",
-                    name: t.blockTextImage.fields.anchor,
-                    required: true,
-                });
-
-                blockTextImage.changeFieldControl("anchor", "builtin", "slugEditor", {
-                    trackingFieldId: "headline",
-                });
-
-                blockTextImage.createField("anchorLabel", {
-                    type: "Symbol",
-                    name: t.blockTextImage.fields.anchorLabel,
-                    validations: [
-                        {
-                            size: {
-                                max: 25,
-                            },
-                        },
-                    ],
-                });
-
                 blockTextImage.createField("text", {
                     type: "RichText",
                     name: t.blockTextImage.fields.text,
                     validations: [
                         { enabledMarks: [MARKS.BOLD, MARKS.ITALIC, MARKS.UNDERLINE] },
                         {
-                            enabledNodeTypes: [INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK],
+                            enabledNodeTypes: [
+                                INLINES.ENTRY_HYPERLINK,
+                                INLINES.ASSET_HYPERLINK,
+                                BLOCKS.UL_LIST,
+                            ],
                         },
                         {
                             nodes: {
@@ -198,6 +180,28 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
                 });
 
                 blockTextImage.changeFieldControl("version", "builtin", "radio");
+
+                blockTextImage.createField("anchor", {
+                    type: "Symbol",
+                    name: t.blockTextImage.fields.anchor,
+                    required: true,
+                });
+
+                blockTextImage.changeFieldControl("anchor", "builtin", "slugEditor", {
+                    trackingFieldId: "headline",
+                });
+
+                blockTextImage.createField("anchorLabel", {
+                    type: "Symbol",
+                    name: t.blockTextImage.fields.anchorLabel,
+                    validations: [
+                        {
+                            size: {
+                                max: 25,
+                            },
+                        },
+                    ],
+                });
 
                 blockTextImage.displayField("headline");
             },

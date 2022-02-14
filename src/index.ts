@@ -64,6 +64,7 @@ export type {
 
 export { getPageMigration } from "./migrations/websites/page";
 export { getReferenceMigration } from "./migrations/websites/reference";
+export { getBlockFeaturesMigration } from "./migrations/components/blockFeatures";
 export { getBlockTextImageMigration } from "./migrations/components/blockTextImage";
 //endregion
 

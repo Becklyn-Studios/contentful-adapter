@@ -1,3 +1,9 @@
+0.0.13
+======
+
+*   (feature) Add `blockFeatures` migration.
+
+
 0.0.12
 ======
 
