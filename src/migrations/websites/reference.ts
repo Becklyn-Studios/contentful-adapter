@@ -17,6 +17,7 @@ const translations = {
         internalReference: {
             name: "Basic > Internal Reference",
             fields: {
+                name: "Internal Name",
                 reference: "Reference",
                 title: "Title",
                 inNewTab: {
@@ -50,6 +51,7 @@ const translations = {
         internalReference: {
             name: "Basic > Interne Referenz",
             fields: {
+                name: "Interner Name",
                 reference: "Referenz",
                 title: "Titel",
                 inNewTab: {
@@ -115,6 +117,12 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     name: t.internalReference.name,
                 });
 
+                externalReference.createField("name", {
+                    type: "Symbol",
+                    name: t.internalReference.fields.name,
+                    required: true,
+                });
+
                 internalReference.createField("reference", {
                     type: "Link",
                     name: t.internalReference.fields.reference,
@@ -149,7 +157,7 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     falseLabel: t.internalReference.fields.inNewTab.false,
                 });
 
-                internalReference.displayField("reference");
+                internalReference.displayField("name");
 
                 // labeled link
                 const labeledLink = migration.createContentType("labeledLink", {

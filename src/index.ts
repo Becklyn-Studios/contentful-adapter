@@ -40,6 +40,8 @@ export type {
     FindEntryByIdsOptions,
     FindEntryOptions,
     BaseContentfulEntry,
+    RteData,
+    ReferencesData,
 } from "./contentful/types";
 
 export {

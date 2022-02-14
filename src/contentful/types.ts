@@ -1,4 +1,5 @@
 import { Entry } from "contentful";
+import { Asset, LinkReference } from "@mayd/ui-types";
 
 export interface PageTreeNode {
     id: string;
@@ -51,3 +52,10 @@ export interface OriginalPageData {
     };
     page?: Entry<ContentfulPage>;
 }
+
+export interface RteData {
+    json: Document;
+    references: ReferencesData;
+}
+
+export type ReferencesData = Record<string, Asset | LinkReference>;

@@ -1,24 +1,15 @@
 {
-  "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
-    "declaration": true,
-    "strict": true,
-    "jsx": "react",
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "lib": ["es2017", "dom"],
-    "paths": {
-      "@css/*": ["app/css/*"],
-      "@mixin/*": ["app/css/mixin/*"]
-    }
-  },
-  "include": ["app"],
-  "exclude": [
-    "node_modules"
-  ],
-  "ts-node": {
-    "require": ["tsconfig-paths/register"]
-  }
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "declaration": true,
+        "strict": true,
+        "jsx": "react",
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "lib": ["es2017", "dom"]
+    },
+    "include": ["app"],
+    "exclude": ["node_modules"]
 }

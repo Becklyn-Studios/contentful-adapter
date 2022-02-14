@@ -5,6 +5,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { normalizeReference } from "./reference";
 import { normalizeAssetData } from "./asset";
+import safeJsonStringify from "safe-json-stringify";
 
 export const addAssetToReferenceList = async (
     references: ReferencesData,
@@ -97,7 +98,7 @@ export const getRteData = async (
     }
 
     return {
-        json: data,
+        json: JSON.parse(safeJsonStringify(data)),
         references,
     };
 };
