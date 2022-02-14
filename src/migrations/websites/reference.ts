@@ -117,7 +117,7 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     name: t.internalReference.name,
                 });
 
-                externalReference.createField("name", {
+                internalReference.createField("name", {
                     type: "Symbol",
                     name: t.internalReference.fields.name,
                     required: true,

@@ -1,3 +1,9 @@
+0.0.14
+======
+
+*   (bug) Fix `internalReference` migration.
+
+
 0.0.13
 ======
 
