@@ -1,4 +1,5 @@
 import { Entry } from "contentful";
+import { Document } from "@contentful/rich-text-types";
 import { Asset, LinkReference } from "@mayd/ui-types";
 
 export interface PageTreeNode {
