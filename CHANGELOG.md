@@ -1,3 +1,9 @@
+0.0.9
+=====
+
+*   (improvement) Bump `@mayd/ui-types`.
+
+
 0.0.8
 =====
 

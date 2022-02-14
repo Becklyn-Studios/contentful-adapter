@@ -6,7 +6,6 @@ import {
     DataType,
     TYPE_ASSET,
     TYPE_BOOL,
-    TYPE_CONTENT_MODEL,
     TYPE_LABELED_LINK,
     TYPE_NUMBER,
     TYPE_RTE,
