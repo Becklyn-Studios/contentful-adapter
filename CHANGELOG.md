@@ -1,3 +1,9 @@
+0.0.8
+=====
+
+*   (feature) Export `getComponentDataConfig` function.
+
+
 0.0.7
 =====
 

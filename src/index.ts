@@ -1,5 +1,5 @@
 //region config
-export { getConfigFromFile } from "./config/config";
+export { getConfigFromFile, getComponentDataConfig } from "./config/config";
 
 export type {
     ContentfulClientConfig,

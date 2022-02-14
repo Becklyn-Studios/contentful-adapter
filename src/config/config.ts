@@ -57,7 +57,7 @@ export const getConfigFromFile = async (
     };
 };
 
-const getComponentDataConfig = (
+export const getComponentDataConfig = (
     data?: (UiComponentDataConfig | BaseComponentConfig<any>)[]
 ): UiComponentDataConfig[] => {
     return data
