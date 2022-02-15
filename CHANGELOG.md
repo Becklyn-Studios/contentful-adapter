@@ -1,3 +1,9 @@
+0.0.19
+======
+
+*   (bug) Fix `blockTabSections` migration.
+
+
 0.0.18
 ======
 

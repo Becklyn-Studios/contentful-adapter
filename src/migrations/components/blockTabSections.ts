@@ -253,7 +253,7 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                     required: true,
                 });
 
-                blockTabSectionsEntry.displayField("blockTabSectionsEntry");
+                blockTabSectionsEntry.displayField("title");
             },
             6: migration => {
                 const blockTabSections = migration.createContentType("blockTabSections", {
