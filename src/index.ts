@@ -64,8 +64,19 @@ export type {
 
 export { getPageMigration } from "./migrations/websites/page";
 export { getReferenceMigration } from "./migrations/websites/reference";
+export { getBlockAccordionMigration } from "./migrations/components/blockAccordion";
+export { getBlockCardsTeaserMigration } from "./migrations/components/blockCardsTeaser";
+export { getBlockCardsSliderTeaserMigration } from "./migrations/components/blockCardsTeaserSlider";
 export { getBlockFeaturesMigration } from "./migrations/components/blockFeatures";
+export { getBlockLogosMigration } from "./migrations/components/blockLogos";
+export { getBlockLogosSliderMigration } from "./migrations/components/blockLogosSlider";
+export { getBlockRatingsMigration } from "./migrations/components/blockRatings";
+export { getBlockRatingsSliderMigration } from "./migrations/components/blockRatingsSlider";
+export { getBlockSocialProofMigration } from "./migrations/components/blockSocialProof";
+export { getBlockTabSectionsMigration } from "./migrations/components/blockTabSections";
+export { getBlockTextMigration } from "./migrations/components/blockText";
 export { getBlockTextImageMigration } from "./migrations/components/blockTextImage";
+export { getBlockThreeColumnsFeaturesMigration } from "./migrations/components/blockThreeColumnsFeatures";
 //endregion
 
 //region data
