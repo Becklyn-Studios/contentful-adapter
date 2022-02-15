@@ -1,3 +1,20 @@
+0.0.17
+======
+
+*   (bug) Add `blockLogos` migration.
+*   (bug) Add `blockSocialProof` migration.
+*   (bug) Add `blockAccordion` migration.
+*   (bug) Add `blockCardsTeaser` migration.
+*   (bug) Add `blockCardsSliderTeaser` migration.
+*   (bug) Add `blockLogosSlider` migration.
+*   (bug) Add `blockRatings` migration.
+*   (bug) Add `blockRatingsSlider` migration.
+*   (bug) Add `blockSocialProof` migration.
+*   (bug) Add `blockTabSections` migration.
+*   (bug) Add `blockText` migration.
+*   (bug) Add `blockThreeColumnsFeatures` migration.
+
+
 0.0.16
 ======
 

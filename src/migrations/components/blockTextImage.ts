@@ -1,16 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
-import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
-
-export const THEME_BLOCK_TEXT_IMAGE = {
-    en: {
-        background: "With background",
-        noBackground: "Without background",
-    },
-    de: {
-        background: "Mit Hintergrund",
-        noBackground: "Kein Hintergrund",
-    },
-};
+import { migrateBaseBlockFields } from "./block";
+import { getRteValidation, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
 
 export const VERSION_BLOCK_TEXT_IMAGE = {
     en: {
@@ -30,19 +20,9 @@ const translations = {
             fields: {
                 overline: "Overline",
                 headline: "Headline",
-                anchor: "Anchor",
-                anchorLabel: "Anchor Label",
                 text: "Text",
                 image: "Image",
                 labeledLink: "Button",
-                theme: {
-                    name: "Theme",
-                    default: THEME_BLOCK_TEXT_IMAGE.en.noBackground,
-                    in: [
-                        THEME_BLOCK_TEXT_IMAGE.en.noBackground,
-                        THEME_BLOCK_TEXT_IMAGE.en.background,
-                    ],
-                },
                 version: {
                     name: "Version",
                     default: VERSION_BLOCK_TEXT_IMAGE.en.imageLeft,
@@ -60,19 +40,9 @@ const translations = {
             fields: {
                 overline: "Overline",
                 headline: "Überschrift",
-                anchor: "Anker",
-                anchorLabel: "Anker Label",
                 text: "Text",
                 image: "Bild",
                 labeledLink: "Button",
-                theme: {
-                    name: "Theme",
-                    default: THEME_BLOCK_TEXT_IMAGE.de.noBackground,
-                    in: [
-                        THEME_BLOCK_TEXT_IMAGE.de.noBackground,
-                        THEME_BLOCK_TEXT_IMAGE.de.background,
-                    ],
-                },
                 version: {
                     name: "Version",
                     default: VERSION_BLOCK_TEXT_IMAGE.de.imageLeft,
@@ -113,25 +83,7 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
                 blockTextImage.createField("text", {
                     type: "RichText",
                     name: t.blockTextImage.fields.text,
-                    validations: [
-                        { enabledMarks: [MARKS.BOLD, MARKS.ITALIC, MARKS.UNDERLINE] },
-                        {
-                            enabledNodeTypes: [
-                                INLINES.ENTRY_HYPERLINK,
-                                INLINES.ASSET_HYPERLINK,
-                                BLOCKS.UL_LIST,
-                            ],
-                        },
-                        {
-                            nodes: {
-                                [INLINES.ENTRY_HYPERLINK]: [
-                                    {
-                                        linkContentType: ["internalReference", "externalReference"],
-                                    },
-                                ],
-                            },
-                        },
-                    ],
+                    validations: getRteValidation(RTE_TYPE_STYLED_FONT_AND_LIST),
                 });
 
                 blockTextImage.createField("image", {
@@ -149,22 +101,6 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
                     validations: [{ linkContentType: ["labeledLink"] }],
                 });
 
-                blockTextImage.createField("theme", {
-                    type: "Symbol",
-                    name: t.blockTextImage.fields.theme.name,
-                    required: true,
-                    defaultValue: {
-                        [language]: t.blockTextImage.fields.theme.default,
-                    },
-                    validations: [
-                        {
-                            in: t.blockTextImage.fields.theme.in,
-                        },
-                    ],
-                });
-
-                blockTextImage.changeFieldControl("theme", "builtin", "radio");
-
                 blockTextImage.createField("version", {
                     type: "Symbol",
                     name: t.blockTextImage.fields.version.name,
@@ -181,27 +117,7 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
 
                 blockTextImage.changeFieldControl("version", "builtin", "radio");
 
-                blockTextImage.createField("anchor", {
-                    type: "Symbol",
-                    name: t.blockTextImage.fields.anchor,
-                    required: true,
-                });
-
-                blockTextImage.changeFieldControl("anchor", "builtin", "slugEditor", {
-                    trackingFieldId: "headline",
-                });
-
-                blockTextImage.createField("anchorLabel", {
-                    type: "Symbol",
-                    name: t.blockTextImage.fields.anchorLabel,
-                    validations: [
-                        {
-                            size: {
-                                max: 25,
-                            },
-                        },
-                    ],
-                });
+                migrateBaseBlockFields(blockTextImage, language);
 
                 blockTextImage.displayField("headline");
             },

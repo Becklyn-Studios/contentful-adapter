@@ -1,16 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
-import { INLINES } from "@contentful/rich-text-types";
-
-export const THEME_BLOCK_FEATURES = {
-    en: {
-        background: "With background",
-        noBackground: "Without background",
-    },
-    de: {
-        background: "Mit Hintergrund",
-        noBackground: "Kein Hintergrund",
-    },
-};
+import { migrateBaseBlockFields } from "./block";
+import { getRteValidation } from "./rte";
 
 const translations = {
     en: {
@@ -19,15 +9,8 @@ const translations = {
             fields: {
                 overline: "Overline",
                 headline: "Headline",
-                anchor: "Anchor",
-                anchorLabel: "Anchor Label",
                 image: "Image",
                 entries: "Entries",
-                theme: {
-                    name: "Theme",
-                    default: THEME_BLOCK_FEATURES.en.noBackground,
-                    in: [THEME_BLOCK_FEATURES.en.noBackground, THEME_BLOCK_FEATURES.en.background],
-                },
             },
         },
         blockFeaturesEntry: {
@@ -45,15 +28,8 @@ const translations = {
             fields: {
                 overline: "Overline",
                 headline: "Überschrift",
-                anchor: "Anker",
-                anchorLabel: "Anker Label",
                 image: "Bild",
                 entries: "Einträge",
-                theme: {
-                    name: "Theme",
-                    default: THEME_BLOCK_FEATURES.de.noBackground,
-                    in: [THEME_BLOCK_FEATURES.de.noBackground, THEME_BLOCK_FEATURES.de.background],
-                },
             },
         },
         blockFeaturesEntry: {
@@ -91,27 +67,12 @@ export const getBlockFeaturesMigration: ContentfulMigrationGenerator = (
                     name: t.blockFeaturesEntry.fields.icon,
                     linkType: "Asset",
                     validations: [{ linkMimetypeGroup: ["image"] }],
-                    required: true,
                 });
 
                 blockFeaturesEntry.createField("text", {
                     type: "RichText",
                     name: t.blockFeaturesEntry.fields.text,
-                    validations: [
-                        { enabledMarks: [] },
-                        {
-                            enabledNodeTypes: [INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK],
-                        },
-                        {
-                            nodes: {
-                                [INLINES.ENTRY_HYPERLINK]: [
-                                    {
-                                        linkContentType: ["internalReference", "externalReference"],
-                                    },
-                                ],
-                            },
-                        },
-                    ],
+                    validations: getRteValidation(),
                 });
 
                 blockFeaturesEntry.displayField("headline");
@@ -147,52 +108,10 @@ export const getBlockFeaturesMigration: ContentfulMigrationGenerator = (
                         validations: [{ linkContentType: ["blockFeaturesEntry"] }],
                     },
                     required: true,
-                    validations: [
-                        {
-                            size: {
-                                min: 1,
-                            },
-                        },
-                    ],
+                    validations: [{ size: { max: 4 } }],
                 });
 
-                blockFeatures.createField("theme", {
-                    type: "Symbol",
-                    name: t.blockFeatures.fields.theme.name,
-                    required: true,
-                    defaultValue: {
-                        [language]: t.blockFeatures.fields.theme.default,
-                    },
-                    validations: [
-                        {
-                            in: t.blockFeatures.fields.theme.in,
-                        },
-                    ],
-                });
-
-                blockFeatures.changeFieldControl("theme", "builtin", "radio");
-
-                blockFeatures.createField("anchor", {
-                    type: "Symbol",
-                    name: t.blockFeatures.fields.anchor,
-                    required: true,
-                });
-
-                blockFeatures.changeFieldControl("anchor", "builtin", "slugEditor", {
-                    trackingFieldId: "headline",
-                });
-
-                blockFeatures.createField("anchorLabel", {
-                    type: "Symbol",
-                    name: t.blockFeatures.fields.anchorLabel,
-                    validations: [
-                        {
-                            size: {
-                                max: 25,
-                            },
-                        },
-                    ],
-                });
+                migrateBaseBlockFields(blockFeatures, language);
 
                 blockFeatures.displayField("headline");
             },
