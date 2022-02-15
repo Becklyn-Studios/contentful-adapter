@@ -1,18 +1,18 @@
 0.0.17
 ======
 
-*   (bug) Add `blockLogos` migration.
-*   (bug) Add `blockSocialProof` migration.
-*   (bug) Add `blockAccordion` migration.
-*   (bug) Add `blockCardsTeaser` migration.
-*   (bug) Add `blockCardsSliderTeaser` migration.
-*   (bug) Add `blockLogosSlider` migration.
-*   (bug) Add `blockRatings` migration.
-*   (bug) Add `blockRatingsSlider` migration.
-*   (bug) Add `blockSocialProof` migration.
-*   (bug) Add `blockTabSections` migration.
-*   (bug) Add `blockText` migration.
-*   (bug) Add `blockThreeColumnsFeatures` migration.
+*   (feature) Add `blockLogos` migration.
+*   (feature) Add `blockSocialProof` migration.
+*   (feature) Add `blockAccordion` migration.
+*   (feature) Add `blockCardsTeaser` migration.
+*   (feature) Add `blockCardsSliderTeaser` migration.
+*   (feature) Add `blockLogosSlider` migration.
+*   (feature) Add `blockRatings` migration.
+*   (feature) Add `blockRatingsSlider` migration.
+*   (feature) Add `blockSocialProof` migration.
+*   (feature) Add `blockTabSections` migration.
+*   (feature) Add `blockText` migration.
+*   (feature) Add `blockThreeColumnsFeatures` migration.
 
 
 0.0.16
