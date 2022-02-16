@@ -90,7 +90,7 @@ export const getBlockSocialProofMigration: ContentfulMigrationGenerator = (
                     items: {
                         type: "Link",
                         linkType: "Entry",
-                        validations: [{ linkContentType: ["blockLogosLogo"] }],
+                        validations: [{ linkContentType: ["blockSocialProofEntry"] }],
                     },
                     required: true,
                 });

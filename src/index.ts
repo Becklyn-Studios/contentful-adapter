@@ -77,6 +77,7 @@ export { getBlockTabSectionsMigration } from "./migrations/components/blockTabSe
 export { getBlockTextMigration } from "./migrations/components/blockText";
 export { getBlockTextImageMigration } from "./migrations/components/blockTextImage";
 export { getBlockThreeColumnsFeaturesMigration } from "./migrations/components/blockThreeColumnsFeatures";
+export { getCardMigration } from "./migrations/components/card";
 //endregion
 
 //region data

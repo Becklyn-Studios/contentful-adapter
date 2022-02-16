@@ -27,7 +27,7 @@ const translations = {
     },
 };
 
-export const getBlockLogosMigration: ContentfulMigrationGenerator = (
+export const getCardMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
     return {
