@@ -1,3 +1,9 @@
+0.0.21
+======
+
+*   (feature) Auto normalize `theme` and `version` fields.
+
+
 0.0.20
 ======
 

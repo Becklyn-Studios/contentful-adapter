@@ -85,9 +85,36 @@ export const normalizeDataForDataConfig = async (
         }
     }
 
+    addThemeToData(outputData, data, service);
+    addVersionToData(outputData, data, service);
+
     outputData["componentKey"] = getComponentKeyFromData(data, service);
 
     return outputData;
+};
+
+const addThemeToData = (
+    outputData: any,
+    data: Entry<any>,
+    service: ContentfulNormalizerService
+): void => {
+    if (!data || !data.fields || !data.fields.theme) {
+        return;
+    }
+
+    outputData["theme"] = service.getThemeValue(data.fields.theme);
+};
+
+const addVersionToData = (
+    outputData: any,
+    data: Entry<any>,
+    service: ContentfulNormalizerService
+): void => {
+    if (!data || !data.fields || !data.fields.version) {
+        return;
+    }
+
+    outputData["version"] = service.getVersionValue(data.fields.version);
 };
 
 const getDataValue = async (

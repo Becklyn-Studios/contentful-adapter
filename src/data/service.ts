@@ -10,6 +10,8 @@ export interface ContentfulNormalizerService {
     getPageTree: () => Promise<PageTreeNode>;
     allUiComponents: UiComponentDataConfig[];
     resolveInternalReferencePath: (data: any) => Promise<string | null>;
+    getThemeValue: (contentfulValue: string) => string;
+    getVersionValue: (contentfulValue: string) => string;
 }
 
 export type InternalReferenceResolver = (
@@ -19,7 +21,9 @@ export type InternalReferenceResolver = (
 
 export const getContentfulNormalizerService = (
     config: MaydContentfulAdapterConfig,
-    referenceResolvers?: Record<string, InternalReferenceResolver>
+    referenceResolvers?: Record<string, InternalReferenceResolver>,
+    themeValueMapping: Record<string, string> = {},
+    versionValueMapping: Record<string, string> = {}
 ): ContentfulNormalizerService => {
     const contentfulClient = connectToContentfulDeliveryApi(config.clientConfig);
     let pageTree: PageTreeNode | null = null;
@@ -37,6 +41,14 @@ export const getContentfulNormalizerService = (
     return {
         allUiComponents: config.components,
         client: contentfulClient,
+        getThemeValue: (contentfulValue: string) => {
+            const mappedValue = themeValueMapping[contentfulValue];
+            return mappedValue ? mappedValue : contentfulValue;
+        },
+        getVersionValue: (contentfulValue: string) => {
+            const mappedValue = versionValueMapping[contentfulValue];
+            return mappedValue ? mappedValue : contentfulValue;
+        },
         getPageTree,
         resolveInternalReferencePath: async (data: any): Promise<string | null> => {
             if (!data || !data.sys || !data.sys.contentType) {
