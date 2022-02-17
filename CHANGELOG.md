@@ -1,3 +1,10 @@
+1.0.0
+=====
+
+*   (bug) Fix page tree slug generation.
+*   (bc) Reorder parameters of `getContentfulNormalizerService`.
+
+
 0.0.21
 ======
 

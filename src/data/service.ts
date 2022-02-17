@@ -21,9 +21,9 @@ export type InternalReferenceResolver = (
 
 export const getContentfulNormalizerService = (
     config: MaydContentfulAdapterConfig,
-    referenceResolvers?: Record<string, InternalReferenceResolver>,
     themeValueMapping: Record<string, string> = {},
-    versionValueMapping: Record<string, string> = {}
+    versionValueMapping: Record<string, string> = {},
+    referenceResolvers?: Record<string, InternalReferenceResolver>
 ): ContentfulNormalizerService => {
     const contentfulClient = connectToContentfulDeliveryApi(config.clientConfig);
     let pageTree: PageTreeNode | null = null;
@@ -65,7 +65,7 @@ export const getContentfulNormalizerService = (
 };
 
 const getInternalReferenceResolvers = (
-    resolvers?: Record<string, InternalReferenceResolver>
+    resolvers: Record<string, InternalReferenceResolver> = {}
 ): Record<string, InternalReferenceResolver> => {
     const referenceResolvers: Record<string, InternalReferenceResolver> = {
         ...resolvers,

@@ -74,7 +74,7 @@ export const loadPageTree = async (
 
     return {
         id: page.sys.id,
-        slug,
+        slug: "/" === slug ? null : slug,
         children: childNodes,
     };
 };
