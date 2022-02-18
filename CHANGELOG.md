@@ -1,3 +1,10 @@
+2.0.0
+=====
+
+*   (bc) Unify `blockLogosSlider` and `blockLogos` to one content type (`blockLogos`).
+*   (feature) Export `getRteValidation` and `RTE_TYPE_*` constants.
+
+
 1.0.0
 =====
 
