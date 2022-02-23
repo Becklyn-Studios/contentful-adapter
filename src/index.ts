@@ -69,6 +69,8 @@ export {
     RTE_TYPE_MINIMAL,
     RTE_TYPE_FULL,
 } from "./migrations/components/rte";
+
+export { migrateBaseBlockFields } from "./migrations/components/block";
 export { getPageMigration } from "./migrations/websites/page";
 export { getReferenceMigration } from "./migrations/websites/reference";
 export { getBlockAccordionMigration } from "./migrations/components/blockAccordion";

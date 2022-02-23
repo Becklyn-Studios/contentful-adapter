@@ -3,6 +3,7 @@
 
 *   (bc) Unify `blockLogosSlider` and `blockLogos` to one content type (`blockLogos`).
 *   (feature) Export `getRteValidation` and `RTE_TYPE_*` constants.
+*   (feature) Export `migrateBaseBlockFields`.
 
 
 1.0.0
