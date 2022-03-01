@@ -4,14 +4,14 @@ import { migrateBaseBlockFields } from "./block";
 const translations = {
     en: {
         blockRatings: {
-            name: "Block > Ratings",
+            name: "🧩 Block > Ratings",
             fields: {
                 name: "Internal Name",
                 entries: "Entries",
             },
         },
         blockRatingsEntry: {
-            name: "Block > Ratings > Eintrag",
+            name: "🧩 Block > Ratings > Eintrag",
             fields: {
                 name: "Internal Name",
                 rating: "Rating",
@@ -21,7 +21,7 @@ const translations = {
             },
         },
         blockRatingsAuthor: {
-            name: "Block > Ratings > Author",
+            name: "🧩 Block > Ratings > Author",
             fields: {
                 name: "Name",
                 image: "Image",
@@ -31,14 +31,14 @@ const translations = {
     },
     de: {
         blockRatings: {
-            name: "Block > Bewertungen",
+            name: "🧩 Block > Bewertungen",
             fields: {
                 name: "Interner Name",
                 entries: "Einträge",
             },
         },
         blockRatingsEntry: {
-            name: "Block > Bewertungen > Eintrag",
+            name: "🧩 Block > Bewertungen > Eintrag",
             fields: {
                 name: "Interner Name",
                 rating: "Bewertung",
@@ -48,7 +48,7 @@ const translations = {
             },
         },
         blockRatingsAuthor: {
-            name: "Block > Bewertungen > Autor",
+            name: "🧩 Block > Bewertungen > Autor",
             fields: {
                 name: "Name",
                 image: "Bild",

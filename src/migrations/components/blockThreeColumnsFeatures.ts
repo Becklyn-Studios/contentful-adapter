@@ -5,7 +5,7 @@ import { getRteValidation } from "./rte";
 const translations = {
     en: {
         blockThreeColumnsFeatures: {
-            name: "Block > Features Three Columns",
+            name: "🧩 Block > Features Three Columns",
             fields: {
                 headline: "Headline",
                 labeledLink: "Button",
@@ -13,7 +13,7 @@ const translations = {
             },
         },
         blockThreeColumnsFeaturesEntry: {
-            name: "Block > Features Three Columns > Entry",
+            name: "🧩 Block > Features Three Columns > Entry",
             fields: {
                 icon: "Icon",
                 headline: "Headline",
@@ -23,7 +23,7 @@ const translations = {
     },
     de: {
         blockThreeColumnsFeatures: {
-            name: "Block > Features Drei Spalten",
+            name: "🧩 Block > Features Drei Spalten",
             fields: {
                 headline: "Überschrift",
                 labeledLink: "Button",
@@ -31,7 +31,7 @@ const translations = {
             },
         },
         blockThreeColumnsFeaturesEntry: {
-            name: "Block > Features Drei Spalten > Eintrag",
+            name: "🧩 Block > Features Drei Spalten > Eintrag",
             fields: {
                 icon: "Icon",
                 headline: "Überschrift",

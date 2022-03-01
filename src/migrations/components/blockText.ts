@@ -5,7 +5,7 @@ import { getRteValidation, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
 const translations = {
     en: {
         blockText: {
-            name: "Block > Text",
+            name: "🧩 Block > Text",
             fields: {
                 overline: "Overline",
                 headline: "Headline",
@@ -15,7 +15,7 @@ const translations = {
     },
     de: {
         blockText: {
-            name: "Block > Text",
+            name: "🧩 Block > Text",
             fields: {
                 overline: "Overline",
                 headline: "Überschrift",

@@ -9,12 +9,9 @@
         "skipLibCheck": true,
         "esModuleInterop": true,
         "moduleResolution": "node",
-        "typeRoots": [
-            "./src/types",
-            "./node_modules/@types"
-        ],
+        "typeRoots": ["./src/types", "./node_modules/@types"],
         "lib": ["es2017", "dom"],
-        "allowJs": true,
+        "allowJs": true
     },
     "include": ["src", "bin", "compiled"],
     "exclude": ["node_modules", "**/__tests__/*", "lib"]

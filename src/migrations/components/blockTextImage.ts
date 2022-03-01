@@ -16,7 +16,7 @@ export const VERSION_BLOCK_TEXT_IMAGE = {
 const translations = {
     en: {
         blockTextImage: {
-            name: "Block > Text Image",
+            name: "🧩 Block > Text Image",
             fields: {
                 overline: "Overline",
                 headline: "Headline",
@@ -36,7 +36,7 @@ const translations = {
     },
     de: {
         blockTextImage: {
-            name: "Block > Text Bild",
+            name: "🧩 Block > Text Bild",
             fields: {
                 overline: "Overline",
                 headline: "Überschrift",

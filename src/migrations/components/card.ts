@@ -3,7 +3,7 @@ import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../
 const translations = {
     en: {
         card: {
-            name: "Basic > Card",
+            name: "⚙️ Basic > Card",
             fields: {
                 image: "Image",
                 overline: "Overline",
@@ -15,7 +15,7 @@ const translations = {
     },
     de: {
         card: {
-            name: "Basic > Card",
+            name: "⚙️ Basic > Card",
             fields: {
                 image: "Bild",
                 overline: "Overline",

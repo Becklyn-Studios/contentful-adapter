@@ -3,7 +3,7 @@ import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../
 const translations = {
     en: {
         externalReference: {
-            name: "Basic > External Reference",
+            name: "⚙️ Basic > External Reference",
             fields: {
                 url: "URL",
                 title: "Title",
@@ -15,7 +15,7 @@ const translations = {
             },
         },
         internalReference: {
-            name: "Basic > Internal Reference",
+            name: "⚙️ Basic > Internal Reference",
             fields: {
                 name: "Internal Name",
                 reference: "Reference",
@@ -28,7 +28,7 @@ const translations = {
             },
         },
         labeledLink: {
-            name: "Basic > Labeled Link",
+            name: "⚙️ Basic > Labeled Link",
             fields: {
                 label: "Label",
                 reference: "Reference",
@@ -37,7 +37,7 @@ const translations = {
     },
     de: {
         externalReference: {
-            name: "Basic > Externe Referenz",
+            name: "⚙️ Basic > Externe Referenz",
             fields: {
                 url: "URL",
                 title: "Titel",
@@ -49,7 +49,7 @@ const translations = {
             },
         },
         internalReference: {
-            name: "Basic > Interne Referenz",
+            name: "⚙️ Basic > Interne Referenz",
             fields: {
                 name: "Interner Name",
                 reference: "Referenz",
@@ -62,7 +62,7 @@ const translations = {
             },
         },
         labeledLink: {
-            name: "Basic > Link mit Label",
+            name: "⚙️ Basic > Link mit Label",
             fields: {
                 label: "Label",
                 reference: "Referenz",

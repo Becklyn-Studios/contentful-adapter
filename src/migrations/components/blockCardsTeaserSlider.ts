@@ -4,7 +4,7 @@ import { migrateBaseBlockFields } from "./block";
 const translations = {
     en: {
         blockCardsSliderTeaser: {
-            name: "Block > Cards Slider Teaser",
+            name: "🧩 Block > Cards Slider Teaser",
             fields: {
                 overline: "Overline",
                 headline: "Headline",
@@ -15,7 +15,7 @@ const translations = {
     },
     de: {
         blockCardsSliderTeaser: {
-            name: "Block > Cards Slider Teaser",
+            name: "🧩 Block > Cards Slider Teaser",
             fields: {
                 overline: "Overline",
                 headline: "Überschrift",

@@ -1,3 +1,10 @@
+2.0.1
+=====
+
+*   (improvement) Add icons to content type names.
+*   (internal) Update prettier code style.
+
+
 2.0.0
 =====
 

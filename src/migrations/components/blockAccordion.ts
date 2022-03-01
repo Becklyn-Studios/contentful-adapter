@@ -1,12 +1,11 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
-import { INLINES, MARKS } from "@contentful/rich-text-types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_STYLED_FONT, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
+import { getRteValidation, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
 
 const translations = {
     en: {
         blockAccordion: {
-            name: "Block > Accordion",
+            name: "🧩 Block > Accordion",
             fields: {
                 headline: "Headline",
                 labeledLink: "Button",
@@ -14,7 +13,7 @@ const translations = {
             },
         },
         blockAccordionEntry: {
-            name: "Block > Accordion > Entry",
+            name: "🧩 Block > Accordion > Entry",
             fields: {
                 headline: "Headline",
                 text: "Text",
@@ -23,7 +22,7 @@ const translations = {
     },
     de: {
         blockAccordion: {
-            name: "Block > Akkordeon",
+            name: "🧩 Block > Akkordeon",
             fields: {
                 headline: "Überschrift",
                 labeledLink: "Button",
@@ -31,7 +30,7 @@ const translations = {
             },
         },
         blockAccordionEntry: {
-            name: "Block > Akkordeon > Eintrag",
+            name: "🧩 Block > Akkordeon > Eintrag",
             fields: {
                 headline: "Überschrift",
                 text: "Text",

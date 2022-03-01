@@ -6,7 +6,7 @@ import { getRteValidation } from "./rte";
 const translations = {
     en: {
         blockCardsTeaser: {
-            name: "Block > Cards Teaser",
+            name: "🧩 Block > Cards Teaser",
             fields: {
                 overline: "Overline",
                 headline: "Headline",
@@ -18,7 +18,7 @@ const translations = {
     },
     de: {
         blockCardsTeaser: {
-            name: "Block > Cards Teaser",
+            name: "🧩 Block > Cards Teaser",
             fields: {
                 overline: "Overline",
                 headline: "Überschrift",

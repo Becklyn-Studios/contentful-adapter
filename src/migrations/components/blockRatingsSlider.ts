@@ -5,7 +5,7 @@ import { getRteValidation, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
 const translations = {
     en: {
         blockRatingsSlider: {
-            name: "Block > Ratings Slider",
+            name: "🧩 Block > Ratings Slider",
             fields: {
                 headline: "Headline",
                 labeledLink: "Button",
@@ -14,7 +14,7 @@ const translations = {
     },
     de: {
         blockRatingsSlider: {
-            name: "Block > Bewertungen Slider",
+            name: "🧩 Block > Bewertungen Slider",
             fields: {
                 headline: "Überschrift",
                 labeledLink: "Button",

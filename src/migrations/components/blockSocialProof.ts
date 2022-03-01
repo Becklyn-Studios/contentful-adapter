@@ -4,14 +4,14 @@ import { migrateBaseBlockFields } from "./block";
 const translations = {
     en: {
         blockSocialProof: {
-            name: "Block > Social Proof",
+            name: "🧩 Block > Social Proof",
             fields: {
                 headline: "Headline",
                 entries: "Entries",
             },
         },
         blockSocialProofEntry: {
-            name: "Block > Social Proof > Entry",
+            name: "🧩 Block > Social Proof > Entry",
             fields: {
                 name: "Internal Name",
                 image: "Image",
@@ -21,14 +21,14 @@ const translations = {
     },
     de: {
         blockSocialProof: {
-            name: "Block > Social Proof",
+            name: "🧩 Block > Social Proof",
             fields: {
                 headline: "Überschrift",
                 entries: "Einträge",
             },
         },
         blockSocialProofEntry: {
-            name: "Block > Social Proof > Eintrag",
+            name: "🧩 Block > Social Proof > Eintrag",
             fields: {
                 name: "Interner Name",
                 image: "Bild",

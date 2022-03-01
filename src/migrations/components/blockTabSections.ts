@@ -6,21 +6,21 @@ import migration from "../migration";
 const translations = {
     en: {
         blockTabSections: {
-            name: "Block > Tabs",
+            name: "🧩 Block > Tabs",
             fields: {
                 headline: "Headline",
                 entries: "Tabs",
             },
         },
         blockTabSectionsEntry: {
-            name: "Block > Tabs > Tab",
+            name: "🧩 Block > Tabs > Tab",
             fields: {
                 title: "Title",
                 content: "Content",
             },
         },
         blockTabSectionText: {
-            name: "Block > Tabs > Text Section",
+            name: "🧩 Block > Tabs > Text Section",
             fields: {
                 name: "Internal Name",
                 headline: "Headline",
@@ -28,7 +28,7 @@ const translations = {
             },
         },
         blockTabSectionTextColumns: {
-            name: "Block > Tabs > Text Cloumns Section",
+            name: "🧩 Block > Tabs > Text Cloumns Section",
             fields: {
                 name: "Internal Name",
                 headline: "Headline",
@@ -37,7 +37,7 @@ const translations = {
             },
         },
         blockTabSectionTextImage: {
-            name: "Block > Tabs > Text Image Section",
+            name: "🧩 Block > Tabs > Text Image Section",
             fields: {
                 name: "Internal Name",
                 headline: "Headline",
@@ -46,7 +46,7 @@ const translations = {
             },
         },
         blockTabSectionVideo: {
-            name: "Block > Tabs > Video Section",
+            name: "🧩 Block > Tabs > Video Section",
             fields: {
                 name: "Internal Name",
                 video: "Video",
@@ -55,21 +55,21 @@ const translations = {
     },
     de: {
         blockTabSections: {
-            name: "Block > Tabs",
+            name: "🧩 Block > Tabs",
             fields: {
                 headline: "Überschrift",
                 entries: "Tabs",
             },
         },
         blockTabSectionsEntry: {
-            name: "Block > Tabs > Tab",
+            name: "🧩 Block > Tabs > Tab",
             fields: {
                 title: "Titel",
                 content: "Inhalt",
             },
         },
         blockTabSectionText: {
-            name: "Block > Tabs > Text Sektion",
+            name: "🧩 Block > Tabs > Text Sektion",
             fields: {
                 name: "Interner Name",
                 headline: "Überschrift",
@@ -77,7 +77,7 @@ const translations = {
             },
         },
         blockTabSectionTextColumns: {
-            name: "Block > Tabs > Text Spalten Sektion",
+            name: "🧩 Block > Tabs > Text Spalten Sektion",
             fields: {
                 name: "Interner Name",
                 headline: "Überschrift",
@@ -86,7 +86,7 @@ const translations = {
             },
         },
         blockTabSectionTextImage: {
-            name: "Block > Tabs > Text Bild Sektion",
+            name: "🧩 Block > Tabs > Text Bild Sektion",
             fields: {
                 name: "Interner Name",
                 headline: "Überschrift",
@@ -95,7 +95,7 @@ const translations = {
             },
         },
         blockTabSectionVideo: {
-            name: "Block > Tabs > Video Sektion",
+            name: "🧩 Block > Tabs > Video Sektion",
             fields: {
                 name: "Interner Name",
                 video: "Video",

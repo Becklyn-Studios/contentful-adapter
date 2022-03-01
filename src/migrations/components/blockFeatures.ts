@@ -5,7 +5,7 @@ import { getRteValidation } from "./rte";
 const translations = {
     en: {
         blockFeatures: {
-            name: "Block > Features",
+            name: "🧩 Block > Features",
             fields: {
                 overline: "Overline",
                 headline: "Headline",
@@ -14,7 +14,7 @@ const translations = {
             },
         },
         blockFeaturesEntry: {
-            name: "Block > Features > Entry",
+            name: "🧩 Block > Features > Entry",
             fields: {
                 icon: "Icon",
                 headline: "Headline",
@@ -24,7 +24,7 @@ const translations = {
     },
     de: {
         blockFeatures: {
-            name: "Block > Features",
+            name: "🧩 Block > Features",
             fields: {
                 overline: "Overline",
                 headline: "Überschrift",
@@ -33,7 +33,7 @@ const translations = {
             },
         },
         blockFeaturesEntry: {
-            name: "Block > Features > Eintrag",
+            name: "🧩 Block > Features > Eintrag",
             fields: {
                 icon: "Icon",
                 headline: "Überschrift",

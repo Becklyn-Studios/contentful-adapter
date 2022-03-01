@@ -3,7 +3,7 @@ import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../
 const translations = {
     en: {
         page: {
-            name: "Page",
+            name: "📄 Page",
             fields: {
                 name: "Internal Name",
                 title: "Page Title",
@@ -17,7 +17,7 @@ const translations = {
             },
         },
         seo: {
-            name: "SEO",
+            name: "📄 SEO",
             fields: {
                 name: "Internal Name",
                 title: "Title",
@@ -38,7 +38,7 @@ const translations = {
     },
     de: {
         page: {
-            name: "Seite",
+            name: "📄 Seite",
             fields: {
                 name: "Interner Name",
                 title: "Seitentitel",
@@ -52,7 +52,7 @@ const translations = {
             },
         },
         seo: {
-            name: "SEO",
+            name: "📄 SEO",
             fields: {
                 name: "Internal Name",
                 title: "Titel",

@@ -4,14 +4,14 @@ import { migrateBaseBlockFields } from "./block";
 const translations = {
     en: {
         blockLogos: {
-            name: "Block > Logos",
+            name: "🧩 Block > Logos",
             fields: {
                 headline: "Headline",
                 entries: "Entries",
             },
         },
         blockLogosLogo: {
-            name: "Block > Logos > Logo",
+            name: "🧩 Block > Logos > Logo",
             fields: {
                 name: "Internal Name",
                 image: "Logo",
@@ -21,14 +21,14 @@ const translations = {
     },
     de: {
         blockLogos: {
-            name: "Block > Logos",
+            name: "🧩 Block > Logos",
             fields: {
                 headline: "Überschrift",
                 entries: "Einträge",
             },
         },
         blockLogosLogo: {
-            name: "Block > Logos > Logo",
+            name: "🧩 Block > Logos > Logo",
             fields: {
                 name: "Interner Name",
                 image: "Logo",
