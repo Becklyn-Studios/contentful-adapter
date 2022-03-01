@@ -17,6 +17,9 @@ npm i --save @mayd/contentful-adapter
 TODOs
 -----
 
+* Multi locale support for languages
+  * pass active locales to migrations (besides backend language)
+  * adjust all migrations that have a `defaultValue` configuration
 * Documentation for `mayd-contentful.config.ts`
 
 

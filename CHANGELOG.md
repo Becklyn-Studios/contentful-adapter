@@ -1,3 +1,9 @@
+2.0.3
+=====
+
+*   (improvement) Use default values for boolean fields in migrations.
+
+
 2.0.2
 =====
 

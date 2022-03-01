@@ -190,6 +190,17 @@ export const getPageMigration: ContentfulMigrationGenerator = (
 
                 seo.displayField("name");
             },
+            2: migration => {
+                const seo = migration.editContentType("seo");
+
+                seo.editField("no_index").defaultValue({
+                    [language]: false,
+                });
+
+                seo.editField("no_follow").defaultValue({
+                    [language]: false,
+                });
+            },
         },
     };
 };

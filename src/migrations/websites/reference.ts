@@ -1,4 +1,5 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
+import migration from "../migration";
 
 const translations = {
     en: {
@@ -78,12 +79,12 @@ const translations = {
 export const getReferenceMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
+    const t = translations[language];
+
     return {
         component: "reference",
         migrations: {
             1: migration => {
-                const t = translations[language];
-
                 // external reference
                 const externalReference = migration.createContentType("externalReference", {
                     name: t.externalReference.name,
@@ -199,6 +200,19 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                 });
 
                 labeledLink.displayField("name");
+            },
+            2: migration => {
+                const externalReference = migration.editContentType("externalReference");
+
+                externalReference.editField("inNewTab").defaultValue({
+                    [language]: false,
+                });
+
+                const internalReference = migration.editContentType("internalReference");
+
+                internalReference.editField("inNewTab").defaultValue({
+                    [language]: false,
+                });
             },
         },
     };
