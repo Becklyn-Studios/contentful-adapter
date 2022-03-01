@@ -15,6 +15,7 @@ const translations = {
         blockAccordionEntry: {
             name: "🧩 Block > Accordion > Entry",
             fields: {
+                name: "Internal Name",
                 headline: "Headline",
                 text: "Text",
             },
@@ -32,6 +33,7 @@ const translations = {
         blockAccordionEntry: {
             name: "🧩 Block > Akkordeon > Eintrag",
             fields: {
+                name: "Interner Name",
                 headline: "Überschrift",
                 text: "Text",
             },
@@ -52,6 +54,12 @@ export const getBlockAccordionMigration: ContentfulMigrationGenerator = (
                     name: t.blockAccordionEntry.name,
                 });
 
+                blockAccordionEntry.createField("name", {
+                    type: "Symbol",
+                    name: t.blockAccordionEntry.fields.name,
+                    required: true,
+                });
+
                 blockAccordionEntry.createField("headline", {
                     type: "Symbol",
                     name: t.blockAccordionEntry.fields.headline,
@@ -64,7 +72,7 @@ export const getBlockAccordionMigration: ContentfulMigrationGenerator = (
                     validations: getRteValidation(RTE_TYPE_STYLED_FONT_AND_LIST),
                 });
 
-                blockAccordionEntry.displayField("headline");
+                blockAccordionEntry.displayField("name");
 
                 const blockAccordion = migration.createContentType("blockAccordion", {
                     name: t.blockAccordion.name,
@@ -88,8 +96,6 @@ export const getBlockAccordionMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockAccordion, language);
-
-                blockAccordion.displayField("headline");
             },
         },
     };

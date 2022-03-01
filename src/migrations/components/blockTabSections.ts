@@ -15,6 +15,7 @@ const translations = {
         blockTabSectionsEntry: {
             name: "🧩 Block > Tabs > Tab",
             fields: {
+                name: "Internal Name",
                 title: "Title",
                 content: "Content",
             },
@@ -64,6 +65,7 @@ const translations = {
         blockTabSectionsEntry: {
             name: "🧩 Block > Tabs > Tab",
             fields: {
+                name: "Interner Name",
                 title: "Titel",
                 content: "Inhalt",
             },
@@ -230,6 +232,12 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                     name: t.blockTabSectionsEntry.name,
                 });
 
+                blockTabSectionsEntry.createField("name", {
+                    type: "Symbol",
+                    name: t.blockTabSectionsEntry.fields.name,
+                    required: true,
+                });
+
                 blockTabSectionsEntry.createField("title", {
                     type: "Symbol",
                     name: t.blockTabSectionsEntry.fields.title,
@@ -253,7 +261,7 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                     required: true,
                 });
 
-                blockTabSectionsEntry.displayField("title");
+                blockTabSectionsEntry.displayField("name");
             },
             6: migration => {
                 const blockTabSections = migration.createContentType("blockTabSections", {
@@ -263,7 +271,6 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                 blockTabSections.createField("headline", {
                     type: "Symbol",
                     name: t.blockTabSections.fields.headline,
-                    required: true,
                 });
 
                 blockTabSections.createField("entries", {
@@ -279,8 +286,6 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockTabSections, language);
-
-                blockTabSections.displayField("headline");
             },
         },
     };

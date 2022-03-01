@@ -6,7 +6,6 @@ const translations = {
         blockRatings: {
             name: "🧩 Block > Ratings",
             fields: {
-                name: "Internal Name",
                 entries: "Entries",
             },
         },
@@ -137,12 +136,6 @@ export const getBlockRatingsMigration: ContentfulMigrationGenerator = (
                     name: t.blockRatings.name,
                 });
 
-                blockRatings.createField("name", {
-                    type: "Symbol",
-                    name: t.blockRatings.fields.name,
-                    required: true,
-                });
-
                 blockRatings.createField("entries", {
                     type: "Array",
                     name: t.blockRatings.fields.entries,
@@ -155,8 +148,6 @@ export const getBlockRatingsMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockRatings, language, "name");
-
-                blockRatings.displayField("name");
             },
         },
     };

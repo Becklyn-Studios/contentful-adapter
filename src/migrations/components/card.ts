@@ -5,6 +5,7 @@ const translations = {
         card: {
             name: "⚙️ Basic > Card",
             fields: {
+                name: "Internal Name",
                 image: "Image",
                 overline: "Overline",
                 headline: "Headline",
@@ -17,6 +18,7 @@ const translations = {
         card: {
             name: "⚙️ Basic > Card",
             fields: {
+                name: "Interner Name",
                 image: "Bild",
                 overline: "Overline",
                 headline: "Überschrift",

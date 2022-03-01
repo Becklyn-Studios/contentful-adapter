@@ -14,6 +14,7 @@ export const THEME_BLOCK = {
 
 const translations = {
     en: {
+        name: "Internal Name",
         theme: {
             name: "Theme",
             default: THEME_BLOCK.en.noBackground,
@@ -23,6 +24,7 @@ const translations = {
         anchorLabel: "Anchor Label",
     },
     de: {
+        name: "Interner Name",
         theme: {
             name: "Theme",
             default: THEME_BLOCK.de.noBackground,
@@ -71,4 +73,14 @@ export const migrateBaseBlockFields = (
         name: t.anchorLabel,
         validations: [{ size: { max: 25 } }],
     });
+
+    block.createField("name", {
+        type: "Symbol",
+        name: t.name,
+        required: true,
+    });
+
+    block.moveField("name").toTheTop();
+
+    block.displayField("name");
 };

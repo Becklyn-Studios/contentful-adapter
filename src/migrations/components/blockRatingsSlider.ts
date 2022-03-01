@@ -39,7 +39,6 @@ export const getBlockRatingsSliderMigration: ContentfulMigrationGenerator = (
                 blockRatingsSlider.createField("headline", {
                     type: "Symbol",
                     name: t.blockRatingsSlider.fields.headline,
-                    required: true,
                 });
 
                 blockRatingsSlider.createField("labeledLink", {
@@ -50,8 +49,6 @@ export const getBlockRatingsSliderMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockRatingsSlider, language);
-
-                blockRatingsSlider.displayField("headline");
             },
         },
     };

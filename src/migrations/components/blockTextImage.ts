@@ -118,8 +118,6 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
                 blockTextImage.changeFieldControl("version", "builtin", "radio");
 
                 migrateBaseBlockFields(blockTextImage, language);
-
-                blockTextImage.displayField("headline");
             },
         },
     };

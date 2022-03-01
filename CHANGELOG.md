@@ -1,3 +1,9 @@
+2.0.2
+=====
+
+*   (improvement) Improve migrations
+
+
 2.0.1
 =====
 

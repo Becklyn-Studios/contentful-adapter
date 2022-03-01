@@ -56,8 +56,6 @@ export const getBlockTextMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockText, language);
-
-                blockText.displayField("headline");
             },
         },
     };

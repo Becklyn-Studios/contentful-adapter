@@ -16,6 +16,7 @@ const translations = {
         blockFeaturesEntry: {
             name: "🧩 Block > Features > Entry",
             fields: {
+                name: "Internal Name",
                 icon: "Icon",
                 headline: "Headline",
                 text: "Text",
@@ -35,6 +36,7 @@ const translations = {
         blockFeaturesEntry: {
             name: "🧩 Block > Features > Eintrag",
             fields: {
+                name: "Interner Name",
                 icon: "Icon",
                 headline: "Überschrift",
                 text: "Text",
@@ -56,6 +58,12 @@ export const getBlockFeaturesMigration: ContentfulMigrationGenerator = (
                     name: t.blockFeaturesEntry.name,
                 });
 
+                blockFeaturesEntry.createField("name", {
+                    type: "Symbol",
+                    name: t.blockFeaturesEntry.fields.name,
+                    required: true,
+                });
+
                 blockFeaturesEntry.createField("headline", {
                     type: "Symbol",
                     name: t.blockFeaturesEntry.fields.headline,
@@ -75,7 +83,7 @@ export const getBlockFeaturesMigration: ContentfulMigrationGenerator = (
                     validations: getRteValidation(),
                 });
 
-                blockFeaturesEntry.displayField("headline");
+                blockFeaturesEntry.displayField("name");
 
                 const blockFeatures = migration.createContentType("blockFeatures", {
                     name: t.blockFeatures.name,
@@ -112,8 +120,6 @@ export const getBlockFeaturesMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockFeatures, language);
-
-                blockFeatures.displayField("headline");
             },
         },
     };

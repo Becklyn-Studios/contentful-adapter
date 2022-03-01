@@ -75,7 +75,7 @@ export { getPageMigration } from "./migrations/websites/page";
 export { getReferenceMigration } from "./migrations/websites/reference";
 export { getBlockAccordionMigration } from "./migrations/components/blockAccordion";
 export { getBlockCardsTeaserMigration } from "./migrations/components/blockCardsTeaser";
-export { getBlockCardsSliderTeaserMigration } from "./migrations/components/blockCardsTeaserSlider";
+export { getBlockCardsSliderTeaserMigration } from "./migrations/components/blockCardsSliderTeaser";
 export { getBlockFeaturesMigration } from "./migrations/components/blockFeatures";
 export { getBlockLogosMigration } from "./migrations/components/blockLogos";
 export { getBlockRatingsMigration } from "./migrations/components/blockRatings";

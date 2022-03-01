@@ -81,7 +81,6 @@ export const getBlockLogosMigration: ContentfulMigrationGenerator = (
                 blockLogos.createField("headline", {
                     type: "Symbol",
                     name: t.blockLogos.fields.headline,
-                    required: true,
                 });
 
                 blockLogos.createField("entries", {
@@ -96,8 +95,6 @@ export const getBlockLogosMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockLogos, language);
-
-                blockLogos.displayField("headline");
             },
         },
     };

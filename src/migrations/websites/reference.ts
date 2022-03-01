@@ -5,6 +5,7 @@ const translations = {
         externalReference: {
             name: "⚙️ Basic > External Reference",
             fields: {
+                name: "Internal Name",
                 url: "URL",
                 title: "Title",
                 inNewTab: {
@@ -30,6 +31,7 @@ const translations = {
         labeledLink: {
             name: "⚙️ Basic > Labeled Link",
             fields: {
+                name: "Internal Name",
                 label: "Label",
                 reference: "Reference",
             },
@@ -39,6 +41,7 @@ const translations = {
         externalReference: {
             name: "⚙️ Basic > Externe Referenz",
             fields: {
+                name: "Interner Name",
                 url: "URL",
                 title: "Titel",
                 inNewTab: {
@@ -64,6 +67,7 @@ const translations = {
         labeledLink: {
             name: "⚙️ Basic > Link mit Label",
             fields: {
+                name: "Interner Name",
                 label: "Label",
                 reference: "Referenz",
             },
@@ -83,6 +87,12 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                 // external reference
                 const externalReference = migration.createContentType("externalReference", {
                     name: t.externalReference.name,
+                });
+
+                externalReference.createField("name", {
+                    type: "Symbol",
+                    name: t.externalReference.fields.name,
+                    required: true,
                 });
 
                 externalReference.createField("url", {
@@ -110,7 +120,7 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     falseLabel: t.externalReference.fields.inNewTab.false,
                 });
 
-                externalReference.displayField("url");
+                externalReference.displayField("name");
 
                 // internal reference
                 const internalReference = migration.createContentType("internalReference", {
@@ -164,6 +174,12 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     name: t.labeledLink.name,
                 });
 
+                labeledLink.createField("name", {
+                    type: "Symbol",
+                    name: t.labeledLink.fields.name,
+                    required: true,
+                });
+
                 labeledLink.createField("label", {
                     type: "Symbol",
                     name: t.labeledLink.fields.label,
@@ -182,7 +198,7 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     ],
                 });
 
-                labeledLink.displayField("label");
+                labeledLink.displayField("name");
             },
         },
     };

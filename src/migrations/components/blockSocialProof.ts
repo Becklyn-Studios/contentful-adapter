@@ -81,7 +81,6 @@ export const getBlockSocialProofMigration: ContentfulMigrationGenerator = (
                 blockSocialProof.createField("headline", {
                     type: "Symbol",
                     name: t.blockSocialProof.fields.headline,
-                    required: true,
                 });
 
                 blockSocialProof.createField("entries", {
@@ -96,8 +95,6 @@ export const getBlockSocialProofMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockSocialProof, language);
-
-                blockSocialProof.displayField("headline");
             },
         },
     };

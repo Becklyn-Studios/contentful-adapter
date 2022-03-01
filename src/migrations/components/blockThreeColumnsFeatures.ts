@@ -15,6 +15,7 @@ const translations = {
         blockThreeColumnsFeaturesEntry: {
             name: "🧩 Block > Features Three Columns > Entry",
             fields: {
+                name: "Internal Name",
                 icon: "Icon",
                 headline: "Headline",
                 text: "Text",
@@ -33,6 +34,7 @@ const translations = {
         blockThreeColumnsFeaturesEntry: {
             name: "🧩 Block > Features Drei Spalten > Eintrag",
             fields: {
+                name: "Interner Name",
                 icon: "Icon",
                 headline: "Überschrift",
                 text: "Text",
@@ -57,6 +59,12 @@ export const getBlockThreeColumnsFeaturesMigration: ContentfulMigrationGenerator
                     }
                 );
 
+                blockThreeColumnsFeaturesEntry.createField("name", {
+                    type: "Symbol",
+                    name: t.blockThreeColumnsFeaturesEntry.fields.name,
+                    required: true,
+                });
+
                 blockThreeColumnsFeaturesEntry.createField("headline", {
                     type: "Symbol",
                     name: t.blockThreeColumnsFeaturesEntry.fields.headline,
@@ -76,7 +84,7 @@ export const getBlockThreeColumnsFeaturesMigration: ContentfulMigrationGenerator
                     validations: getRteValidation(),
                 });
 
-                blockThreeColumnsFeaturesEntry.displayField("headline");
+                blockThreeColumnsFeaturesEntry.displayField("name");
 
                 const blockThreeColumnsFeatures = migration.createContentType(
                     "blockThreeColumnsFeatures",
@@ -88,7 +96,6 @@ export const getBlockThreeColumnsFeaturesMigration: ContentfulMigrationGenerator
                 blockThreeColumnsFeatures.createField("headline", {
                     type: "Symbol",
                     name: t.blockThreeColumnsFeatures.fields.headline,
-                    required: true,
                 });
 
                 blockThreeColumnsFeatures.createField("labeledLink", {
@@ -111,8 +118,6 @@ export const getBlockThreeColumnsFeaturesMigration: ContentfulMigrationGenerator
                 });
 
                 migrateBaseBlockFields(blockThreeColumnsFeatures, language);
-
-                blockThreeColumnsFeatures.displayField("headline");
             },
         },
     };

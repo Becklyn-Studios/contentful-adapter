@@ -80,8 +80,6 @@ export const getBlockCardsTeaserMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockCardsTeaser, language);
-
-                blockCardsTeaser.displayField("headline");
             },
         },
     };

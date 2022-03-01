@@ -72,8 +72,6 @@ export const getBlockCardsSliderTeaserMigration: ContentfulMigrationGenerator = 
                 });
 
                 migrateBaseBlockFields(blockCardsSliderTeaser, language);
-
-                blockCardsSliderTeaser.displayField("headline");
             },
         },
     };
