@@ -4,19 +4,44 @@ import {
     ComponentDataConfig,
     SingleRelationType,
     TYPE_ASSET,
+    TYPE_BOOL,
     TYPE_LABELED_LINK,
+    TYPE_NUMBER,
+    TYPE_RTE,
     TYPE_STRING,
 } from "@mayd/ui-types";
 import { ContentfulNormalizerService } from "./service";
 
-export const getDataFieldNames = (data: Entry<any>): string[] => {
+export const getDataFieldNames = (data: Entry<any>, dataConfig: ComponentDataConfig): string[] => {
     const fieldNames: string[] = [];
 
     if (!data.fields) {
         return fieldNames;
     }
 
-    return Object.keys(data.fields);
+    const dataFields = Object.keys(data.fields);
+    const customFields = getCustomDataTypeFields(dataConfig);
+
+    return dataFields.concat(...customFields.filter(field => !dataFields.includes(field)));
+};
+
+const getCustomDataTypeFields = (dataConfig: ComponentDataConfig) => {
+    return Object.keys(dataConfig).filter(key => {
+        const dataType = dataConfig[key];
+
+        if ("string" !== typeof dataType) {
+            return false;
+        }
+
+        return (
+            dataType !== TYPE_STRING &&
+            dataType !== TYPE_BOOL &&
+            dataType !== TYPE_NUMBER &&
+            dataType !== TYPE_RTE &&
+            dataType !== TYPE_ASSET &&
+            dataType !== TYPE_LABELED_LINK
+        );
+    });
 };
 
 export const getDataConfigForContentType = (

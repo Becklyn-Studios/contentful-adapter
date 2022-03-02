@@ -27,7 +27,7 @@
     "dependencies": {
         "@contentful/rich-text-html-renderer": "^15.11.1",
         "@contentful/rich-text-types": "^15.11.1",
-        "@mayd/ui-types": "^3.0.1",
+        "@mayd/ui-types": "^3.1.0",
         "contentful": "^9.1.6",
         "contentful-management": "^7.51.5",
         "contentful-migration": "^4.7.0",

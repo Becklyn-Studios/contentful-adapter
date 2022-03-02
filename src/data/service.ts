@@ -12,7 +12,11 @@ export interface ContentfulNormalizerService {
     resolveInternalReferencePath: (data: any) => Promise<string | null>;
     getThemeValue: (contentfulValue: string) => string;
     getVersionValue: (contentfulValue: string) => string;
+    registerNormalizerType: (dataType: string, normalizer: DataTypeNormalizer) => void;
+    getCustomNormalizer: (dataType: string) => DataTypeNormalizer | null;
 }
+
+export type DataTypeNormalizer = (data: any, service: ContentfulNormalizerService) => Promise<any>;
 
 export type InternalReferenceResolver = (
     data: any,
@@ -27,6 +31,7 @@ export const getContentfulNormalizerService = (
 ): ContentfulNormalizerService => {
     const contentfulClient = connectToContentfulDeliveryApi(config.clientConfig);
     let pageTree: PageTreeNode | null = null;
+    let customNormalizers: Record<string, DataTypeNormalizer> = {};
 
     const getPageTree = async () => {
         if (!pageTree) {
@@ -60,6 +65,16 @@ export const getContentfulNormalizerService = (
             const resolver = internalReferenceResolvers[contentType];
 
             return resolver ? await resolver(data, currentPageTree) : null;
+        },
+        registerNormalizerType: (dataType: string, normalizer: DataTypeNormalizer) => {
+            if (customNormalizers[dataType]) {
+                throw new Error(`DataTypeNormalizer for dataType ${dataType} already exists`);
+            }
+
+            customNormalizers[dataType] = normalizer;
+        },
+        getCustomNormalizer: (dataType: string): DataTypeNormalizer | null => {
+            return customNormalizers[dataType] ?? null;
         },
     };
 };

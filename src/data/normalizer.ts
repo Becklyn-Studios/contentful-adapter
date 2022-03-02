@@ -73,7 +73,7 @@ export const normalizeDataForDataConfig = async (
         data = newData;
     }
 
-    const fieldNames = getDataFieldNames(data);
+    const fieldNames = getDataFieldNames(data, dataConfig);
     const outputData: any = {};
 
     for (let i = 0; i < fieldNames.length; i++) {
@@ -81,7 +81,11 @@ export const normalizeDataForDataConfig = async (
         const dataType = dataConfig[fieldName];
 
         if (dataType) {
-            outputData[fieldName] = await getDataValue(data.fields[fieldName], dataType, service);
+            outputData[fieldName] = await getDataValue(
+                data.fields[fieldName] ?? null,
+                dataType,
+                service
+            );
         }
     }
 
@@ -136,6 +140,12 @@ const getDataValue = async (
         case TYPE_LABELED_LINK:
             return await normalizeLabeledLink(data, service);
         default:
-            return await normalizeRelationTypeData(dataType, data, service);
+            if ("string" !== typeof dataType) {
+                return await normalizeRelationTypeData(dataType, data, service);
+            }
+
+            const normalizer = service.getCustomNormalizer(dataType);
+
+            return normalizer ? await normalizer(data, service) : null;
     }
 };

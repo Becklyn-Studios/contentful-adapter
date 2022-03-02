@@ -1,3 +1,9 @@
+2.1.0
+=====
+
+*   (feature) Allow registration of custom `DataTypeNormalizer`s.
+
+
 2.0.3
 =====
 
