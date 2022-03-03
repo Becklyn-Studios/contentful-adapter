@@ -55,6 +55,21 @@ export const connectToContentfulDeliveryApi = (
     });
 };
 
+export const findEntries = async <T>(
+    client: ContentfulClientApi,
+    { contentType, select, where, depth }: FindEntryOptions
+): Promise<Entry<T>[]> => {
+    const entries = await client.getEntries<T>({
+        ...getContentfulWhereObject(where),
+        content_type: contentType,
+        select: getContentfulSelectString(select),
+        limit: 1,
+        include: depth ? depth : 0,
+    });
+
+    return entries.items;
+};
+
 export const findOneEntry = async <T>(
     client: ContentfulClientApi,
     { contentType, select, where, depth, throwError }: FindEntryOptions

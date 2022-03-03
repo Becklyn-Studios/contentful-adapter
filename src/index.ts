@@ -17,6 +17,7 @@ export {
     getExecutedMigrations,
     getDefaultLocale,
     findEntriesByIds,
+    findEntries,
     findOneEntry,
     findOneEntryBySys,
     findOneAsset,

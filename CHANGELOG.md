@@ -1,3 +1,9 @@
+2.2.0
+=====
+
+*   (feature) Add `findEntries` api function.
+
+
 2.1.0
 =====
 
