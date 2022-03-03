@@ -1,7 +1,7 @@
 2.3.0
 =====
 
-*   (feature) Add `findEntries` migration.
+*   (feature) Add `blockIconCards` migration.
 
 
 2.2.0
