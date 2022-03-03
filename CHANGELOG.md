@@ -1,3 +1,9 @@
+2.3.0
+=====
+
+*   (feature) Add `findEntries` migration.
+
+
 2.2.0
 =====
 
