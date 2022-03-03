@@ -63,7 +63,6 @@ export const findEntries = async <T>(
         ...getContentfulWhereObject(where),
         content_type: contentType,
         select: getContentfulSelectString(select),
-        limit: 1,
         include: depth ? depth : 0,
     });
 

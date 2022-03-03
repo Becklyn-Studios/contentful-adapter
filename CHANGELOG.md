@@ -1,3 +1,9 @@
+2.3.1
+=====
+
+*   (bug) Fix `findEntries` limit.
+
+
 2.3.0
 =====
 
