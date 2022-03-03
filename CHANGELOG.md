@@ -1,3 +1,9 @@
+2.5.0
+=====
+
+*   (feature) Automatically add `anchor` and `anchorLabel` to all types in normalizer.
+
+
 2.4.0
 =====
 

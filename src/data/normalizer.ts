@@ -76,6 +76,13 @@ export const normalizeDataForDataConfig = async (
     const fieldNames = getDataFieldNames(data, dataConfig);
     const outputData: any = {};
 
+    addThemeToData(outputData, data, service);
+    addVersionToData(outputData, data, service);
+    addAnchorDataToData(outputData, data, service);
+
+    outputData["id"] = getIdFromData(data);
+    outputData["componentKey"] = getComponentKeyFromData(data, service);
+
     for (let i = 0; i < fieldNames.length; i++) {
         const fieldName = fieldNames[i];
         const dataType = dataConfig[fieldName];
@@ -88,12 +95,6 @@ export const normalizeDataForDataConfig = async (
             );
         }
     }
-
-    addThemeToData(outputData, data, service);
-    addVersionToData(outputData, data, service);
-
-    outputData["id"] = getIdFromData(data);
-    outputData["componentKey"] = getComponentKeyFromData(data, service);
 
     return outputData;
 };
@@ -120,6 +121,20 @@ const addVersionToData = (
     }
 
     outputData["version"] = service.getVersionValue(data.fields.version);
+};
+
+const addAnchorDataToData = (
+    outputData: any,
+    data: Entry<any>,
+    service: ContentfulNormalizerService
+): void => {
+    if (data && data.fields && data.fields.anchor) {
+        outputData["anchor"] = data.fields.anchor;
+    }
+
+    if (data && data.fields && data.fields.anchorLabel) {
+        outputData["anchorLabel"] = data.fields.anchorLabel;
+    }
 };
 
 const getDataValue = async (
