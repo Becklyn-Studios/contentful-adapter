@@ -11,7 +11,7 @@ import {
     TYPE_RTE,
     TYPE_STRING,
 } from "@mayd/ui-types";
-import { getComponentKeyFromData, getDataFieldNames } from "./util";
+import { getComponentKeyFromData, getDataFieldNames, getIdFromData } from "./util";
 import { ContentfulNormalizerService } from "./service";
 import { normalizeAssetData } from "./asset";
 import { getRteData } from "./rte";
@@ -92,6 +92,7 @@ export const normalizeDataForDataConfig = async (
     addThemeToData(outputData, data, service);
     addVersionToData(outputData, data, service);
 
+    outputData["id"] = getIdFromData(data);
     outputData["componentKey"] = getComponentKeyFromData(data, service);
 
     return outputData;

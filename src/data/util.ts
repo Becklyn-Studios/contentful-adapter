@@ -59,6 +59,10 @@ export const getDataConfigForContentType = (
     return null;
 };
 
+export const getIdFromData = (data: Entry<any>): string | null => {
+    return data && data.sys ? data.sys.id : null;
+};
+
 export const getComponentKeyFromData = (
     data: Entry<any>,
     service: ContentfulNormalizerService

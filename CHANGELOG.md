@@ -1,3 +1,9 @@
+2.4.0
+=====
+
+*   (feature) Automatically add `id` to all types in normalizer.
+
+
 2.3.1
 =====
 
