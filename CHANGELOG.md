@@ -1,3 +1,9 @@
+2.5.2
+=====
+
+*   (internal) Improve migration error handling.
+
+
 2.5.1
 =====
 

@@ -52,7 +52,7 @@ const runSingleMigration = async (
         accessToken: config.management.accessToken,
         environmentId: config.environmentId,
         yes: true,
-    }).catch(console.error);
+    });
 
     console.log(`Migration "${migration.key}" succeeded`);
 
