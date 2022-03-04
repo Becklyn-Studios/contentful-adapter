@@ -66,17 +66,20 @@ export const loadPageTree = async (
 
     const slug = page.fields && page.fields.slug ? page.fields.slug : null;
     const childPages = await findChildPages(client, page);
-    const childNodes: PageTreeNode[] = [];
 
-    for (let i = 0; i < childPages.length; i++) {
-        childNodes.push(await loadPageTree(client, childPages[i]));
-    }
-
-    return {
+    const parentPage: PageTreeNode = {
         id: page.sys.id,
         slug: "/" === slug ? null : slug,
-        children: childNodes,
+        children: [],
     };
+
+    for (let i = 0; i < childPages.length; i++) {
+        const childPage = await loadPageTree(client, childPages[i]);
+        childPage.parent = parentPage;
+        parentPage.children.push(childPage);
+    }
+
+    return parentPage;
 };
 
 export const findRootPage = async (

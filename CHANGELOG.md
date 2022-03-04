@@ -1,3 +1,10 @@
+2.5.1
+=====
+
+*   (bug) Fix `loadPageTree` 
+*   (bug) Fix `getSlugPartsOfPageTreeNode`.
+
+
 2.5.0
 =====
 

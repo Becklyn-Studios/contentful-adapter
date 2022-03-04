@@ -79,11 +79,13 @@ export const getSlugPartsOfPageTreeNode = (
         return [];
     }
 
+    const currentSlugParts = page.slug ? [page.slug, ...parts] : parts;
+
     if (!page.parent) {
-        return page.slug ? [page.slug, ...parts] : parts;
+        return currentSlugParts;
     }
 
-    return getSlugPartsOfPageTreeNode(page.parent, page.slug ? [page.slug] : []);
+    return getSlugPartsOfPageTreeNode(page.parent, currentSlugParts);
 };
 
 export const findPageInTree = (pageId: string, pageTree: PageTreeNode): PageTreeNode | null => {
