@@ -89,7 +89,7 @@ export const findRootPage = async (
 ): Promise<Entry<ContentfulBasePage>> => {
     const page = await findOneEntry<ContentfulBasePage>(client, {
         contentType: "page",
-        select: ["fields.slug", "fields.childPages"],
+        select: ["fields.slug", "fields.title", "fields.childPages"],
         where: {
             "fields.slug": "/",
         },
@@ -114,7 +114,7 @@ const findChildPages = async (
 
     return await findEntriesByIds<ContentfulBasePage>(client, {
         contentType: "page",
-        select: ["fields.slug", "fields.childPages"],
+        select: ["fields.slug", "fields.title", "fields.childPages"],
         ids: childIds,
     });
 };
