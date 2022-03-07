@@ -65,11 +65,13 @@ export const loadPageTree = async (
     page = !!page ? page : await findRootPage(client);
 
     const slug = page.fields && page.fields.slug ? page.fields.slug : null;
+    const title = page.fields && page.fields.title ? page.fields.title : null;
     const childPages = await findChildPages(client, page);
 
     const parentPage: PageTreeNode = {
         id: page.sys.id,
         slug: "/" === slug ? null : slug,
+        title,
         children: [],
     };
 

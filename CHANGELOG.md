@@ -1,3 +1,9 @@
+2.6.1
+=====
+
+*   (improvement) Add `title` to `PageTreeNode`.
+
+
 2.6.0
 =====
 

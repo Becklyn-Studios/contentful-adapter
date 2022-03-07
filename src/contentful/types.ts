@@ -5,6 +5,7 @@ import { Asset, LinkReference } from "@mayd/ui-types";
 export interface PageTreeNode {
     id: string;
     slug: string | null;
+    title?: string | null;
     parent?: PageTreeNode;
     children: PageTreeNode[];
 }
@@ -30,6 +31,7 @@ export interface BaseContentfulEntry {
 
 export interface ContentfulBasePage {
     slug: string;
+    title: string;
     childPages: BaseContentfulEntry[];
 }
 
