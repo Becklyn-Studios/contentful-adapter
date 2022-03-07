@@ -87,6 +87,8 @@ export { getBlockTextMigration } from "./migrations/components/blockText";
 export { getBlockTextImageMigration } from "./migrations/components/blockTextImage";
 export { getBlockThreeColumnsFeaturesMigration } from "./migrations/components/blockThreeColumnsFeatures";
 export { getBlockIconCardsMigration } from "./migrations/components/blockIconCards";
+export { getBlockProcessMigration } from "./migrations/components/blockProcess";
+export { getBlockListMigration } from "./migrations/components/blockList";
 export { getCardMigration } from "./migrations/components/card";
 //endregion
 

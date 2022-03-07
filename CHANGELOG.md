@@ -1,3 +1,10 @@
+2.6.0
+=====
+
+*   (feature) Add `blockProcess` migration.
+*   (feature) Add `blockList` migration.
+
+
 2.5.2
 =====
 
