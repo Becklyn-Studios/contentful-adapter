@@ -122,6 +122,4 @@ export { normalizeRelationTypeData, normalizeDynamicDataConfigData } from "./dat
 export type { ContentfulNormalizerService, InternalReferenceResolver } from "./data/service";
 
 export { getContentfulNormalizerService } from "./data/service";
-
-export { getPageConfig } from "./data/component/page";
 //endregion

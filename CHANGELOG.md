@@ -1,3 +1,9 @@
+2.6.3
+=====
+
+*   (improvement) Optimize exports.
+
+
 2.6.2
 =====
 

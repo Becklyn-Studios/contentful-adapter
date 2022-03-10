@@ -1,5 +1,5 @@
-import { BaseComponentConfig, TYPE_BOOL, TYPE_STRING } from "@mayd/ui-types";
 import React from "react";
+import { BaseComponentConfig, TYPE_BOOL, TYPE_STRING } from "@mayd/ui-types";
 
 export const getPageConfig = (
     contentComponentKeys: string[],
