@@ -125,11 +125,15 @@ export const getBlockThreeColumnsFeaturesMigration: ContentfulMigrationGenerator
                     "blockThreeColumnsFeatures"
                 );
 
-                blockThreeColumnsFeatures.editField("headline", {
+                blockThreeColumnsFeatures.deleteField("headline");
+
+                blockThreeColumnsFeatures.createField("headline", {
                     type: "RichText",
                     name: t.blockThreeColumnsFeatures.fields.headline,
                     validations: getRteValidation(RTE_TYPE_HEADLINE),
                 });
+
+                blockThreeColumnsFeatures.moveField("headline").afterField("name");
 
                 blockThreeColumnsFeatures.editField("entries").validations([{ size: { max: 9 } }]);
             },

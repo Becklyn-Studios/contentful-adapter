@@ -1,3 +1,9 @@
+2.7.1
+=====
+
+*   (bug) Fix `blockThreeColumnsFeatures` migration.
+
+
 2.7.0
 =====
 
