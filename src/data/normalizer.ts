@@ -144,6 +144,12 @@ const getDataValue = async (
     dataType: DataType,
     service: ContentfulNormalizerService
 ): Promise<any | null> => {
+    const normalizer = "string" === typeof dataType ? service.getCustomNormalizer(dataType) : null;
+
+    if (normalizer) {
+        return normalizer(data, service);
+    }
+
     switch (dataType) {
         case TYPE_STRING:
             return "string" === typeof data ? data : null;
@@ -160,12 +166,6 @@ const getDataValue = async (
         case TYPE_LABELED_LINK:
             return await normalizeLabeledLink(data, service);
         default:
-            if ("string" !== typeof dataType) {
-                return await normalizeRelationTypeData(dataType, data, service);
-            }
-
-            const normalizer = service.getCustomNormalizer(dataType);
-
-            return normalizer ? await normalizer(data, service) : null;
+            return await normalizeRelationTypeData(dataType, data, service);
     }
 };

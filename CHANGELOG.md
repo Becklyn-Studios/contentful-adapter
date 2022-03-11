@@ -3,6 +3,7 @@
 
 *   (bug) Load all migrations.
 *   (bug) Fix headline migrations.
+*   (improvement) Override default normalizer types.
 
 
 2.7.2
