@@ -36,11 +36,23 @@ export const getExecutedMigrations = async (
         return [];
     }
 
-    const { items: versions } = await environment.getEntries({
-        content_type: MIGRATIONS_MODEL_NAME,
-    });
+    let allVersions: any[] = [];
+    let total: number | null = null;
+    let skip = 0;
 
-    return versions.map(version => version.fields.version[locale]).filter(version => !!version);
+    while (total === null || total > allVersions.length) {
+        const { items: versions, total: newTotal } = await environment.getEntries({
+            content_type: MIGRATIONS_MODEL_NAME,
+            limit: 1000,
+            skip,
+        });
+
+        total = newTotal;
+        skip += versions.length;
+        allVersions = [...allVersions, ...versions];
+    }
+
+    return allVersions.map(version => version.fields.version[locale]).filter(version => !!version);
 };
 
 export const connectToContentfulDeliveryApi = (
