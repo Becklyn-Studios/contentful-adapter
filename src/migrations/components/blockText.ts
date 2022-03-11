@@ -70,6 +70,12 @@ export const getBlockTextMigration: ContentfulMigrationGenerator = (
 
                 blockText.moveField("headline").afterField("name");
             },
+            3: migration => {
+                const blockText = migration.editContentType("blockText");
+
+                blockText.editField("headline").required(true);
+                blockText.moveField("headline").afterField("overline");
+            },
         },
     };
 };

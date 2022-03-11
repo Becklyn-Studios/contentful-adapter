@@ -126,6 +126,11 @@ export const getBlockIconCardsMigration: ContentfulMigrationGenerator = (
 
                 blockIconCards.moveField("headline").afterField("name");
             },
+            3: migration => {
+                const blockIconCards = migration.editContentType("blockIconCards");
+
+                blockIconCards.moveField("headline").afterField("overline");
+            },
         },
     };
 };

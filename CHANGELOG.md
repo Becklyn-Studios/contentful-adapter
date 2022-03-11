@@ -2,6 +2,7 @@
 =====
 
 *   (bug) Load all migrations.
+*   (bug) Fix headline migrations.
 
 
 2.7.2

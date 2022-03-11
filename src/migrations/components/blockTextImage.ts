@@ -134,6 +134,12 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
 
                 blockTextImage.moveField("headline").afterField("name");
             },
+            3: migration => {
+                const blockTextImage = migration.editContentType("blockTextImage");
+
+                blockTextImage.editField("headline").required(true);
+                blockTextImage.moveField("headline").afterField("overline");
+            },
         },
     };
 };

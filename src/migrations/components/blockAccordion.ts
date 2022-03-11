@@ -1,6 +1,7 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
 import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
+import migration from "../migration";
 
 const translations = {
     en: {
@@ -109,6 +110,11 @@ export const getBlockAccordionMigration: ContentfulMigrationGenerator = (
                 });
 
                 blockAccordion.moveField("headline").afterField("name");
+            },
+            3: migration => {
+                const blockAccordion = migration.editContentType("blockAccordion");
+
+                blockAccordion.editField("headline").required(true);
             },
         },
     };

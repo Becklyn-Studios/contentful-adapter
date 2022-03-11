@@ -136,6 +136,12 @@ export const getBlockFeaturesMigration: ContentfulMigrationGenerator = (
 
                 blockFeatures.moveField("headline").afterField("name");
             },
+            3: migration => {
+                const blockFeatures = migration.editContentType("blockFeatures");
+
+                blockFeatures.editField("headline").required(true);
+                blockFeatures.moveField("headline").afterField("overline");
+            },
         },
     };
 };

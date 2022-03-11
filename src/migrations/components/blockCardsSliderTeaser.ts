@@ -87,6 +87,12 @@ export const getBlockCardsSliderTeaserMigration: ContentfulMigrationGenerator = 
 
                 blockCardsSliderTeaser.moveField("headline").afterField("name");
             },
+            3: migration => {
+                const blockCardsSliderTeaser = migration.editContentType("blockCardsSliderTeaser");
+
+                blockCardsSliderTeaser.editField("headline").required(true);
+                blockCardsSliderTeaser.moveField("headline").afterField("overline");
+            },
         },
     };
 };

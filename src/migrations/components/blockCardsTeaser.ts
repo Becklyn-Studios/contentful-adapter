@@ -94,6 +94,12 @@ export const getBlockCardsTeaserMigration: ContentfulMigrationGenerator = (
 
                 blockCardsTeaser.moveField("headline").afterField("name");
             },
+            3: migration => {
+                const blockCardsTeaser = migration.editContentType("blockCardsTeaser");
+
+                blockCardsTeaser.editField("headline").required(true);
+                blockCardsTeaser.moveField("headline").afterField("overline");
+            },
         },
     };
 };
