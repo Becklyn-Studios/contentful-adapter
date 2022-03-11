@@ -1,3 +1,11 @@
+2.7.0
+=====
+
+*   (feature) Add image to seo.
+*   (feature) Add formatted headline feature to normalizer.
+*   (improvement) Use formatted headline in `blockThreeColumnsFeatures`.
+
+
 2.6.3
 =====
 

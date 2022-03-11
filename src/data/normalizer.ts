@@ -6,6 +6,7 @@ import {
     DataType,
     TYPE_ASSET,
     TYPE_BOOL,
+    TYPE_HEADLINE,
     TYPE_LABELED_LINK,
     TYPE_NUMBER,
     TYPE_RTE,
@@ -18,6 +19,7 @@ import { getRteData } from "./rte";
 import { normalizeLabeledLink } from "./reference";
 import { normalizeRelationTypeData } from "./relation";
 import { findOneEntryBySys } from "../contentful/api";
+import { getHeadlineString } from "./headline";
 
 export const normalizePageData = async (
     pageData: Entry<ContentfulPage>,
@@ -151,6 +153,8 @@ const getDataValue = async (
             return "number" === typeof data ? data : null;
         case TYPE_RTE:
             return await getRteData(data, service);
+        case TYPE_HEADLINE:
+            return getHeadlineString(data);
         case TYPE_ASSET:
             return await normalizeAssetData(data, service);
         case TYPE_LABELED_LINK:

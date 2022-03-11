@@ -33,6 +33,10 @@ const translations = {
                     true: "Yes",
                     false: "No",
                 },
+                image: {
+                    name: "Image",
+                    help: "Recomended size 1200x628",
+                },
             },
         },
     },
@@ -68,6 +72,10 @@ const translations = {
                     true: "Ja",
                     false: "Nein",
                 },
+                image: {
+                    name: "Bild",
+                    help: "Vorgeschlagene Größe 1200x628",
+                },
             },
         },
     },
@@ -76,12 +84,12 @@ const translations = {
 export const getPageMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
+    const t = translations[language];
+
     return {
         component: "page",
         migrations: {
             1: migration => {
-                const t = translations[language];
-
                 const page = migration.createContentType("page", {
                     name: t.page.name,
                 });
@@ -200,6 +208,25 @@ export const getPageMigration: ContentfulMigrationGenerator = (
                 seo.editField("no_follow").defaultValue({
                     [language]: false,
                 });
+            },
+            3: migration => {
+                const seo = migration.editContentType("seo");
+
+                seo.createField("image", {
+                    type: "Link",
+                    name: t.seo.fields.image.name,
+                    linkType: "Asset",
+                    validations: [
+                        { linkMimetypeGroup: ["image"] },
+                        { assetFileSize: { max: 5242880 } },
+                    ],
+                });
+
+                seo.changeFieldControl("image", "builtin", "assetLinkEditor", {
+                    helpText: t.seo.fields.image.help,
+                });
+
+                seo.moveField("image").afterField("description");
             },
         },
     };
