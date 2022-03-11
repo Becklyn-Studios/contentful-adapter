@@ -1,5 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
+import { getRteValidation, RTE_TYPE_HEADLINE } from "./rte";
 
 const translations = {
     en: {
@@ -41,12 +42,12 @@ const translations = {
 export const getBlockLogosMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
+    const t = translations[language];
+
     return {
         component: "blockLogos",
         migrations: {
             1: migration => {
-                const t = translations[language];
-
                 const blockLogosLogo = migration.createContentType("blockLogosLogo", {
                     name: t.blockLogosLogo.name,
                 });
@@ -95,6 +96,19 @@ export const getBlockLogosMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockLogos, language);
+            },
+            2: migration => {
+                const blockLogos = migration.editContentType("blockLogos");
+
+                blockLogos.deleteField("headline");
+
+                blockLogos.createField("headline", {
+                    type: "RichText",
+                    name: t.blockLogos.fields.headline,
+                    validations: getRteValidation(RTE_TYPE_HEADLINE),
+                });
+
+                blockLogos.moveField("headline").afterField("name");
             },
         },
     };

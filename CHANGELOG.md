@@ -1,3 +1,12 @@
+2.7.2
+=====
+
+*   (improvement) Use formatted headline in all blocks that use a headline.
+*   (improvement) Improve headline type normalizer.
+*   (bug) Fix headline rte migration.
+
+
+
 2.7.1
 =====
 

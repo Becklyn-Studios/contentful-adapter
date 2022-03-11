@@ -1,6 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation } from "./rte";
+import { getRteValidation, RTE_TYPE_HEADLINE } from "./rte";
 
 const translations = {
     en: {
@@ -112,6 +112,19 @@ export const getBlockIconCardsMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockIconCards, language);
+            },
+            2: migration => {
+                const blockIconCards = migration.editContentType("blockIconCards");
+
+                blockIconCards.deleteField("headline");
+
+                blockIconCards.createField("headline", {
+                    type: "RichText",
+                    name: t.blockIconCards.fields.headline,
+                    validations: getRteValidation(RTE_TYPE_HEADLINE),
+                });
+
+                blockIconCards.moveField("headline").afterField("name");
             },
         },
     };

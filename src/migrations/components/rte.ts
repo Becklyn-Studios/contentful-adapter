@@ -15,6 +15,15 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
                     max: 256,
                 },
             },
+            {
+                enabledMarks: [],
+            },
+            {
+                enabledNodeTypes: [],
+            },
+            {
+                nodes: {},
+            },
         ];
     }
 

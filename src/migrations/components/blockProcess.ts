@@ -1,6 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_STYLED_FONT } from "./rte";
+import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT } from "./rte";
 
 const translations = {
     en: {
@@ -44,6 +44,8 @@ const translations = {
 export const getBlockProcessMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
+    const t = translations[language];
+
     return {
         component: "blockProcess",
         migrations: {
@@ -103,6 +105,19 @@ export const getBlockProcessMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockProcess, language);
+            },
+            2: migration => {
+                const blockProcess = migration.editContentType("blockProcess");
+
+                blockProcess.deleteField("headline");
+
+                blockProcess.createField("headline", {
+                    type: "RichText",
+                    name: t.blockProcess.fields.headline,
+                    validations: getRteValidation(RTE_TYPE_HEADLINE),
+                });
+
+                blockProcess.moveField("headline").afterField("name");
             },
         },
     };

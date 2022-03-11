@@ -1,6 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
+import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
 
 const translations = {
     en: {
@@ -44,12 +44,12 @@ const translations = {
 export const getBlockAccordionMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
+    const t = translations[language];
+
     return {
         component: "blockAccordion",
         migrations: {
             1: migration => {
-                const t = translations[language];
-
                 const blockAccordionEntry = migration.createContentType("blockAccordionEntry", {
                     name: t.blockAccordionEntry.name,
                 });
@@ -96,6 +96,19 @@ export const getBlockAccordionMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockAccordion, language);
+            },
+            2: migration => {
+                const blockAccordion = migration.editContentType("blockAccordion");
+
+                blockAccordion.deleteField("headline");
+
+                blockAccordion.createField("headline", {
+                    type: "RichText",
+                    name: t.blockAccordion.fields.headline,
+                    validations: getRteValidation(RTE_TYPE_HEADLINE),
+                });
+
+                blockAccordion.moveField("headline").afterField("name");
             },
         },
     };

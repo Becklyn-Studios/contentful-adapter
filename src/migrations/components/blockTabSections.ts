@@ -1,6 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
+import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
 import migration from "../migration";
 
 const translations = {
@@ -286,6 +286,19 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockTabSections, language);
+            },
+            7: migration => {
+                const blockTabSections = migration.editContentType("blockTabSections");
+
+                blockTabSections.deleteField("headline");
+
+                blockTabSections.createField("headline", {
+                    type: "RichText",
+                    name: t.blockTabSections.fields.headline,
+                    validations: getRteValidation(RTE_TYPE_HEADLINE),
+                });
+
+                blockTabSections.moveField("headline").afterField("name");
             },
         },
     };

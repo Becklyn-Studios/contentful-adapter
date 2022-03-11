@@ -1,6 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
+import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
 
 export const VERSION_BLOCK_TEXT_IMAGE = {
     en: {
@@ -59,6 +59,8 @@ const translations = {
 export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
+    const t = translations[language];
+
     return {
         component: "blockTextImage",
         migrations: {
@@ -118,6 +120,19 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
                 blockTextImage.changeFieldControl("version", "builtin", "radio");
 
                 migrateBaseBlockFields(blockTextImage, language);
+            },
+            2: migration => {
+                const blockTextImage = migration.editContentType("blockTextImage");
+
+                blockTextImage.deleteField("headline");
+
+                blockTextImage.createField("headline", {
+                    type: "RichText",
+                    name: t.blockTextImage.fields.headline,
+                    validations: getRteValidation(RTE_TYPE_HEADLINE),
+                });
+
+                blockTextImage.moveField("headline").afterField("name");
             },
         },
     };

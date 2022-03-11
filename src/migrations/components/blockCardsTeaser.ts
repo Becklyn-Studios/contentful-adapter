@@ -1,7 +1,7 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
 import { INLINES } from "@contentful/rich-text-types";
-import { getRteValidation } from "./rte";
+import { getRteValidation, RTE_TYPE_HEADLINE } from "./rte";
 
 const translations = {
     en: {
@@ -33,12 +33,12 @@ const translations = {
 export const getBlockCardsTeaserMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
+    const t = translations[language];
+
     return {
         component: "blockCardsTeaser",
         migrations: {
             1: migration => {
-                const t = translations[language];
-
                 const blockCardsTeaser = migration.createContentType("blockCardsTeaser", {
                     name: t.blockCardsTeaser.name,
                 });
@@ -80,6 +80,19 @@ export const getBlockCardsTeaserMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockCardsTeaser, language);
+            },
+            2: migration => {
+                const blockCardsTeaser = migration.editContentType("blockCardsTeaser");
+
+                blockCardsTeaser.deleteField("headline");
+
+                blockCardsTeaser.createField("headline", {
+                    type: "RichText",
+                    name: t.blockCardsTeaser.fields.headline,
+                    validations: getRteValidation(RTE_TYPE_HEADLINE),
+                });
+
+                blockCardsTeaser.moveField("headline").afterField("name");
             },
         },
     };

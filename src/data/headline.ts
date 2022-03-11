@@ -11,7 +11,7 @@ export const getHeadlineString = (data: any): string | null => {
     documentToHtmlString(data, {
         renderNode: {
             [BLOCKS.PARAGRAPH]: (node, next) => {
-                paragraphs = [...paragraphs, `${next(node.content)}`];
+                paragraphs = [...paragraphs, `${next(node.content)}`.split("\n").join("<br/>")];
                 return "";
             },
         },

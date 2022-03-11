@@ -1,6 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation } from "./rte";
+import { getRteValidation, RTE_TYPE_HEADLINE } from "./rte";
 
 const translations = {
     en: {
@@ -48,6 +48,8 @@ const translations = {
 export const getBlockFeaturesMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
+    const t = translations[language];
+
     return {
         component: "blockFeatures",
         migrations: {
@@ -120,6 +122,19 @@ export const getBlockFeaturesMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockFeatures, language);
+            },
+            2: migration => {
+                const blockFeatures = migration.editContentType("blockFeatures");
+
+                blockFeatures.deleteField("headline");
+
+                blockFeatures.createField("headline", {
+                    type: "RichText",
+                    name: t.blockFeatures.fields.headline,
+                    validations: getRteValidation(RTE_TYPE_HEADLINE),
+                });
+
+                blockFeatures.moveField("headline").afterField("name");
             },
         },
     };

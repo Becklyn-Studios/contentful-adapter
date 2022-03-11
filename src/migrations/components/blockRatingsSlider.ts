@@ -1,6 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
+import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
 
 const translations = {
     en: {
@@ -26,6 +26,8 @@ const translations = {
 export const getBlockRatingsSliderMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
+    const t = translations[language];
+
     return {
         component: "blockRatingsSlider",
         migrations: {
@@ -49,6 +51,19 @@ export const getBlockRatingsSliderMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockRatingsSlider, language);
+            },
+            2: migration => {
+                const blockRatingsSlider = migration.editContentType("blockRatingsSlider");
+
+                blockRatingsSlider.deleteField("headline");
+
+                blockRatingsSlider.createField("headline", {
+                    type: "RichText",
+                    name: t.blockRatingsSlider.fields.headline,
+                    validations: getRteValidation(RTE_TYPE_HEADLINE),
+                });
+
+                blockRatingsSlider.moveField("headline").afterField("name");
             },
         },
     };
