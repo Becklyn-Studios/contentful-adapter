@@ -27,9 +27,10 @@ export const getContentfulNormalizerService = (
     config: MaydContentfulAdapterConfig,
     themeValueMapping: Record<string, string> = {},
     versionValueMapping: Record<string, string> = {},
-    referenceResolvers?: Record<string, InternalReferenceResolver>
+    referenceResolvers?: Record<string, InternalReferenceResolver>,
+    preview: boolean = false
 ): ContentfulNormalizerService => {
-    const contentfulClient = connectToContentfulDeliveryApi(config.clientConfig);
+    const contentfulClient = connectToContentfulDeliveryApi(config.clientConfig, preview);
     let pageTree: PageTreeNode | null = null;
     let customNormalizers: Record<string, DataTypeNormalizer> = {};
 

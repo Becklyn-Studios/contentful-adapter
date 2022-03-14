@@ -1,3 +1,9 @@
+2.7.5
+=====
+
+*   (improvement) Allow to use the preview api in `getContentfulNormalizerService`.
+
+
 2.7.4
 =====
 
