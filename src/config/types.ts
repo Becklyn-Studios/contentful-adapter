@@ -1,6 +1,5 @@
 import { BaseComponentConfig, ComponentDataConfig } from "@mayd/ui-types";
 import { ContentfulComponentMigration, ContentfulMigrationGenerator } from "../migrations/types";
-import React from "react";
 
 export type BackendLanguage = "de" | "en";
 
@@ -19,8 +18,14 @@ export interface ContentfulClientConfig {
 export interface MaydContentfulAdapterConfig {
     clientConfig: ContentfulClientConfig;
     backendLanguage: BackendLanguage;
-    components: UiComponentDataConfig[];
+    components: ContentfulComponentConfig[];
     migrations: ContentfulComponentMigration[];
+}
+
+export interface ContentfulComponentConfig {
+    key: string;
+    contentType: string;
+    data?: ComponentDataConfig;
 }
 
 export interface UiComponentDataConfig {

@@ -1,3 +1,9 @@
+2.7.4
+=====
+
+*   (improvement) Remove unused Component from internal component config object.
+
+
 2.7.3
 =====
 

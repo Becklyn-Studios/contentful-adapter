@@ -1,5 +1,4 @@
 import { ContentfulPage } from "../contentful/types";
-import { UiComponentDataConfig } from "../config/types";
 import { Entry } from "contentful";
 import {
     ComponentDataConfig,
@@ -20,6 +19,7 @@ import { normalizeLabeledLink } from "./reference";
 import { normalizeRelationTypeData } from "./relation";
 import { findOneEntryBySys } from "../contentful/api";
 import { getHeadlineString } from "./headline";
+import { ContentfulComponentConfig } from "../config/types";
 
 export const normalizePageData = async (
     pageData: Entry<ContentfulPage>,
@@ -47,10 +47,10 @@ export const normalizeData = async (
 
 export const normalizeDataForComponent = async (
     data: Entry<any>,
-    component: UiComponentDataConfig,
+    component: ContentfulComponentConfig,
     service: ContentfulNormalizerService
 ): Promise<any | null> => {
-    const dataConfig = component.component.data;
+    const dataConfig = component.data;
 
     if (!dataConfig) {
         return null;

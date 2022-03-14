@@ -3,6 +3,7 @@ export { getComponentDataConfig } from "./config/components";
 
 export type {
     ContentfulClientConfig,
+    ContentfulComponentConfig,
     MaydContentfulAdapterConfig,
     MaydContentfulAdapterConfigFile,
     UiComponentDataConfig,

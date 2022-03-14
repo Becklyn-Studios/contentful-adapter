@@ -1,6 +1,6 @@
 import { ContentfulClientApi } from "contentful";
 import { PageTreeNode } from "../contentful/types";
-import { MaydContentfulAdapterConfig, UiComponentDataConfig } from "../config/types";
+import { ContentfulComponentConfig, MaydContentfulAdapterConfig } from "../config/types";
 import { connectToContentfulDeliveryApi } from "../contentful/api";
 import { loadPageTree } from "../contentful/pages";
 import { getPageSlug } from "../contentful/util";
@@ -8,7 +8,7 @@ import { getPageSlug } from "../contentful/util";
 export interface ContentfulNormalizerService {
     client: ContentfulClientApi;
     getPageTree: () => Promise<PageTreeNode>;
-    allUiComponents: UiComponentDataConfig[];
+    allUiComponents: ContentfulComponentConfig[];
     resolveInternalReferencePath: (data: any) => Promise<string | null>;
     getThemeValue: (contentfulValue: string) => string;
     getVersionValue: (contentfulValue: string) => string;

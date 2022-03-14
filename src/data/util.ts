@@ -52,7 +52,7 @@ export const getDataConfigForContentType = (
         const component = service.allUiComponents[i];
 
         if (component.contentType === contentType) {
-            return component.component.data ?? null;
+            return component.data ?? null;
         }
     }
 
@@ -77,7 +77,7 @@ export const getComponentKeyFromData = (
         const component = service.allUiComponents[i];
 
         if (component.contentType === data.sys.contentType.sys.id) {
-            return component.component.key;
+            return component.key;
         }
     }
 
@@ -108,7 +108,7 @@ export const getContentTypeFromComponentKey = (
 
     for (let i = 0; i < service.allUiComponents.length; i++) {
         const component = service.allUiComponents[i];
-        if (component.component.key === componentKey) {
+        if (component.key === componentKey) {
             return component.contentType;
         }
     }
