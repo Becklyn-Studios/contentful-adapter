@@ -1,3 +1,9 @@
+2.7.6
+=====
+
+*   (improvement) Allow limit and skip for `findEntries`.
+
+
 2.7.5
 =====
 
