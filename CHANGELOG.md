@@ -1,3 +1,9 @@
+2.7.7
+=====
+
+*   (bug) Enable custom normalizers for relations.
+
+
 2.7.6
 =====
 

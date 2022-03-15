@@ -94,6 +94,13 @@ const normalizeArrayRelationTypeData = async (
         return normalizedData;
     }
 
+    const normalizer =
+        "string" === typeof relatedType ? service.getCustomNormalizer(relatedType) : null;
+
+    if (normalizer) {
+        return normalizer(data, service);
+    }
+
     if (TYPE_STRING === relatedType) {
         return data.filter(element => "string" === typeof element);
     }
