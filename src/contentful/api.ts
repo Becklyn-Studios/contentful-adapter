@@ -2,7 +2,7 @@ import { createClient, Environment } from "contentful-management";
 import { ContentfulClientConfig } from "../config/types";
 import { MIGRATIONS_MODEL_NAME } from "../migrations/migration";
 import { Asset, ContentfulClientApi, Entry } from "contentful";
-import { FindEntryByIdsOptions, FindEntryOptions } from "./types";
+import { FindEntriesOptions, FindEntryByIdsOptions, FindEntryOptions } from "./types";
 import { getContentfulSelectString, getContentfulWhereObject } from "./util";
 import { createClient as createDeliveryClient } from "contentful";
 
@@ -69,13 +69,14 @@ export const connectToContentfulDeliveryApi = (
 
 export const findEntries = async <T>(
     client: ContentfulClientApi,
-    { contentType, select, where, depth }: FindEntryOptions
+    { contentType, select, where, depth, limit }: FindEntriesOptions
 ): Promise<Entry<T>[]> => {
     const entries = await client.getEntries<T>({
         ...getContentfulWhereObject(where),
         content_type: contentType,
         select: getContentfulSelectString(select),
         include: depth ? depth : 0,
+        limit,
     });
 
     return entries.items;

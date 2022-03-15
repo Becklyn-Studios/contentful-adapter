@@ -18,6 +18,10 @@ export interface FindEntryOptions {
     throwError?: boolean;
 }
 
+export interface FindEntriesOptions extends FindEntryOptions {
+    limit?: number;
+}
+
 export interface FindEntryByIdsOptions extends FindEntryOptions {
     ids: string[];
 }
