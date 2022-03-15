@@ -98,7 +98,17 @@ const normalizeArrayRelationTypeData = async (
         "string" === typeof relatedType ? service.getCustomNormalizer(relatedType) : null;
 
     if (normalizer) {
-        return normalizer(data, service);
+        const normalizedData: string[] = [];
+
+        for (let i = 0; i < data.length; i++) {
+            const value = await normalizer(data[i], service);
+
+            if (value) {
+                normalizedData.push(value);
+            }
+        }
+
+        return normalizedData;
     }
 
     if (TYPE_STRING === relatedType) {
