@@ -69,7 +69,7 @@ export const connectToContentfulDeliveryApi = (
 
 export const findEntries = async <T>(
     client: ContentfulClientApi,
-    { contentType, select, where, depth, limit }: FindEntriesOptions
+    { contentType, select, where, depth, limit, skip }: FindEntriesOptions
 ): Promise<Entry<T>[]> => {
     const entries = await client.getEntries<T>({
         ...getContentfulWhereObject(where),
@@ -77,6 +77,7 @@ export const findEntries = async <T>(
         select: getContentfulSelectString(select),
         include: depth ? depth : 0,
         limit,
+        skip,
     });
 
     return entries.items;

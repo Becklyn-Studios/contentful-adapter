@@ -20,6 +20,7 @@ export interface FindEntryOptions {
 
 export interface FindEntriesOptions extends FindEntryOptions {
     limit?: number;
+    skip?: number;
 }
 
 export interface FindEntryByIdsOptions extends FindEntryOptions {
