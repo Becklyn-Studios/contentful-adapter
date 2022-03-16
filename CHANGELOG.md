@@ -1,3 +1,9 @@
+2.8.1
+=====
+
+*   (bug) Fix rte validation.
+
+
 2.8.0
 =====
 
