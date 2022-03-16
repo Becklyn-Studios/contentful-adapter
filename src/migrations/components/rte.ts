@@ -27,15 +27,18 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
         ];
     }
 
-    const enabledMarks =
+    const enabledMarks: string[] =
         version !== RTE_TYPE_MINIMAL ? [MARKS.BOLD, MARKS.ITALIC, MARKS.UNDERLINE] : [];
+
+    if (version === RTE_TYPE_FULL) {
+        enabledMarks.push(BLOCKS.HEADING_2);
+        enabledMarks.push(BLOCKS.HEADING_3);
+    }
 
     const enabledNodeTypes =
         version !== RTE_TYPE_MINIMAL && version !== RTE_TYPE_STYLED_FONT
             ? [INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK, BLOCKS.UL_LIST]
             : [INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK];
-
-    // @todo: full RTE (include inline images);
 
     return [
         { enabledMarks },

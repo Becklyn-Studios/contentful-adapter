@@ -90,11 +90,12 @@ export const normalizeDataForDataConfig = async (
         const dataType = dataConfig[fieldName];
 
         if (dataType) {
-            outputData[fieldName] = await getDataValue(
-                data.fields[fieldName] ?? null,
-                dataType,
-                service
-            );
+            const normalizer =
+                "string" === typeof dataType ? service.getCustomNormalizer(dataType) : null;
+
+            outputData[fieldName] = normalizer
+                ? await normalizer(data.fields[fieldName] ?? null, service, data)
+                : await getDataValue(data.fields[fieldName] ?? null, dataType, service);
         }
     }
 
@@ -144,12 +145,6 @@ const getDataValue = async (
     dataType: DataType,
     service: ContentfulNormalizerService
 ): Promise<any | null> => {
-    const normalizer = "string" === typeof dataType ? service.getCustomNormalizer(dataType) : null;
-
-    if (normalizer) {
-        return normalizer(data, service);
-    }
-
     switch (dataType) {
         case TYPE_STRING:
             return "string" === typeof data ? data : null;

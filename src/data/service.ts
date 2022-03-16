@@ -16,7 +16,11 @@ export interface ContentfulNormalizerService {
     getCustomNormalizer: (dataType: string) => DataTypeNormalizer | null;
 }
 
-export type DataTypeNormalizer = (data: any, service: ContentfulNormalizerService) => Promise<any>;
+export type DataTypeNormalizer = (
+    data: any,
+    service: ContentfulNormalizerService,
+    parentData?: any
+) => Promise<any>;
 
 export type InternalReferenceResolver = (
     data: any,

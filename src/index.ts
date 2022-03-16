@@ -19,6 +19,7 @@ export {
     getDefaultLocale,
     findEntriesByIds,
     findEntries,
+    findAllEntries,
     findOneEntry,
     findOneEntryBySys,
     findOneAsset,

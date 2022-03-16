@@ -67,6 +67,32 @@ export const connectToContentfulDeliveryApi = (
     });
 };
 
+export const findAllEntries = async <T>(
+    client: ContentfulClientApi,
+    { contentType, select, where, depth }: FindEntryOptions
+): Promise<Entry<T>[]> => {
+    let allEntries: Entry<T>[] = [];
+    let total: number | null = null;
+    let skip = 0;
+
+    while (total === null || total > allEntries.length) {
+        const { items, total: newTotal } = await client.getEntries<T>({
+            ...getContentfulWhereObject(where),
+            content_type: contentType,
+            select: getContentfulSelectString(select),
+            include: depth ? depth : 0,
+            limit: 1000,
+            skip,
+        });
+
+        total = newTotal;
+        skip += items.length;
+        allEntries = [...allEntries, ...items];
+    }
+
+    return allEntries;
+};
+
 export const findEntries = async <T>(
     client: ContentfulClientApi,
     { contentType, select, where, depth, limit, skip }: FindEntriesOptions

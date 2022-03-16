@@ -1,3 +1,11 @@
+2.8.0
+=====
+
+*   (feature) Add `parentData` to custom normalizer.
+*   (feature) Add `findAllEntries` api function.
+*   (bug) Fix full rte migrations.
+
+
 2.7.8
 =====
 
