@@ -104,6 +104,7 @@ export {
     isSingleRelationType,
     getComponentKeyFromData,
     getDataFieldNames,
+    getValueOfField,
 } from "./data/util";
 
 export { normalizeLabeledLink, normalizeReference } from "./data/reference";

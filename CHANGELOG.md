@@ -1,3 +1,9 @@
+3.1.0
+=====
+
+*   (feature) Export `getValueOfField` function.
+
+
 3.0.0
 =====
 
