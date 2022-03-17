@@ -1,6 +1,7 @@
 import { ContentfulNormalizerService } from "./service";
 import { LabeledLink, LinkReference } from "@mayd/ui-types";
 import { findOneEntryBySys } from "../contentful/api";
+import { getValueOfField } from "./util";
 
 export const normalizeLabeledLink = async (
     data: any,
@@ -20,8 +21,11 @@ export const normalizeLabeledLink = async (
     }
 
     return {
-        label: data.fields.label ?? null,
-        reference: await normalizeReference(data.fields.reference, service),
+        label: getValueOfField(data.fields.label, service.locale) ?? null,
+        reference: await normalizeReference(
+            getValueOfField(data.fields.reference, service.locale),
+            service
+        ),
     };
 };
 
@@ -43,24 +47,26 @@ export const normalizeReference = async (
     }
 
     if ("internalReference" === data.sys.contentType.sys.id) {
-        const referenceSlug = await service.resolveInternalReferencePath(data.fields.reference);
+        const referenceSlug = await service.resolveInternalReferencePath(
+            getValueOfField(data.fields.reference, service.locale)
+        );
 
         if (null === referenceSlug) {
             return null;
         }
 
         return {
-            title: data.fields.title ?? null,
+            title: getValueOfField(data.fields.title, service.locale) ?? null,
             url: "/" === referenceSlug ? referenceSlug : `/${referenceSlug}`,
-            inNewTab: data.fields.inNewTab ?? false,
+            inNewTab: getValueOfField(data.fields.inNewTab, service.locale) ?? false,
         };
     }
 
     if ("externalReference" === data.sys.contentType.sys.id) {
         return {
-            title: data.fields.title ?? null,
-            url: data.fields.url ?? null,
-            inNewTab: data.fields.inNewTab ?? false,
+            title: getValueOfField(data.fields.title, service.locale) ?? null,
+            url: getValueOfField(data.fields.url, service.locale) ?? null,
+            inNewTab: getValueOfField(data.fields.inNewTab, service.locale) ?? false,
         };
     }
 

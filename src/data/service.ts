@@ -7,6 +7,7 @@ import { getPageSlug } from "../contentful/util";
 
 export interface ContentfulNormalizerService {
     client: ContentfulClientApi;
+    locale: string;
     getPageTree: () => Promise<PageTreeNode>;
     allUiComponents: ContentfulComponentConfig[];
     resolveInternalReferencePath: (data: any) => Promise<string | null>;
@@ -29,6 +30,7 @@ export type InternalReferenceResolver = (
 
 export const getContentfulNormalizerService = (
     config: MaydContentfulAdapterConfig,
+    locale: string,
     themeValueMapping: Record<string, string> = {},
     versionValueMapping: Record<string, string> = {},
     referenceResolvers?: Record<string, InternalReferenceResolver>,
@@ -51,6 +53,7 @@ export const getContentfulNormalizerService = (
     return {
         allUiComponents: config.components,
         client: contentfulClient,
+        locale,
         getThemeValue: (contentfulValue: string) => {
             const mappedValue = themeValueMapping[contentfulValue];
             return mappedValue ? mappedValue : contentfulValue;

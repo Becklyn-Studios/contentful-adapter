@@ -1,3 +1,10 @@
+3.0.0
+=====
+
+*   (bc) Add locale to `ContentfulNormalizerService`. The locale needs to be passed in `getContentfulNormalizerService`.
+*   (feature) Automatically normalize the data that depends on a locale.
+
+
 2.8.1
 =====
 

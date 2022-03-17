@@ -11,7 +11,7 @@ import {
     TYPE_RTE,
     TYPE_STRING,
 } from "@mayd/ui-types";
-import { getComponentKeyFromData, getDataFieldNames, getIdFromData } from "./util";
+import { getComponentKeyFromData, getDataFieldNames, getIdFromData, getValueOfField } from "./util";
 import { ContentfulNormalizerService } from "./service";
 import { normalizeAssetData } from "./asset";
 import { getRteData } from "./rte";
@@ -93,9 +93,11 @@ export const normalizeDataForDataConfig = async (
             const normalizer =
                 "string" === typeof dataType ? service.getCustomNormalizer(dataType) : null;
 
+            const fieldData = getValueOfField(data.fields[fieldName], service.locale);
+
             outputData[fieldName] = normalizer
-                ? await normalizer(data.fields[fieldName] ?? null, service, data)
-                : await getDataValue(data.fields[fieldName] ?? null, dataType, service);
+                ? await normalizer(fieldData ?? null, service, data)
+                : await getDataValue(fieldData ?? null, dataType, service);
         }
     }
 
@@ -111,7 +113,13 @@ const addThemeToData = (
         return;
     }
 
-    outputData["theme"] = service.getThemeValue(data.fields.theme);
+    const themeFieldData = getValueOfField(data.fields.theme, service.locale);
+
+    if (!themeFieldData) {
+        return;
+    }
+
+    outputData["theme"] = service.getThemeValue(themeFieldData);
 };
 
 const addVersionToData = (
@@ -123,7 +131,13 @@ const addVersionToData = (
         return;
     }
 
-    outputData["version"] = service.getVersionValue(data.fields.version);
+    const versionFieldData = getValueOfField(data.fields.version, service.locale);
+
+    if (!versionFieldData) {
+        return;
+    }
+
+    outputData["version"] = service.getVersionValue(versionFieldData);
 };
 
 const addAnchorDataToData = (
@@ -132,11 +146,11 @@ const addAnchorDataToData = (
     service: ContentfulNormalizerService
 ): void => {
     if (data && data.fields && data.fields.anchor) {
-        outputData["anchor"] = data.fields.anchor;
+        outputData["anchor"] = getValueOfField(data.fields.anchor, service.locale);
     }
 
     if (data && data.fields && data.fields.anchorLabel) {
-        outputData["anchorLabel"] = data.fields.anchorLabel;
+        outputData["anchorLabel"] = getValueOfField(data.fields.anchorLabel, service.locale);
     }
 };
 

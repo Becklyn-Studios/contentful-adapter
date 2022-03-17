@@ -149,3 +149,7 @@ export const isSingleRelationType = (dataType: any): dataType is SingleRelationT
     const typeOfData = typeof dataType.data;
     return (!Array.isArray(dataType) && "object" === typeOfData) || isArray(typeOfData);
 };
+
+export const getValueOfField = (data: any, locale: string) => {
+    return "object" === typeof data && Object.keys(data).includes(locale) ? data[locale] : data;
+};

@@ -1,6 +1,7 @@
 import { Asset } from "@mayd/ui-types";
 import { ContentfulNormalizerService } from "./service";
 import { findOneAsset } from "../contentful/api";
+import { getValueOfField } from "./util";
 
 export const normalizeAssetData = async (
     data: any,
@@ -19,14 +20,20 @@ export const normalizeAssetData = async (
         return null;
     }
 
+    const fileFieldData = getValueOfField(data.fields.file, service.locale);
+
+    if (!fileFieldData) {
+        return null;
+    }
+
     const asset: Asset = {
-        contentType: data.fields.file.contentType ?? "",
-        url: data.fields.file.url ?? "",
-        title: data.fields.title ?? "",
+        contentType: fileFieldData.contentType ?? "",
+        url: fileFieldData.url ?? "",
+        title: getValueOfField(data.fields.title ?? "", service.locale),
     };
 
-    if (data.fields.file.details && data.fields.file.details.image) {
-        const imageOptions = data.fields.file.details.image;
+    if (fileFieldData.details && fileFieldData.details.image) {
+        const imageOptions = fileFieldData.details.image;
 
         asset.width = imageOptions.width;
         asset.height = imageOptions.height;
