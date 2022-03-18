@@ -1,3 +1,9 @@
+3.2.1
+=====
+
+*   (bug) Fix return type of `normalizeAssetData`.
+
+
 3.2.0
 =====
 

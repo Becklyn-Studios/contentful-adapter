@@ -10,7 +10,7 @@ interface NormalizedAsset extends Asset {
 export const normalizeAssetData = async (
     data: any,
     service: ContentfulNormalizerService
-): Promise<Asset | null> => {
+): Promise<NormalizedAsset | null> => {
     if (!data || !data.sys) {
         return null;
     }
