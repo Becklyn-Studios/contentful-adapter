@@ -32,6 +32,21 @@ export const normalizeData = async (
     data: Entry<any>,
     service: ContentfulNormalizerService
 ): Promise<any | null> => {
+    if ("Asset" === data.sys.type) {
+        return normalizeAssetData(data, service);
+    }
+
+    if ("Link" === data.sys.type) {
+        // load missing data
+        const newData = await findOneEntryBySys(data.sys, service.client, { depth: 10 });
+
+        if (null === newData) {
+            return null;
+        }
+
+        return normalizeData(newData, service);
+    }
+
     const contentType = data.sys.contentType.sys.id;
 
     for (let i = 0; i < service.allUiComponents.length; i++) {

@@ -1,3 +1,10 @@
+3.2.0
+=====
+
+*   (feature) Allow direct normalization of links and assets.
+*   (improvement) Add `id` field to normalized assets.
+
+
 3.1.0
 =====
 
