@@ -64,6 +64,12 @@ const getDataAndApplyChildConfigs = (
 
         if (isBaseComponentConfig(fieldConfig.data)) {
             const cleanData = getDataAndApplyChildConfigs(configs, fieldConfig.data.data);
+            const key = fieldConfig.data.key;
+
+            if (!cleanData || !key) {
+                continue;
+            }
+
             const newConfig: ContentfulComponentConfig = {
                 key: fieldConfig.data.key,
                 contentType: fieldConfig.data.key,
@@ -74,7 +80,10 @@ const getDataAndApplyChildConfigs = (
 
             cleanConfig[field] = {
                 multiple: fieldConfig.multiple,
-                data: cleanData,
+                data: {
+                    key,
+                    data: cleanData,
+                },
             } as RelationType;
             continue;
         }
