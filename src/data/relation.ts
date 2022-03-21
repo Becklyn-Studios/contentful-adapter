@@ -20,6 +20,7 @@ import {
 import { normalizeAssetData } from "./asset";
 import { normalizeLabeledLink } from "./reference";
 import { normalizeDataForDataConfig } from "./normalizer";
+import { findOneEntryBySys } from "../contentful/api";
 
 export const normalizeRelationTypeData = async (
     dataType: any,
@@ -151,9 +152,25 @@ export const normalizeDynamicDataConfigData = async (
     fieldData: any,
     service: ContentfulNormalizerService
 ): Promise<any | null> => {
+    if (!fieldData.sys) {
+        return null;
+    }
+
     const allowedContentTypes = dataTypes.map(componentKey =>
         getContentTypeFromComponentKey(componentKey, service)
     );
+
+    if (!fieldData.fields) {
+        // load missing data
+        const newData = await findOneEntryBySys(fieldData.sys, service.client, { depth: 10 });
+
+        if (null === newData) {
+            return null;
+        }
+
+        fieldData = newData;
+    }
+
     const contentType = getContentTypeFromData(fieldData);
 
     if (null === contentType || !allowedContentTypes.includes(contentType)) {

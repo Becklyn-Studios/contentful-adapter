@@ -1,3 +1,9 @@
+3.2.2
+=====
+
+*   (bug) Load missing linked data in `normalizeDynamicDataConfigData`.
+
+
 3.2.1
 =====
 
