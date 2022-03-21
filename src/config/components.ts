@@ -1,15 +1,15 @@
-import { BaseComponentConfig } from "@mayd/ui-types";
+import { BaseComponentConfig, ComponentDataConfig, RelationType } from "@mayd/ui-types";
 import { ContentfulComponentConfig, UiComponentDataConfig } from "./types";
 import { isBaseComponentConfig, isRelationType } from "../data/util";
 
 export const getComponentDataConfig = (
-    data?: (UiComponentDataConfig | BaseComponentConfig<any>)[]
+    data?: (UiComponentDataConfig | BaseComponentConfig)[]
 ): ContentfulComponentConfig[] => {
     if (!data) {
         return [];
     }
 
-    let configs: Record<string, ContentfulComponentConfig> = {};
+    const configs: Record<string, ContentfulComponentConfig> = {};
 
     for (const config of data) {
         let currentConfig: ContentfulComponentConfig;
@@ -19,17 +19,17 @@ export const getComponentDataConfig = (
             currentConfig = {
                 key: component.key,
                 contentType: config.contentType,
-                data: component.data,
+                data: getDataAndApplyChildConfigs(configs, component.data),
             };
         } else {
             currentConfig = {
                 key: config.key,
                 contentType: config.key,
-                data: config.data,
+                data: getDataAndApplyChildConfigs(configs, config.data),
             };
         }
 
-        configs = addConfigToConfigs(configs, currentConfig);
+        addConfigToConfigs(configs, currentConfig);
     }
 
     return Object.values(configs);
@@ -38,39 +38,55 @@ export const getComponentDataConfig = (
 const addConfigToConfigs = (
     configs: Record<string, ContentfulComponentConfig>,
     newConfig: ContentfulComponentConfig
-): Record<string, ContentfulComponentConfig> => {
+): void => {
     if (!configs[newConfig.key]) {
         configs[newConfig.key] = newConfig;
     }
-
-    configs = addChildConfigsToConfig(configs, newConfig);
-
-    return configs;
 };
 
-const addChildConfigsToConfig = (
+const getDataAndApplyChildConfigs = (
     configs: Record<string, ContentfulComponentConfig>,
-    config: ContentfulComponentConfig
-): Record<string, ContentfulComponentConfig> => {
-    for (const field in config.data) {
-        const dataConfig = config.data[field];
-
-        if (isRelationType(dataConfig) && isBaseComponentConfig(dataConfig.data)) {
-            const newConfig: ContentfulComponentConfig = {
-                key: dataConfig.data.key,
-                contentType: dataConfig.data.key,
-                data: dataConfig.data.data,
-            };
-
-            configs = addConfigToConfigs(configs, newConfig);
-        }
+    dataConfig?: ComponentDataConfig
+): ComponentDataConfig | undefined => {
+    if (!dataConfig) {
+        return dataConfig;
     }
 
-    return configs;
+    const cleanConfig: ComponentDataConfig = {};
+
+    for (const field in dataConfig) {
+        const fieldConfig = dataConfig[field];
+
+        if (!isRelationType(fieldConfig)) {
+            cleanConfig[field] = fieldConfig;
+            continue;
+        }
+
+        if (isBaseComponentConfig(fieldConfig.data)) {
+            const cleanData = getDataAndApplyChildConfigs(configs, fieldConfig.data.data);
+            const newConfig: ContentfulComponentConfig = {
+                key: fieldConfig.data.key,
+                contentType: fieldConfig.data.key,
+                data: cleanData,
+            };
+
+            addConfigToConfigs(configs, newConfig);
+
+            cleanConfig[field] = {
+                multiple: fieldConfig.multiple,
+                data: cleanData,
+            } as RelationType;
+            continue;
+        }
+
+        cleanConfig[field] = fieldConfig;
+    }
+
+    return cleanConfig;
 };
 
 const isComponentDataConfig = (
-    data: UiComponentDataConfig | BaseComponentConfig<any>
+    data: UiComponentDataConfig | BaseComponentConfig
 ): data is UiComponentDataConfig => {
     return (data as UiComponentDataConfig).contentType !== undefined;
 };

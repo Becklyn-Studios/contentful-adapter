@@ -1,3 +1,9 @@
+4.0.1
+=====
+
+*   (bug) Properly remove ui components from `ContentfulComponentConfig`.
+
+
 4.0.0
 =====
 

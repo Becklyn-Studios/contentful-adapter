@@ -11,7 +11,8 @@
         "test": "echo \"Error: no test specified\" && exit 0",
         "format": "prettier --write \"**/*.{ts,tsx,json}\"",
         "lint": "prettier --check \"**/*.{ts,tsx,json}\"",
-        "build": "tsc && chmod +x lib/bin/mayd-contentful.js",
+        "build": "npm run clean && tsc && chmod +x lib/bin/mayd-contentful.js",
+        "clean": "rm -rf lib",
         "prepublishOnly": "npm test && npm run lint && npm run build",
         "preversion": "npm run lint"
     },
@@ -27,7 +28,7 @@
     "dependencies": {
         "@contentful/rich-text-html-renderer": "^15.11.1",
         "@contentful/rich-text-types": "^15.11.1",
-        "@mayd/ui-types": "^4.0.0",
+        "@mayd/ui-types": "^4.0.1",
         "contentful": "^9.1.6",
         "contentful-management": "^7.51.5",
         "contentful-migration": "^4.7.0",

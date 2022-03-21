@@ -1,13 +1,8 @@
-import React from "react";
 import { BaseComponentConfig, TYPE_BOOL, TYPE_STRING } from "@mayd/ui-types";
 
-export const getPageConfig = (
-    contentComponentKeys: string[],
-    basePageComponent: React.FC<any>
-): BaseComponentConfig<any> => {
+export const getPageConfig = (contentComponentKeys: string[]): BaseComponentConfig => {
     return {
         key: "page",
-        Component: basePageComponent,
         data: {
             title: TYPE_STRING,
             slug: TYPE_STRING,
@@ -23,9 +18,8 @@ export const getPageConfig = (
     };
 };
 
-export const SeoConfig: BaseComponentConfig<any> = {
+export const SeoConfig: BaseComponentConfig = {
     key: "blockTabSectionTextImage",
-    Component: () => null,
     data: {
         title: TYPE_STRING,
         description: TYPE_STRING,

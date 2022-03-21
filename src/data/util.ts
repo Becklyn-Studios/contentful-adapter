@@ -122,7 +122,7 @@ export const isArray = (dataType: any): dataType is [] => {
     return Array.isArray(dataType);
 };
 
-export const isBaseComponentConfig = (dataType: any): dataType is BaseComponentConfig<any> => {
+export const isBaseComponentConfig = (dataType: any): dataType is BaseComponentConfig => {
     return !Array.isArray(dataType) && "object" === typeof dataType;
 };
 

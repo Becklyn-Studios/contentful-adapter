@@ -22,19 +22,17 @@ export interface MaydContentfulAdapterConfig {
     migrations: ContentfulComponentMigration[];
 }
 
-export interface ContentfulComponentConfig {
-    key: string;
+export interface ContentfulComponentConfig extends BaseComponentConfig {
     contentType: string;
-    data?: ComponentDataConfig;
 }
 
 export interface UiComponentDataConfig {
-    component: BaseComponentConfig<any>;
+    component: BaseComponentConfig;
     contentType: string;
 }
 
 export interface MaydContentfulAdapterConfigFile extends ContentfulClientConfig {
     backendLanguage?: BackendLanguage;
-    components?: (UiComponentDataConfig | BaseComponentConfig<any>)[];
+    components?: (UiComponentDataConfig | BaseComponentConfig)[];
     migrations?: ContentfulMigrationGenerator[];
 }
