@@ -99,7 +99,7 @@ export {
     getDataConfigForContentType,
     getContentTypeFromData,
     getContentTypeFromComponentKey,
-    isComponentDataConfig,
+    isBaseComponentConfig,
     isArrayRelationType,
     isSingleRelationType,
     getComponentKeyFromData,

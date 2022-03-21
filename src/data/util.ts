@@ -1,7 +1,9 @@
 import { Entry } from "contentful";
 import {
     ArrayRelationType,
+    BaseComponentConfig,
     ComponentDataConfig,
+    RelationType,
     SingleRelationType,
     TYPE_ASSET,
     TYPE_BOOL,
@@ -120,8 +122,12 @@ export const isArray = (dataType: any): dataType is [] => {
     return Array.isArray(dataType);
 };
 
-export const isComponentDataConfig = (dataType: any): dataType is ComponentDataConfig => {
+export const isBaseComponentConfig = (dataType: any): dataType is BaseComponentConfig<any> => {
     return !Array.isArray(dataType) && "object" === typeof dataType;
+};
+
+export const isRelationType = (dataType: any): dataType is RelationType => {
+    return isArrayRelationType(dataType) || isSingleRelationType(dataType);
 };
 
 export const isArrayRelationType = (dataType: any): dataType is ArrayRelationType => {

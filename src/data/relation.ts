@@ -5,7 +5,7 @@ import {
     getDataConfigForContentType,
     isArray,
     isArrayRelationType,
-    isComponentDataConfig,
+    isBaseComponentConfig,
     isSingleRelationType,
 } from "./util";
 import {
@@ -47,8 +47,8 @@ const normalizeSingleRelationTypeData = async (
         return null;
     }
 
-    if (isComponentDataConfig(relatedType)) {
-        return await normalizeDataForDataConfig(data, relatedType, service);
+    if (isBaseComponentConfig(relatedType)) {
+        return await normalizeDataForDataConfig(data, relatedType.data || {}, service);
     }
 
     return isArray(relatedType)
@@ -67,11 +67,15 @@ const normalizeArrayRelationTypeData = async (
         return null;
     }
 
-    if (isComponentDataConfig(relatedType)) {
+    if (isBaseComponentConfig(relatedType)) {
         const normalizedData: any[] = [];
 
         for (let i = 0; i < data.length; i++) {
-            const normalized = await normalizeDataForDataConfig(data[i], relatedType, service);
+            const normalized = await normalizeDataForDataConfig(
+                data[i],
+                relatedType.data || {},
+                service
+            );
 
             if (normalized) {
                 normalizedData.push(normalized);

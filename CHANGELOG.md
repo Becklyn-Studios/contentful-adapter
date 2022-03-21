@@ -1,3 +1,10 @@
+4.0.0
+=====
+
+*   (bc) Use new version of `@mayd/ui-types`.
+*   (feature) Auto add child data configs to list of available data configs for normalization.
+
+
 3.2.2
 =====
 

@@ -13,16 +13,7 @@ export const getPageConfig = (
             slug: TYPE_STRING,
             seo: {
                 multiple: false,
-                data: {
-                    title: TYPE_STRING,
-                    description: TYPE_STRING,
-                    keywords: {
-                        data: TYPE_STRING,
-                        multiple: true,
-                    },
-                    no_index: TYPE_BOOL,
-                    no_follow: TYPE_BOOL,
-                },
+                data: SeoConfig,
             },
             content: {
                 multiple: false,
@@ -30,4 +21,19 @@ export const getPageConfig = (
             },
         },
     };
+};
+
+export const SeoConfig: BaseComponentConfig<any> = {
+    key: "blockTabSectionTextImage",
+    Component: () => null,
+    data: {
+        title: TYPE_STRING,
+        description: TYPE_STRING,
+        keywords: {
+            data: TYPE_STRING,
+            multiple: true,
+        },
+        no_index: TYPE_BOOL,
+        no_follow: TYPE_BOOL,
+    },
 };
