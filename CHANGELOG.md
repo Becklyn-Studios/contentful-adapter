@@ -1,3 +1,9 @@
+4.0.3
+=====
+
+*   (feature) Allow default hyperlinks for rte.
+
+
 4.0.2
 =====
 

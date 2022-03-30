@@ -72,6 +72,10 @@ export const getRteData = async (
 
     documentToHtmlString(data, {
         renderNode: {
+            [INLINES.HYPERLINK]: node => {
+                assetReferences = [...assetReferences, node.data];
+                return "";
+            },
             [INLINES.ASSET_HYPERLINK]: node => {
                 assetReferences = [...assetReferences, node.data];
                 return "";
