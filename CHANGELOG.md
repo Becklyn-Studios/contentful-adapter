@@ -1,3 +1,9 @@
+vNext
+=====
+
+*   (improvement) Remove required for field `rating` within `blockRatingsEntry`.
+
+
 4.0.3
 =====
 

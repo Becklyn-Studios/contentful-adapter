@@ -104,7 +104,6 @@ export const getBlockRatingsMigration: ContentfulMigrationGenerator = (
                 blockRatingsEntry.createField("rating", {
                     type: "Integer",
                     name: t.blockRatingsEntry.fields.rating,
-                    required: true,
                     validations: [{ range: { min: 1, max: 5 } }],
                 });
 
