@@ -1,7 +1,17 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
 import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
-import migration from "../migration";
+
+export const VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE = {
+    en: {
+        imageLeft: "Image left",
+        imageRight: "Image right",
+    },
+    de: {
+        imageLeft: "Bild links",
+        imageRight: "Bild rechts",
+    },
+};
 
 const translations = {
     en: {
@@ -44,6 +54,14 @@ const translations = {
                 headline: "Headline",
                 text: "Text",
                 image: "Image",
+                version: {
+                    name: "Version",
+                    default: VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE.en.imageRight,
+                    in: [
+                        VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE.en.imageLeft,
+                        VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE.en.imageRight,
+                    ],
+                },
             },
         },
         blockTabSectionVideo: {
@@ -94,6 +112,14 @@ const translations = {
                 headline: "Überschrift",
                 text: "Text",
                 image: "Bild",
+                version: {
+                    name: "Version",
+                    default: VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE.de.imageRight,
+                    in: [
+                        VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE.de.imageLeft,
+                        VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE.de.imageRight,
+                    ],
+                },
             },
         },
         blockTabSectionVideo: {
@@ -299,6 +325,29 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                 });
 
                 blockTabSections.moveField("headline").afterField("name");
+            },
+            8: migration => {
+                const blockTabSectionTextImage = migration.editContentType(
+                    "blockTabSectionTextImage"
+                );
+
+                blockTabSectionTextImage.createField("version", {
+                    type: "Symbol",
+                    name: t.blockTabSectionTextImage.fields.version.name,
+                    required: true,
+                    defaultValue: {
+                        [language]: t.blockTabSectionTextImage.fields.version.default,
+                    },
+                    validations: [
+                        {
+                            in: t.blockTabSectionTextImage.fields.version.in,
+                        },
+                    ],
+                });
+
+                blockTabSectionTextImage.changeFieldControl("version", "builtin", "radio");
+
+                blockTabSectionTextImage.moveField("version").afterField("image");
             },
         },
     };

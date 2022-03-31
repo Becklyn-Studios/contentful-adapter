@@ -1,3 +1,9 @@
+vNext
+=====
+
+*   (bug) Add version to `blockTabTextImage`.
+
+
 4.0.4
 =====
 
