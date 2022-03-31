@@ -60,12 +60,12 @@ const translations = {
 export const getBlockRatingsMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
+    const t = translations[language];
+
     return {
         component: "blockRatings",
         migrations: {
             1: migration => {
-                const t = translations[language];
-
                 const blockRatingsAuthor = migration.createContentType("blockRatingsAuthor", {
                     name: t.blockRatingsAuthor.name,
                 });
@@ -147,6 +147,35 @@ export const getBlockRatingsMigration: ContentfulMigrationGenerator = (
                 });
 
                 migrateBaseBlockFields(blockRatings, language, "name");
+            },
+            2: migration => {
+                const blockRatingsEntry = migration.editContentType("blockRatingsEntry");
+
+                blockRatingsEntry.createField("textMigration", {
+                    type: "Text",
+                    name: t.blockRatingsEntry.fields.text,
+                    validations: [{ size: { max: 356 } }],
+                    required: true,
+                });
+
+                blockRatingsEntry.changeFieldControl("textMigration", "builtin", "multipleLine");
+
+                blockRatingsEntry.moveField("textMigration").afterField("text");
+
+                migration.transformEntries({
+                    contentType: "blockRatingsEntry",
+                    from: ["text"],
+                    to: ["textMigration"],
+                    transformEntryForLocale: (fromFields, currentLocale) => {
+                        return {
+                            textMigration: fromFields.text[currentLocale],
+                        };
+                    },
+                });
+
+                blockRatingsEntry.deleteField("text");
+
+                blockRatingsEntry.editField("textMigration").newId("text");
             },
         },
     };

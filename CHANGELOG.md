@@ -1,7 +1,8 @@
-vNext
+4.0.4
 =====
 
 *   (improvement) Remove required for field `rating` within `blockRatingsEntry`.
+*   (improvement) Extend text input length for `blockRatingsEntry`.
 
 
 4.0.3
