@@ -14,5 +14,5 @@
         "allowJs": true
     },
     "include": ["src", "bin", "compiled"],
-    "exclude": ["node_modules", "**/__tests__/*", "lib"]
+    "exclude": ["node_modules", "**/__tests__/*", "lib", "test"]
 }

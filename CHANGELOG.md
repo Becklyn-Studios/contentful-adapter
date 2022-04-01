@@ -1,3 +1,9 @@
+4.0.7
+=====
+
+*   (bug) Fix relation type normalization.
+
+
 4.0.6
 =====
 

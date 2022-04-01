@@ -95,7 +95,10 @@ const getRelationTypeAndApplyChildConfigs = (
 
         cleanConfig[field] = {
             multiple: fieldConfig.multiple,
-            data: cleanChildConfig,
+            data: {
+                key: fieldConfig.data.key,
+                data: cleanChildConfig,
+            },
         } as RelationType;
         return;
     }
@@ -126,6 +129,11 @@ const getRelationTypeAndApplyChildConfigs = (
             },
         ];
     }
+
+    cleanConfig[field] = {
+        multiple: fieldConfig.multiple,
+        data: cleanArrayConfig,
+    } as RelationType;
 };
 
 const isComponentDataConfig = (
