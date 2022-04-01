@@ -62,36 +62,70 @@ const getDataAndApplyChildConfigs = (
             continue;
         }
 
-        if (isBaseComponentConfig(fieldConfig.data)) {
-            const cleanData = getDataAndApplyChildConfigs(configs, fieldConfig.data.data);
-            const key = fieldConfig.data.key;
-
-            if (!cleanData || !key) {
-                continue;
-            }
-
-            const newConfig: ContentfulComponentConfig = {
-                key: fieldConfig.data.key,
-                contentType: fieldConfig.data.key,
-                data: cleanData,
-            };
-
-            addConfigToConfigs(configs, newConfig);
-
-            cleanConfig[field] = {
-                multiple: fieldConfig.multiple,
-                data: {
-                    key,
-                    data: cleanData,
-                },
-            } as RelationType;
-            continue;
-        }
-
-        cleanConfig[field] = fieldConfig;
+        getRelationTypeAndApplyChildConfigs(configs, cleanConfig, field, fieldConfig);
     }
 
     return cleanConfig;
+};
+
+const getRelationTypeAndApplyChildConfigs = (
+    configs: Record<string, ContentfulComponentConfig>,
+    cleanConfig: ComponentDataConfig,
+    field: string,
+    fieldConfig: RelationType
+): void => {
+    if ("string" === typeof fieldConfig.data || !fieldConfig.data) {
+        cleanConfig[field] = {
+            multiple: fieldConfig.multiple,
+            data: fieldConfig.data,
+        } as RelationType;
+        return;
+    }
+
+    if (isBaseComponentConfig(fieldConfig.data)) {
+        const cleanChildConfig = getDataAndApplyChildConfigs(configs, fieldConfig.data.data);
+
+        if (cleanChildConfig) {
+            addConfigToConfigs(configs, {
+                key: fieldConfig.data.key,
+                contentType: fieldConfig.data.key,
+                data: cleanChildConfig,
+            });
+        }
+
+        cleanConfig[field] = {
+            multiple: fieldConfig.multiple,
+            data: cleanChildConfig,
+        } as RelationType;
+        return;
+    }
+
+    let cleanArrayConfig: (string | BaseComponentConfig)[] = [];
+
+    for (const singleConfig of fieldConfig.data) {
+        if ("string" === typeof singleConfig) {
+            cleanArrayConfig = [...cleanArrayConfig, singleConfig];
+            continue;
+        }
+
+        const cleanChildConfig = getDataAndApplyChildConfigs(configs, singleConfig.data);
+
+        if (cleanChildConfig) {
+            addConfigToConfigs(configs, {
+                key: singleConfig.key,
+                contentType: singleConfig.key,
+                data: cleanChildConfig,
+            });
+        }
+
+        cleanArrayConfig = [
+            ...cleanArrayConfig,
+            {
+                key: singleConfig.key,
+                data: cleanChildConfig,
+            },
+        ];
+    }
 };
 
 const isComponentDataConfig = (
