@@ -11,6 +11,7 @@ import {
 import {
     ArrayRelationType,
     Asset,
+    BaseComponentConfig,
     LabeledLink,
     SingleRelationType,
     TYPE_ASSET,
@@ -152,7 +153,7 @@ const normalizeArrayRelationTypeData = async (
 };
 
 export const normalizeDynamicDataConfigData = async (
-    dataTypes: string[],
+    dataTypes: (string | BaseComponentConfig)[],
     fieldData: any,
     service: ContentfulNormalizerService
 ): Promise<any | null> => {
@@ -161,7 +162,9 @@ export const normalizeDynamicDataConfigData = async (
     }
 
     const allowedContentTypes = dataTypes.map(componentKey =>
-        getContentTypeFromComponentKey(componentKey, service)
+        "string" === typeof componentKey
+            ? getContentTypeFromComponentKey(componentKey, service)
+            : componentKey.key
     );
 
     if (!fieldData.fields) {

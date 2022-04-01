@@ -1,6 +1,7 @@
-vNext
+4.0.5
 =====
 
+*   (improvement) Bump `@mayd/ui-types`.
 *   (bug) Add version to `blockTabTextImage`.
 
 
