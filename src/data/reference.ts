@@ -55,9 +55,13 @@ export const normalizeReference = async (
             return null;
         }
 
+        const anchor = getValueOfField(data.fields.title, service.locale)
+            ? `#${getValueOfField(data.fields.title, service.locale)}`
+            : "";
+
         return {
             title: getValueOfField(data.fields.title, service.locale) ?? null,
-            url: "/" === referenceSlug ? referenceSlug : `/${referenceSlug}`,
+            url: "/" === referenceSlug ? referenceSlug + anchor : `/${referenceSlug}${anchor}`,
             inNewTab: getValueOfField(data.fields.inNewTab, service.locale) ?? false,
         };
     }

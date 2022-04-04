@@ -21,6 +21,7 @@ const translations = {
             fields: {
                 name: "Internal Name",
                 reference: "Reference",
+                anchor: "Anchor",
                 title: "Title",
                 inNewTab: {
                     name: "Open in new tab",
@@ -57,6 +58,7 @@ const translations = {
             fields: {
                 name: "Interner Name",
                 reference: "Referenz",
+                anchor: "Anker",
                 title: "Titel",
                 inNewTab: {
                     name: "In neuem Tab öffnen",
@@ -213,6 +215,17 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                 internalReference.editField("inNewTab").defaultValue({
                     [language]: false,
                 });
+            },
+            3: migration => {
+                const internalReference = migration.editContentType("internalReference");
+
+                internalReference.createField("anchor", {
+                    type: "Symbol",
+                    name: t.internalReference.fields.anchor,
+                    required: false,
+                });
+
+                internalReference.moveField("anchor").beforeField("title");
             },
         },
     };

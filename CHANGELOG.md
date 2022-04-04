@@ -1,3 +1,9 @@
+4.1.0
+=====
+
+*   (feature) Add anchor to internal reference.
+
+
 4.0.7
 =====
 
