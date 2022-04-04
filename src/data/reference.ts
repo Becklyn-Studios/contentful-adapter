@@ -55,8 +55,8 @@ export const normalizeReference = async (
             return null;
         }
 
-        const anchor = getValueOfField(data.fields.title, service.locale)
-            ? `#${getValueOfField(data.fields.title, service.locale)}`
+        const anchor = getValueOfField(data.fields.anchor, service.locale)
+            ? `#${getValueOfField(data.fields.anchor, service.locale)}`
             : "";
 
         return {

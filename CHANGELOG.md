@@ -1,3 +1,9 @@
+4.1.1
+=====
+
+*   (bug) Fix internal reference anchor value.
+
+
 4.1.0
 =====
 
