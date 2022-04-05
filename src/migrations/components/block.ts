@@ -62,6 +62,7 @@ export const migrateBaseBlockFields = (
         type: "Symbol",
         name: t.anchor,
         required: true,
+        validations: [{ regexp: { pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" } }],
     });
 
     block.changeFieldControl("anchor", "builtin", "slugEditor", {

@@ -114,6 +114,7 @@ export const getPageMigration: ContentfulMigrationGenerator = (
                     type: "Symbol",
                     name: t.page.fields.slug.name,
                     required: true,
+                    validations: [{ regexp: { pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" } }],
                 });
 
                 page.changeFieldControl("slug", "builtin", "slugEditor", {
