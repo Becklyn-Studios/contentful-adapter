@@ -1,3 +1,9 @@
+4.1.2
+=====
+
+*   (improvement) Add validation for page slugs and anchor links in migrations.
+
+
 4.1.1
 =====
 
