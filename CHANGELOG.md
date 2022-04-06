@@ -1,3 +1,9 @@
+4.2.0
+=====
+
+*   (feature) Add `TYPE_RAW` normalizer.
+
+
 4.1.3
 =====
 

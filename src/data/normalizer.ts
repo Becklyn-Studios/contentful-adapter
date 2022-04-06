@@ -8,6 +8,7 @@ import {
     TYPE_HEADLINE,
     TYPE_LABELED_LINK,
     TYPE_NUMBER,
+    TYPE_RAW,
     TYPE_RTE,
     TYPE_STRING,
 } from "@mayd/ui-types";
@@ -175,6 +176,8 @@ const getDataValue = async (
     service: ContentfulNormalizerService
 ): Promise<any | null> => {
     switch (dataType) {
+        case TYPE_RAW:
+            return data;
         case TYPE_STRING:
             return "string" === typeof data ? data : null;
         case TYPE_BOOL:
