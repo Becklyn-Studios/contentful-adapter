@@ -1,3 +1,9 @@
+4.1.3
+=====
+
+*   (improvement) Remove `blockCardsTeaser` maximum validation.
+
+
 4.1.2
 =====
 

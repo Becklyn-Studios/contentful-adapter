@@ -1,6 +1,5 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { INLINES } from "@contentful/rich-text-types";
 import { getRteValidation, RTE_TYPE_HEADLINE } from "./rte";
 
 const translations = {
@@ -99,6 +98,11 @@ export const getBlockCardsTeaserMigration: ContentfulMigrationGenerator = (
 
                 blockCardsTeaser.editField("headline").required(true);
                 blockCardsTeaser.moveField("headline").afterField("overline");
+            },
+            4: migration => {
+                const blockCardsTeaser = migration.editContentType("blockCardsTeaser");
+
+                blockCardsTeaser.editField("entries").validations([{ size: { min: 2 } }]);
             },
         },
     };
