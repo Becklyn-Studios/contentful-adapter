@@ -72,16 +72,20 @@ export const getRteData = async (
 
     documentToHtmlString(data, {
         renderNode: {
-            [INLINES.HYPERLINK]: node => {
-                assetReferences = [...assetReferences, node.data];
-                return "";
-            },
             [INLINES.ASSET_HYPERLINK]: node => {
                 assetReferences = [...assetReferences, node.data];
                 return "";
             },
             [INLINES.ENTRY_HYPERLINK]: node => {
-                linkReferences = [...assetReferences, node.data];
+                if ("internalReference" === node.data?.target?.sys?.contentType?.sys?.id) {
+                    Object.keys(node.data.target.fields?.reference?.fields || []).forEach(key => {
+                        if (key !== "slug") {
+                            delete node.data.target.fields?.reference?.fields[key];
+                        }
+                    });
+                }
+
+                linkReferences = [...linkReferences, node.data];
                 return "";
             },
             [BLOCKS.EMBEDDED_ASSET]: node => {
