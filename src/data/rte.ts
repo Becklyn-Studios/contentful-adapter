@@ -77,12 +77,9 @@ export const getRteData = async (
                 return "";
             },
             [INLINES.ENTRY_HYPERLINK]: node => {
+                // @todo: maybe remove again after absolute slug optimization
                 if ("internalReference" === node.data?.target?.sys?.contentType?.sys?.id) {
-                    Object.keys(node.data.target.fields?.reference?.fields || []).forEach(key => {
-                        if (key !== "slug") {
-                            delete node.data.target.fields?.reference?.fields[key];
-                        }
-                    });
+                    delete node.data.target.fields;
                 }
 
                 linkReferences = [...linkReferences, node.data];

@@ -1,3 +1,9 @@
+4.2.2
+=====
+
+*   (bug) Fix RTE normalizer.
+
+
 4.2.1
 =====
 
