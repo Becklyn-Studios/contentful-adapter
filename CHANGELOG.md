@@ -1,3 +1,9 @@
+4.2.4
+=====
+
+*   (bug) Add missing title field to block tab sections.
+
+
 4.2.3
 =====
 

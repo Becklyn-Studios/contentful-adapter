@@ -34,6 +34,7 @@ const translations = {
             name: "🧩 Block > Tabs > Text Section",
             fields: {
                 name: "Internal Name",
+                title: "Title",
                 headline: "Headline",
                 text: "Text",
             },
@@ -42,6 +43,7 @@ const translations = {
             name: "🧩 Block > Tabs > Text Cloumns Section",
             fields: {
                 name: "Internal Name",
+                title: "Title",
                 headline: "Headline",
                 firstColumn: "Text Left",
                 secondColumn: "Text Right",
@@ -51,6 +53,7 @@ const translations = {
             name: "🧩 Block > Tabs > Text Image Section",
             fields: {
                 name: "Internal Name",
+                title: "Title",
                 headline: "Headline",
                 text: "Text",
                 image: "Image",
@@ -68,6 +71,7 @@ const translations = {
             name: "🧩 Block > Tabs > Video Section",
             fields: {
                 name: "Internal Name",
+                title: "Title",
                 video: "Video",
             },
         },
@@ -92,6 +96,7 @@ const translations = {
             name: "🧩 Block > Tabs > Text Sektion",
             fields: {
                 name: "Interner Name",
+                title: "Titel",
                 headline: "Überschrift",
                 text: "Text",
             },
@@ -100,6 +105,7 @@ const translations = {
             name: "🧩 Block > Tabs > Text Spalten Sektion",
             fields: {
                 name: "Interner Name",
+                title: "Titel",
                 headline: "Überschrift",
                 firstColumn: "Text Links",
                 secondColumn: "Text Rechts",
@@ -109,6 +115,7 @@ const translations = {
             name: "🧩 Block > Tabs > Text Bild Sektion",
             fields: {
                 name: "Interner Name",
+                title: "Titel",
                 headline: "Überschrift",
                 text: "Text",
                 image: "Bild",
@@ -126,6 +133,7 @@ const translations = {
             name: "🧩 Block > Tabs > Video Sektion",
             fields: {
                 name: "Interner Name",
+                title: "Titel",
                 video: "Video",
             },
         },
@@ -372,6 +380,50 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                         ],
                     },
                 });
+
+                const blockTabSectionText = migration.editContentType("blockTabSectionText");
+
+                blockTabSectionText.createField("title", {
+                    type: "Symbol",
+                    name: t.blockTabSectionText.fields.title,
+                    required: true,
+                });
+
+                blockTabSectionText.moveField("title").afterField("name");
+
+                const blockTabSectionTextColumns = migration.editContentType(
+                    "blockTabSectionTextColumns"
+                );
+
+                blockTabSectionTextColumns.createField("title", {
+                    type: "Symbol",
+                    name: t.blockTabSectionTextColumns.fields.title,
+                    required: true,
+                });
+
+                blockTabSectionTextColumns.moveField("title").afterField("name");
+
+                const blockTabSectionTextImage = migration.editContentType(
+                    "blockTabSectionTextImage"
+                );
+
+                blockTabSectionTextImage.createField("title", {
+                    type: "Symbol",
+                    name: t.blockTabSectionTextImage.fields.title,
+                    required: true,
+                });
+
+                blockTabSectionTextImage.moveField("title").afterField("name");
+
+                const blockTabSectionVideo = migration.editContentType("blockTabSectionVideo");
+
+                blockTabSectionVideo.createField("title", {
+                    type: "Symbol",
+                    name: t.blockTabSectionVideo.fields.title,
+                    required: true,
+                });
+
+                blockTabSectionVideo.moveField("title").afterField("name");
 
                 migration.deleteContentType("blockTabSectionsEntry");
             },
