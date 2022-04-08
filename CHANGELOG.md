@@ -1,3 +1,9 @@
+vNext
+=====
+
+*   (improvement) Replace block tab sections display fields with `title`.
+
+
 4.2.4
 =====
 

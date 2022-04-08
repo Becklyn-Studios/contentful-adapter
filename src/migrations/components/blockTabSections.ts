@@ -1,6 +1,7 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
 import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
+import migration from "../migration";
 
 export const VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE = {
     en: {
@@ -426,6 +427,35 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                 blockTabSectionVideo.moveField("title").afterField("name");
 
                 migration.deleteContentType("blockTabSectionsEntry");
+            },
+            10: migration => {
+                const blockTabSectionText = migration.editContentType("blockTabSectionText");
+
+                blockTabSectionText.displayField("title");
+
+                blockTabSectionText.deleteField("name");
+
+                const blockTabSectionTextColumns = migration.editContentType(
+                    "blockTabSectionTextColumns"
+                );
+
+                blockTabSectionTextColumns.displayField("title");
+
+                blockTabSectionTextColumns.deleteField("name");
+
+                const blockTabSectionTextImage = migration.editContentType(
+                    "blockTabSectionTextImage"
+                );
+
+                blockTabSectionTextImage.displayField("title");
+
+                blockTabSectionTextImage.deleteField("name");
+
+                const blockTabSectionVideo = migration.editContentType("blockTabSectionVideo");
+
+                blockTabSectionVideo.displayField("title");
+
+                blockTabSectionVideo.deleteField("name");
             },
         },
     };
