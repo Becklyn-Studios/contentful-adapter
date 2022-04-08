@@ -349,6 +349,32 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
 
                 blockTabSectionTextImage.moveField("version").afterField("image");
             },
+            9: migration => {
+                const blockTabSections = migration.editContentType("blockTabSections");
+
+                blockTabSections.editField("entries", {
+                    type: "Array",
+                    name: t.blockTabSections.fields.entries,
+                    required: true,
+                    validations: [{ size: { max: 6 } }],
+                    items: {
+                        type: "Link",
+                        linkType: "Entry",
+                        validations: [
+                            {
+                                linkContentType: [
+                                    "blockTabSectionText",
+                                    "blockTabSectionTextColumns",
+                                    "blockTabSectionTextImage",
+                                    "blockTabSectionVideo",
+                                ],
+                            },
+                        ],
+                    },
+                });
+
+                migration.deleteContentType("blockTabSectionsEntry");
+            },
         },
     };
 };

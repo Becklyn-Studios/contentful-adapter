@@ -1,3 +1,9 @@
+4.2.3
+=====
+
+*   (improvement) Delete `blockTabSectionsEntry`.
+
+
 4.2.2
 =====
 
