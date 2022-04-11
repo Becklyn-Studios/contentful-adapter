@@ -1,7 +1,8 @@
-vNext
+4.2.5
 =====
 
 *   (improvement) Replace block tab sections display fields with `title`.
+*   (improvement) Make page `slug` unique for better absolute slug support.
 
 
 4.2.4

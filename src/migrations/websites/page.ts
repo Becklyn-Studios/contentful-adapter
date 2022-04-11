@@ -229,6 +229,15 @@ export const getPageMigration: ContentfulMigrationGenerator = (
 
                 seo.moveField("image").afterField("description");
             },
+            4: migration => {
+                const page = migration.editContentType("page");
+
+                page.editField("slug").validations([
+                    {
+                        unique: true,
+                    },
+                ]);
+            },
         },
     };
 };
