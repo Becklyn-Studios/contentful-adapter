@@ -1,3 +1,9 @@
+5.0.0
+=====
+
+*   (bc) Replace child pages by absolute slugs.
+
+
 4.2.5
 =====
 

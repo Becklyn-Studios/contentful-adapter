@@ -2,12 +2,8 @@ import { Entry } from "contentful";
 import { Document } from "@contentful/rich-text-types";
 import { Asset, LinkReference } from "@mayd/ui-types";
 
-export interface PageTreeNode {
-    id: string;
-    slug: string | null;
-    title?: string | null;
-    parent?: PageTreeNode;
-    children: PageTreeNode[];
+export interface SlugPage {
+    slug: string;
 }
 
 export interface FindEntryOptions {
@@ -52,7 +48,6 @@ export interface ContentfulPageSeo {
 }
 
 export interface OriginalPageData {
-    pageTree: PageTreeNode;
     notFound?: boolean;
     redirect?: {
         destination: string;

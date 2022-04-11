@@ -1,6 +1,6 @@
 import { Asset as ContentfulAsset, Entry } from "contentful";
-import { PageTreeNode } from "./types";
 import { Asset, LabeledLink, LinkReference } from "@mayd/ui-types";
+import { PageCache } from "./cache";
 
 export const getContentfulSelectString = (select?: string[]): string | null => {
     if (!select) {
@@ -34,10 +34,10 @@ export const getAssetFromContentful = (data?: ContentfulAsset | null): Asset | n
     };
 };
 
-export const getLabeledLinkFromContentful = (
-    pageTree: PageTreeNode,
+export const getLabeledLinkFromContentful = async (
+    pageCache: PageCache,
     data?: Entry<any> | null
-): LabeledLink | null => {
+): Promise<LabeledLink | null> => {
     if (!data) {
         return null;
     }
@@ -50,7 +50,7 @@ export const getLabeledLinkFromContentful = (
     };
 
     if (ref.sys.contentType.sys.id === "page") {
-        reference.url = getPageSlug(ref.sys.id, pageTree);
+        reference.url = pageCache.getSlugForPage(ref.sys.id);
     } else if (ref.sys.contentType.sys.id === "externalReference" && ref.fields.url) {
         reference.url = ref.fields.url;
         reference.inNewTab = ref.fields.inNewTab ?? false;
@@ -64,63 +64,63 @@ export const getLabeledLinkFromContentful = (
     };
 };
 
-export const getPageSlug = (pageId: string, pageTree: PageTreeNode): string => {
-    const page = findPageInTree(pageId, pageTree);
-    const slugParts = getSlugPartsOfPageTreeNode(page);
+// export const getPageSlug = (pageId: string, pageTree: PageTreeNode): string => {
+//     const page = findPageInTree(pageId, pageTree);
+//     const slugParts = getSlugPartsOfPageTreeNode(page);
+//
+//     return 0 !== slugParts.length ? slugParts.join("/") : "/";
+// };
 
-    return 0 !== slugParts.length ? slugParts.join("/") : "/";
-};
+// export const getSlugPartsOfPageTreeNode = (
+//     page: PageTreeNode | null,
+//     parts: string[] = []
+// ): string[] => {
+//     if (null === page) {
+//         return [];
+//     }
+//
+//     const currentSlugParts = page.slug ? [page.slug, ...parts] : parts;
+//
+//     if (!page.parent) {
+//         return currentSlugParts;
+//     }
+//
+//     return getSlugPartsOfPageTreeNode(page.parent, currentSlugParts);
+// };
 
-export const getSlugPartsOfPageTreeNode = (
-    page: PageTreeNode | null,
-    parts: string[] = []
-): string[] => {
-    if (null === page) {
-        return [];
-    }
+// export const findPageInTree = (pageId: string, pageTree: PageTreeNode): PageTreeNode | null => {
+//     if (pageTree.id === pageId) {
+//         return pageTree;
+//     }
+//
+//     for (let i = 0; i < pageTree.children.length; i++) {
+//         const foundInChild = findPageInTree(pageId, pageTree.children[i]);
+//
+//         if (null !== foundInChild) {
+//             return foundInChild;
+//         }
+//     }
+//
+//     return null;
+// };
 
-    const currentSlugParts = page.slug ? [page.slug, ...parts] : parts;
-
-    if (!page.parent) {
-        return currentSlugParts;
-    }
-
-    return getSlugPartsOfPageTreeNode(page.parent, currentSlugParts);
-};
-
-export const findPageInTree = (pageId: string, pageTree: PageTreeNode): PageTreeNode | null => {
-    if (pageTree.id === pageId) {
-        return pageTree;
-    }
-
-    for (let i = 0; i < pageTree.children.length; i++) {
-        const foundInChild = findPageInTree(pageId, pageTree.children[i]);
-
-        if (null !== foundInChild) {
-            return foundInChild;
-        }
-    }
-
-    return null;
-};
-
-export const findPageBySlugInTree = (
-    slugParts: string[],
-    pageTree: PageTreeNode
-): PageTreeNode | null => {
-    if (slugParts.length === 0) {
-        return pageTree;
-    }
-
-    const part = slugParts.shift();
-
-    for (let i = 0; i < pageTree.children.length; i++) {
-        const child = pageTree.children[i];
-
-        if (child.slug === part) {
-            return findPageBySlugInTree(slugParts, child);
-        }
-    }
-
-    return null;
-};
+// export const findPageBySlugInTree = (
+//     slugParts: string[],
+//     pageTree: PageTreeNode
+// ): PageTreeNode | null => {
+//     if (slugParts.length === 0) {
+//         return pageTree;
+//     }
+//
+//     const part = slugParts.shift();
+//
+//     for (let i = 0; i < pageTree.children.length; i++) {
+//         const child = pageTree.children[i];
+//
+//         if (child.slug === part) {
+//             return findPageBySlugInTree(slugParts, child);
+//         }
+//     }
+//
+//     return null;
+// };

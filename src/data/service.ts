@@ -1,14 +1,13 @@
 import { ContentfulClientApi } from "contentful";
-import { PageTreeNode } from "../contentful/types";
 import { ContentfulComponentConfig, MaydContentfulAdapterConfig } from "../config/types";
-import { connectToContentfulDeliveryApi } from "../contentful/api";
-import { loadPageTree } from "../contentful/pages";
-import { getPageSlug } from "../contentful/util";
+import { connectToContentfulDeliveryApi, findAllEntries } from "../contentful/api";
+import { getPageCache, PageCache } from "../contentful/cache";
+import { SlugPage } from "../contentful/types";
 
 export interface ContentfulNormalizerService {
     client: ContentfulClientApi;
     locale: string;
-    getPageTree: () => Promise<PageTreeNode>;
+    pageCache: PageCache;
     allUiComponents: ContentfulComponentConfig[];
     resolveInternalReferencePath: (data: any) => Promise<string | null>;
     getThemeValue: (contentfulValue: string) => string;
@@ -23,30 +22,23 @@ export type DataTypeNormalizer = (
     parentData?: any
 ) => Promise<any>;
 
-export type InternalReferenceResolver = (
-    data: any,
-    pageTree: PageTreeNode
-) => Promise<string | null>;
+export type InternalReferenceResolver = (data: any, pageCache: PageCache) => Promise<string | null>;
 
-export const getContentfulNormalizerService = (
+export const getContentfulNormalizerService = async (
     config: MaydContentfulAdapterConfig,
     locale: string,
     themeValueMapping: Record<string, string> = {},
     versionValueMapping: Record<string, string> = {},
     referenceResolvers?: Record<string, InternalReferenceResolver>,
     preview: boolean = false
-): ContentfulNormalizerService => {
+): Promise<ContentfulNormalizerService> => {
     const contentfulClient = connectToContentfulDeliveryApi(config.clientConfig, preview);
-    let pageTree: PageTreeNode | null = null;
+    const pages = await findAllEntries<SlugPage>(contentfulClient, {
+        contentType: "page",
+        select: ["fields.slug"],
+    });
+    const pageCache = getPageCache(pages);
     let customNormalizers: Record<string, DataTypeNormalizer> = {};
-
-    const getPageTree = async () => {
-        if (!pageTree) {
-            pageTree = await loadPageTree(contentfulClient);
-        }
-
-        return pageTree;
-    };
 
     const internalReferenceResolvers = getInternalReferenceResolvers(referenceResolvers);
 
@@ -62,17 +54,16 @@ export const getContentfulNormalizerService = (
             const mappedValue = versionValueMapping[contentfulValue];
             return mappedValue ? mappedValue : contentfulValue;
         },
-        getPageTree,
+        pageCache,
         resolveInternalReferencePath: async (data: any): Promise<string | null> => {
             if (!data || !data.sys || !data.sys.contentType) {
                 return null;
             }
 
-            const currentPageTree = await getPageTree();
             const contentType = data.sys.contentType.sys.id;
             const resolver = internalReferenceResolvers[contentType];
 
-            return resolver ? await resolver(data, currentPageTree) : null;
+            return resolver ? await resolver(data, pageCache) : null;
         },
         registerNormalizerType: (dataType: string, normalizer: DataTypeNormalizer) => {
             if (customNormalizers[dataType]) {
@@ -97,13 +88,13 @@ const getInternalReferenceResolvers = (
     if (!referenceResolvers["page"]) {
         referenceResolvers["page"] = async (
             data: any,
-            pageTree: PageTreeNode
+            pageCache: PageCache
         ): Promise<string | null> => {
             if (!data || !data.sys || !data.sys.id) {
                 return null;
             }
 
-            return getPageSlug(data.sys.id, pageTree);
+            return pageCache.getSlugForPage(data.sys.id);
         };
     }
 

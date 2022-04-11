@@ -25,16 +25,11 @@ export {
     findOneAsset,
 } from "./contentful/api";
 
-export {
-    loadPageTree,
-    getSlugPathsFromPageTree,
-    loadPageData,
-    loadPagePaths,
-    findRootPage,
-} from "./contentful/pages";
+export { PageCache } from "./contentful/cache";
+
+export { loadPageData, loadPagePaths } from "./contentful/pages";
 
 export type {
-    PageTreeNode,
     OriginalPageData,
     ContentfulBasePage,
     ContentfulPage,
@@ -47,14 +42,10 @@ export type {
 } from "./contentful/types";
 
 export {
-    findPageBySlugInTree,
-    findPageInTree,
     getLabeledLinkFromContentful,
     getAssetFromContentful,
     getContentfulSelectString,
     getContentfulWhereObject,
-    getSlugPartsOfPageTreeNode,
-    getPageSlug,
 } from "./contentful/util";
 //endregion
 
