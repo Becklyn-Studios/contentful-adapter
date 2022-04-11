@@ -1,3 +1,9 @@
+5.3.0
+=====
+
+*   (feature) Add `assetReference`.
+
+
 5.2.1
 =====
 

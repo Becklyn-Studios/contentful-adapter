@@ -30,6 +30,14 @@ const translations = {
                 },
             },
         },
+        assetReference: {
+            name: "⚙️ Basic > Asset Referenz",
+            fields: {
+                name: "Internal Name",
+                asset: "Asset",
+                title: "Title",
+            },
+        },
         labeledLink: {
             name: "⚙️ Basic > Labeled Link",
             fields: {
@@ -65,6 +73,14 @@ const translations = {
                     true: "Ja",
                     false: "Nein",
                 },
+            },
+        },
+        assetReference: {
+            name: "⚙️ Basic > Asset Referenz",
+            fields: {
+                name: "Interner Name",
+                asset: "Asset",
+                title: "Titel",
             },
         },
         labeledLink: {
@@ -226,6 +242,63 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                 });
 
                 internalReference.moveField("anchor").beforeField("title");
+            },
+            4: migration => {
+                const assetReference = migration.createContentType("assetReference", {
+                    name: t.assetReference.name,
+                });
+
+                assetReference.createField("name", {
+                    type: "Symbol",
+                    name: t.assetReference.fields.name,
+                    required: true,
+                });
+
+                assetReference.createField("asset", {
+                    type: "Link",
+                    name: t.assetReference.fields.asset,
+                    required: true,
+                    linkType: "Asset",
+                    validations: [
+                        {
+                            linkMimetypeGroup: [
+                                "image",
+                                "video",
+                                "plaintext",
+                                "pdfdocument",
+                                "spreadsheet",
+                                "plaintext",
+                                "attachment",
+                                "audio",
+                            ],
+                        },
+                    ],
+                });
+
+                assetReference.changeFieldControl("asset", "builtin", "assetLinkEditor", {
+                    showLinkEntityAction: true,
+                    showCreateEntityAction: false,
+                });
+
+                assetReference.createField("title", {
+                    type: "Symbol",
+                    name: t.internalReference.fields.title,
+                    required: false,
+                });
+
+                assetReference.displayField("name");
+
+                const labeledLink = migration.editContentType("labeledLink");
+
+                labeledLink.editField("reference").validations([
+                    {
+                        linkContentType: [
+                            "internalReference",
+                            "externalReference",
+                            "assetReference",
+                        ],
+                    },
+                ]);
             },
         },
     };

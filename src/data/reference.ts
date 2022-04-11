@@ -74,5 +74,13 @@ export const normalizeReference = async (
         };
     }
 
+    if ("assetReference" === data.sys.contentType.sys.id) {
+        return {
+            title: getValueOfField(data.fields.title, service.locale) ?? null,
+            url: getValueOfField(data.fields.asset?.fields?.file?.url, service.locale) ?? null,
+            inNewTab: true,
+        };
+    }
+
     return null;
 };
