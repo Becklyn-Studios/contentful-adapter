@@ -1,19 +1,35 @@
-import { SlugPage } from "./types";
+import { PageForCache } from "./types";
 import { Entry } from "contentful";
 
 export interface PageCache {
-    getSlugForPage: (id: string) => string;
+    getSlugOfPage: (id: string) => string;
+    getTitleOfPage: (id: string) => string;
 }
 
-export const getPageCache = (pages: Entry<SlugPage>[]): PageCache => {
-    const cache: Record<string, string> = {};
-    pages.forEach(page => (cache[page.sys.id] = page.fields.slug));
+export const getPageCache = (pages: Entry<PageForCache>[]): PageCache => {
+    const slugCache: Record<string, string> = {};
+    const titleCache: Record<string, string> = {};
+    pages.forEach(page => {
+        let slug = page.fields.slug;
 
-    const getSlugForPage = (id: string): string => {
-        return cache[id];
+        if (slug && !slug.startsWith("/")) {
+            slug = "/" + slug;
+        }
+
+        slugCache[page.sys.id] = slug;
+        titleCache[page.sys.id] = page.fields.title;
+    });
+
+    const getSlugOfPage = (id: string): string => {
+        return slugCache[id];
+    };
+
+    const getTitleOfPage = (id: string): string => {
+        return titleCache[id];
     };
 
     return {
-        getSlugForPage,
+        getSlugOfPage,
+        getTitleOfPage,
     };
 };

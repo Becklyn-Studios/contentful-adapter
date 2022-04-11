@@ -1,3 +1,10 @@
+5.0.1
+=====
+
+*   (bug) Add missing page title to page cache.
+*   (bug) Add beginning slash to all cached slugs.
+
+
 5.0.0
 =====
 

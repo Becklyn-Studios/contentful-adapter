@@ -6,6 +6,10 @@ export interface SlugPage {
     slug: string;
 }
 
+export interface PageForCache extends SlugPage {
+    title: string;
+}
+
 export interface FindEntryOptions {
     contentType: string;
     select?: string[];

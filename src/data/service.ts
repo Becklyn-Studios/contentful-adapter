@@ -2,7 +2,7 @@ import { ContentfulClientApi } from "contentful";
 import { ContentfulComponentConfig, MaydContentfulAdapterConfig } from "../config/types";
 import { connectToContentfulDeliveryApi, findAllEntries } from "../contentful/api";
 import { getPageCache, PageCache } from "../contentful/cache";
-import { SlugPage } from "../contentful/types";
+import { PageForCache } from "../contentful/types";
 
 export interface ContentfulNormalizerService {
     client: ContentfulClientApi;
@@ -33,9 +33,9 @@ export const getContentfulNormalizerService = async (
     preview: boolean = false
 ): Promise<ContentfulNormalizerService> => {
     const contentfulClient = connectToContentfulDeliveryApi(config.clientConfig, preview);
-    const pages = await findAllEntries<SlugPage>(contentfulClient, {
+    const pages = await findAllEntries<PageForCache>(contentfulClient, {
         contentType: "page",
-        select: ["fields.slug"],
+        select: ["fields.slug", "fields.title"],
     });
     const pageCache = getPageCache(pages);
     let customNormalizers: Record<string, DataTypeNormalizer> = {};
@@ -94,7 +94,7 @@ const getInternalReferenceResolvers = (
                 return null;
             }
 
-            return pageCache.getSlugForPage(data.sys.id);
+            return pageCache.getSlugOfPage(data.sys.id);
         };
     }
 
