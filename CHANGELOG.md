@@ -1,3 +1,11 @@
+5.1.0
+=====
+
+*   (feature) Add `getTitleOfPageBySlug` to `PageCache`.
+*   (feature) Add `getIdOfPageBySlug` to `PageCache`.
+*   (feature) Add `isSlugExisting` to `PageCache`.
+
+
 5.0.2
 =====
 
