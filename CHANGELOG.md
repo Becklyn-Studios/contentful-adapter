@@ -1,6 +1,7 @@
-vNext
+5.2.0
 =====
 
+*   (improvement) Reduce `blockTabSections` tab sections.
 *   (feature) Add `version` to `blockCardsSliderTeaser`.
 
 

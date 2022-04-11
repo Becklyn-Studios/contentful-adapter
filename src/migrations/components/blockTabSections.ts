@@ -1,7 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
 import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
-import migration from "../migration";
 
 export const VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE = {
     en: {
@@ -58,6 +57,7 @@ const translations = {
                 headline: "Headline",
                 text: "Text",
                 image: "Image",
+                labeledLink: "Button",
                 version: {
                     name: "Version",
                     default: VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE.en.imageRight,
@@ -120,6 +120,7 @@ const translations = {
                 headline: "Überschrift",
                 text: "Text",
                 image: "Bild",
+                labeledLink: "Button",
                 version: {
                     name: "Version",
                     default: VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE.de.imageRight,
@@ -456,6 +457,81 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                 blockTabSectionVideo.displayField("title");
 
                 blockTabSectionVideo.deleteField("name");
+            },
+            11: migration => {
+                const blockTabSectionEntry = migration.createContentType("blockTabSectionEntry", {
+                    name: t.blockTabSectionsEntry.name,
+                });
+
+                blockTabSectionEntry.createField("title", {
+                    type: "Symbol",
+                    name: t.blockTabSectionTextImage.fields.title,
+                    required: true,
+                });
+
+                blockTabSectionEntry.createField("headline", {
+                    type: "Symbol",
+                    name: t.blockTabSectionTextImage.fields.headline,
+                });
+
+                blockTabSectionEntry.createField("text", {
+                    type: "RichText",
+                    name: t.blockTabSectionTextImage.fields.text,
+                    validations: getRteValidation(RTE_TYPE_STYLED_FONT_AND_LIST),
+                });
+
+                blockTabSectionEntry.createField("image", {
+                    type: "Link",
+                    name: t.blockTabSectionTextImage.fields.image,
+                    linkType: "Asset",
+                    validations: [{ linkMimetypeGroup: ["image"] }],
+                    required: true,
+                });
+
+                blockTabSectionEntry.createField("labeledLink", {
+                    type: "Link",
+                    name: t.blockTabSectionTextImage.fields.labeledLink,
+                    linkType: "Entry",
+                    validations: [{ linkContentType: ["labeledLink"] }],
+                });
+
+                blockTabSectionEntry.moveField("labeledLink").afterField("image");
+
+                blockTabSectionEntry.createField("version", {
+                    type: "Symbol",
+                    name: t.blockTabSectionTextImage.fields.version.name,
+                    required: true,
+                    defaultValue: {
+                        [language]: t.blockTabSectionTextImage.fields.version.default,
+                    },
+                    validations: [
+                        {
+                            in: t.blockTabSectionTextImage.fields.version.in,
+                        },
+                    ],
+                });
+
+                blockTabSectionEntry.changeFieldControl("version", "builtin", "radio");
+
+                blockTabSectionEntry.displayField("title");
+            },
+            12: migration => {
+                const blockTabSections = migration.editContentType("blockTabSections");
+
+                blockTabSections.editField("entries").items({
+                    type: "Link",
+                    linkType: "Entry",
+                    validations: [
+                        {
+                            linkContentType: ["blockTabSectionEntry"],
+                        },
+                    ],
+                });
+
+                migration.deleteContentType("blockTabSectionText");
+                migration.deleteContentType("blockTabSectionTextColumns");
+                migration.deleteContentType("blockTabSectionTextImage");
+                migration.deleteContentType("blockTabSectionVideo");
             },
         },
     };
