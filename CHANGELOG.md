@@ -1,3 +1,9 @@
+5.2.1
+=====
+
+*   (improvement) Turn `version` into radio field.
+
+
 5.2.0
 =====
 

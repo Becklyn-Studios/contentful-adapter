@@ -139,6 +139,11 @@ export const getBlockCardsSliderTeaserMigration: ContentfulMigrationGenerator = 
 
                 blockCardsSliderTeaser.moveField("version").afterField("theme");
             },
+            5: migration => {
+                const blockCardsSliderTeaser = migration.editContentType("blockCardsSliderTeaser");
+
+                blockCardsSliderTeaser.changeFieldControl("version", "builtin", "radio");
+            },
         },
     };
 };
