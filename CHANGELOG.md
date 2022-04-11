@@ -1,3 +1,9 @@
+5.0.2
+=====
+
+*   (bug) Remove beginning slash of all cached slugs.
+
+
 5.0.1
 =====
 
