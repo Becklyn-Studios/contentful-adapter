@@ -1,3 +1,9 @@
+vNext
+=====
+
+*   (feature) Add `version` to `blockCardsSliderTeaser`.
+
+
 5.1.0
 =====
 
