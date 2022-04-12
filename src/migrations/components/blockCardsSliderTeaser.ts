@@ -1,6 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_HEADLINE } from "./rte";
+import { getRteValidation, RTE_TYPE_HEADLINE } from "../rte";
 
 export const VERSION_CARDS_SLIDER_TEASER = {
     en: {

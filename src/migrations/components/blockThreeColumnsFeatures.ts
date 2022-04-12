@@ -1,6 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_HEADLINE } from "./rte";
+import { getRteValidation, RTE_TYPE_HEADLINE } from "../rte";
 import migration from "../migration";
 
 const translations = {

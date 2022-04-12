@@ -36,7 +36,13 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
             : [INLINES.HYPERLINK, INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK];
 
     if (version === RTE_TYPE_FULL) {
-        enabledNodeTypes = [...enabledNodeTypes, BLOCKS.HEADING_2, BLOCKS.HEADING_3];
+        enabledNodeTypes = [
+            ...enabledNodeTypes,
+            BLOCKS.HR,
+            BLOCKS.EMBEDDED_ENTRY,
+            BLOCKS.HEADING_2,
+            BLOCKS.HEADING_3,
+        ];
     }
 
     return [
@@ -47,6 +53,11 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
                 [INLINES.ENTRY_HYPERLINK]: [
                     {
                         linkContentType: ["internalReference", "externalReference"],
+                    },
+                ],
+                [BLOCKS.EMBEDDED_ENTRY]: [
+                    {
+                        linkContentType: ["rteQuote", "rteMedia"],
                     },
                 ],
             },

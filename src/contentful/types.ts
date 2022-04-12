@@ -63,6 +63,7 @@ export interface OriginalPageData {
 export interface RteData {
     json: Document;
     references: ReferencesData;
+    entries: Record<string, any>;
 }
 
 export type ReferencesData = Record<string, Asset | LinkReference>;
