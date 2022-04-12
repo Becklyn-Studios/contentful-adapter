@@ -1,3 +1,9 @@
+5.4.1
+=====
+
+*   (bug) Add missing `version` field to `blockCardsTeaser`.
+
+
 5.4.0
 =====
 

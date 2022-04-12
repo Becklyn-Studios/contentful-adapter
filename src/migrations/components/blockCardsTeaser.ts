@@ -2,6 +2,17 @@ import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../
 import { migrateBaseBlockFields } from "./block";
 import { getRteValidation, RTE_TYPE_HEADLINE } from "../rte";
 
+export const VERSION_CARDS_TEASER = {
+    en: {
+        default: "Default",
+        multiLine: "Multi Line",
+    },
+    de: {
+        default: "Standard",
+        multiLine: "Mehrzeilig",
+    },
+};
+
 const translations = {
     en: {
         blockCardsTeaser: {
@@ -12,6 +23,11 @@ const translations = {
                 text: "Text",
                 labeledLink: "Button",
                 entries: "Entries",
+                version: {
+                    name: "Version",
+                    default: VERSION_CARDS_TEASER.en.default,
+                    in: [VERSION_CARDS_TEASER.en.default, VERSION_CARDS_TEASER.en.multiLine],
+                },
             },
         },
     },
@@ -24,6 +40,11 @@ const translations = {
                 text: "Text",
                 labeledLink: "Button",
                 entries: "Einträge",
+                version: {
+                    name: "Version",
+                    default: VERSION_CARDS_TEASER.de.default,
+                    in: [VERSION_CARDS_TEASER.de.default, VERSION_CARDS_TEASER.de.multiLine],
+                },
             },
         },
     },
@@ -103,6 +124,27 @@ export const getBlockCardsTeaserMigration: ContentfulMigrationGenerator = (
                 const blockCardsTeaser = migration.editContentType("blockCardsTeaser");
 
                 blockCardsTeaser.editField("entries").validations([{ size: { min: 2 } }]);
+            },
+            5: migration => {
+                const blockCardsTeaser = migration.editContentType("blockCardsTeaser");
+
+                blockCardsTeaser.createField("version", {
+                    type: "Symbol",
+                    name: t.blockCardsTeaser.fields.version.name,
+                    required: true,
+                    defaultValue: {
+                        [language]: t.blockCardsTeaser.fields.version.default,
+                    },
+                    validations: [
+                        {
+                            in: t.blockCardsTeaser.fields.version.in,
+                        },
+                    ],
+                });
+
+                blockCardsTeaser.changeFieldControl("version", "builtin", "radio");
+
+                blockCardsTeaser.moveField("version").afterField("theme");
             },
         },
     };
