@@ -1,3 +1,9 @@
+5.4.0
+=====
+
+*   (feature) Add `rteMedia` and `rteQuote`.
+
+
 5.3.1
 =====
 
