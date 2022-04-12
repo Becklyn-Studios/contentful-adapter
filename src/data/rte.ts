@@ -6,6 +6,7 @@ import { normalizeReference } from "./reference";
 import { normalizeAssetData } from "./asset";
 import safeJsonStringify from "safe-json-stringify";
 import { ReferencesData, RteData } from "../contentful/types";
+import { normalizeData } from "./normalizer";
 
 export const addAssetToReferenceList = async (
     references: ReferencesData,
@@ -59,6 +60,32 @@ const addReferenceToReferenceList = async (
     return references;
 };
 
+const addEntryToEntryList = async (
+    entries: ReferencesData,
+    data: NodeData,
+    service: ContentfulNormalizerService
+): Promise<ReferencesData> => {
+    if (!data || !data.target || !data.target.sys) {
+        return entries;
+    }
+
+    const id = data.target.sys.id;
+
+    if (entries[id]) {
+        return entries;
+    }
+
+    const entry = await normalizeData(data.target, service);
+
+    if (null === entry) {
+        return entries;
+    }
+
+    entries[id] = entry;
+
+    return entries;
+};
+
 export const getRteData = async (
     data: any,
     service: ContentfulNormalizerService
@@ -69,6 +96,7 @@ export const getRteData = async (
 
     let assetReferences: any[] = [];
     let linkReferences: any[] = [];
+    let entryReferences: any[] = [];
 
     documentToHtmlString(data, {
         renderNode: {
@@ -85,6 +113,10 @@ export const getRteData = async (
                 linkReferences = [...linkReferences, node.data];
                 return "";
             },
+            [BLOCKS.EMBEDDED_ENTRY]: node => {
+                entryReferences = [...entryReferences, node.data];
+                return "";
+            },
             [BLOCKS.EMBEDDED_ASSET]: node => {
                 assetReferences = [...assetReferences, node.data];
                 return "";
@@ -93,6 +125,7 @@ export const getRteData = async (
     });
 
     let references: ReferencesData = {};
+    let entries: Record<string, any> = {};
 
     for (let i = 0; i < assetReferences.length; i++) {
         references = await addAssetToReferenceList(references, assetReferences[i], service);
@@ -102,8 +135,13 @@ export const getRteData = async (
         references = await addReferenceToReferenceList(references, linkReferences[i], service);
     }
 
+    for (let i = 0; i < entryReferences.length; i++) {
+        entries = await addEntryToEntryList(entries, entryReferences[i], service);
+    }
+
     return {
         json: JSON.parse(safeJsonStringify(data)),
         references,
+        entries,
     };
 };

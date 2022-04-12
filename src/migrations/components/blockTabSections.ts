@@ -1,6 +1,6 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "./rte";
+import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "../rte";
 
 export const VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE = {
     en: {

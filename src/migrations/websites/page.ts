@@ -1,4 +1,5 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
+import migration from "../migration";
 
 const translations = {
     en: {
@@ -237,6 +238,11 @@ export const getPageMigration: ContentfulMigrationGenerator = (
                         unique: true,
                     },
                 ]);
+            },
+            5: migration => {
+                const page = migration.editContentType("page");
+
+                page.deleteField("childPages");
             },
         },
     };

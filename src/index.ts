@@ -58,11 +58,12 @@ export type {
 
 export {
     getRteValidation,
+    RTE_TYPE_HEADLINE,
     RTE_TYPE_STYLED_FONT,
     RTE_TYPE_STYLED_FONT_AND_LIST,
     RTE_TYPE_MINIMAL,
     RTE_TYPE_FULL,
-} from "./migrations/components/rte";
+} from "./migrations/rte";
 
 export { migrateBaseBlockFields } from "./migrations/components/block";
 export { getPageMigration } from "./migrations/websites/page";
