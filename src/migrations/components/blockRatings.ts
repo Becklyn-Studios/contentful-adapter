@@ -146,7 +146,7 @@ export const getBlockRatingsMigration: ContentfulMigrationGenerator = (
                     required: true,
                 });
 
-                migrateBaseBlockFields(blockRatings, language, "name");
+                migrateBaseBlockFields(blockRatings, language);
             },
             2: migration => {
                 const blockRatingsEntry = migration.editContentType("blockRatingsEntry");

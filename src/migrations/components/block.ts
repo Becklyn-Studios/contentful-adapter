@@ -38,7 +38,7 @@ const translations = {
 export const migrateBaseBlockFields = (
     block: ContentType,
     language: BackendLanguage,
-    trackingFieldId: string = "headline"
+    trackingFieldId: string = "name"
 ) => {
     const t = translations[language];
 

@@ -1,3 +1,9 @@
+5.3.1
+=====
+
+*   (bug) Fix block anchor link auto generation in migrations.
+
+
 5.3.0
 =====
 
