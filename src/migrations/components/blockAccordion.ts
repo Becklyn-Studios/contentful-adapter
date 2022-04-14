@@ -116,6 +116,11 @@ export const getBlockAccordionMigration: ContentfulMigrationGenerator = (
 
                 blockAccordion.editField("headline").required(true);
             },
+            4: migration => {
+                const blockAccordion = migration.editContentType("blockAccordion");
+
+                blockAccordion.editField("headline").required(false);
+            },
         },
     };
 };

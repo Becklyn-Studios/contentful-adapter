@@ -1,3 +1,9 @@
+5.4.3
+=====
+
+*   (improvement) Make `blockAccordion` headline optional.
+
+
 5.4.2
 =====
 
