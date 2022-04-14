@@ -61,7 +61,7 @@ export const normalizeReference = async (
 
         return {
             title: getValueOfField(data.fields.title, service.locale) ?? null,
-            url: "/" === referenceSlug ? referenceSlug + anchor : `/${referenceSlug}${anchor}`,
+            url: `${referenceSlug}${anchor}`,
             inNewTab: getValueOfField(data.fields.inNewTab, service.locale) ?? false,
         };
     }

@@ -15,8 +15,8 @@ export const getPageCache = (pages: Entry<PageForCache>[]): PageCache => {
     pages.forEach(page => {
         let slug = page.fields.slug;
 
-        if (slug && slug.startsWith("/")) {
-            slug = slug.substring(1);
+        if (slug && !slug.startsWith("/")) {
+            slug = "/" + slug;
         }
 
         slugCache[page.sys.id] = slug;

@@ -1,3 +1,9 @@
+5.4.2
+=====
+
+*   (internal) Use leading `/` for slugs.
+
+
 5.4.1
 =====
 
