@@ -75,6 +75,11 @@ export const getCardMigration: ContentfulMigrationGenerator = (
 
                 card.displayField("headline");
             },
+            2: migration => {
+                const card = migration.editContentType("card");
+
+                card.editField("text").required(false);
+            },
         },
     };
 };

@@ -1,3 +1,9 @@
+5.4.4
+=====
+
+*   (improvement) Make `card` text optional.
+
+
 5.4.3
 =====
 
