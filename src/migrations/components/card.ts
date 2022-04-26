@@ -32,12 +32,12 @@ const translations = {
 export const getCardMigration: ContentfulMigrationGenerator = (
     language
 ): ContentfulComponentMigrations => {
+    const t = translations[language];
+
     return {
         component: "card",
         migrations: {
             1: migration => {
-                const t = translations[language];
-
                 const card = migration.createContentType("card", {
                     name: t.card.name,
                 });
@@ -79,6 +79,34 @@ export const getCardMigration: ContentfulMigrationGenerator = (
                 const card = migration.editContentType("card");
 
                 card.editField("text").required(false);
+            },
+            3: migration => {
+                const card = migration.editContentType("card");
+
+                card.createField("name", {
+                    type: "Symbol",
+                    name: t.card.fields.name,
+                    required: true,
+                });
+
+                card.displayField("name");
+
+                migration.transformEntries({
+                    contentType: "card",
+                    from: ["headline"],
+                    to: ["name"],
+                    transformEntryForLocale: (fromFields, currentLocale) => {
+                        if (!fromFields.headline) {
+                            return;
+                        }
+
+                        return {
+                            name: fromFields.headline[currentLocale],
+                        };
+                    },
+                });
+
+                card.moveField("name").toTheTop();
             },
         },
     };
