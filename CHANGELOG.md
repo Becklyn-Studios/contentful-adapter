@@ -1,3 +1,9 @@
+5.5.0
+=====
+
+*   (feature) Add `blockLogos` monochrome version.
+
+
 5.4.5
 =====
 

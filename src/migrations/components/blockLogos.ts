@@ -2,6 +2,17 @@ import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../
 import { migrateBaseBlockFields } from "./block";
 import { getRteValidation, RTE_TYPE_HEADLINE } from "../rte";
 
+export const VERSION_BLOCK_TEXT_IMAGE = {
+    en: {
+        default: "Default",
+        monochrome: "Monochrome",
+    },
+    de: {
+        default: "Standard",
+        monochrome: "Monochrom",
+    },
+};
+
 const translations = {
     en: {
         blockLogos: {
@@ -9,6 +20,14 @@ const translations = {
             fields: {
                 headline: "Headline",
                 entries: "Entries",
+                version: {
+                    name: "Version",
+                    default: VERSION_BLOCK_TEXT_IMAGE.en.default,
+                    in: [
+                        VERSION_BLOCK_TEXT_IMAGE.en.default,
+                        VERSION_BLOCK_TEXT_IMAGE.en.monochrome,
+                    ],
+                },
             },
         },
         blockLogosLogo: {
@@ -26,6 +45,14 @@ const translations = {
             fields: {
                 headline: "Überschrift",
                 entries: "Einträge",
+                version: {
+                    name: "Version",
+                    default: VERSION_BLOCK_TEXT_IMAGE.de.default,
+                    in: [
+                        VERSION_BLOCK_TEXT_IMAGE.de.default,
+                        VERSION_BLOCK_TEXT_IMAGE.de.monochrome,
+                    ],
+                },
             },
         },
         blockLogosLogo: {
@@ -109,6 +136,27 @@ export const getBlockLogosMigration: ContentfulMigrationGenerator = (
                 });
 
                 blockLogos.moveField("headline").afterField("name");
+            },
+            3: migration => {
+                const blockLogos = migration.editContentType("blockLogos");
+
+                blockLogos.createField("version", {
+                    type: "Symbol",
+                    name: t.blockLogos.fields.version.name,
+                    required: true,
+                    defaultValue: {
+                        [language]: t.blockLogos.fields.version.default,
+                    },
+                    validations: [
+                        {
+                            in: t.blockLogos.fields.version.in,
+                        },
+                    ],
+                });
+
+                blockLogos.changeFieldControl("version", "builtin", "radio");
+
+                blockLogos.moveField("version").afterField("theme");
             },
         },
     };
