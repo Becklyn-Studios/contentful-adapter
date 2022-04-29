@@ -1,3 +1,9 @@
+5.5.1
+=====
+
+*   (bug) Do not throw errors when loading missing related data.
+
+
 5.5.0
 =====
 

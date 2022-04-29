@@ -140,7 +140,11 @@ export const findOneAsset = async <T>(
     assetId: string,
     client: ContentfulClientApi
 ): Promise<Asset | null> => {
-    return await client.getAsset(assetId);
+    try {
+        return await client.getAsset(assetId);
+    } catch (e) {
+        return null;
+    }
 };
 
 export const findOneEntryBySys = async <T>(
@@ -152,12 +156,17 @@ export const findOneEntryBySys = async <T>(
         return null;
     }
 
-    return await client.getEntry<T>(sys.id, {
-        ...getContentfulWhereObject(where),
-        content_type: sys.contentType && sys.contentType.sys ? sys.contentType.sys.id : undefined,
-        select: getContentfulSelectString(select),
-        include: depth ? depth : 0,
-    });
+    try {
+        return await client.getEntry<T>(sys.id, {
+            ...getContentfulWhereObject(where),
+            content_type:
+                sys.contentType && sys.contentType.sys ? sys.contentType.sys.id : undefined,
+            select: getContentfulSelectString(select),
+            include: depth ? depth : 0,
+        });
+    } catch (e) {
+        return null;
+    }
 };
 
 export const findEntriesByIds = async <T>(
