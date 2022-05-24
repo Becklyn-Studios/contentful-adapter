@@ -1,3 +1,9 @@
+5.5.2
+=====
+
+*   (improvement) Increase `blockThreeColumnsFeatures` entries size.
+
+
 5.5.1
 =====
 

@@ -137,6 +137,13 @@ export const getBlockThreeColumnsFeaturesMigration: ContentfulMigrationGenerator
 
                 blockThreeColumnsFeatures.editField("entries").validations([{ size: { max: 9 } }]);
             },
+            3: migration => {
+                const blockThreeColumnsFeatures = migration.editContentType(
+                    "blockThreeColumnsFeatures"
+                );
+
+                blockThreeColumnsFeatures.editField("entries").validations([{ size: { max: 12 } }]);
+            },
         },
     };
 };
