@@ -8,6 +8,7 @@ const translations = {
             name: "🧩 Block > List",
             fields: {
                 headline: "Headline",
+                columnHeadings: "Column Headlines",
                 entries: "Entries",
             },
         },
@@ -17,6 +18,8 @@ const translations = {
                 name: "Internal Name",
                 title: "Title",
                 text: "Text",
+                firstColumn: "First Column",
+                secondColumn: "Second Column",
             },
         },
     },
@@ -25,6 +28,7 @@ const translations = {
             name: "🧩 Block > Liste",
             fields: {
                 headline: "Überschrift",
+                columnHeadings: "Spaltenüberschriften",
                 entries: "Entry",
             },
         },
@@ -34,6 +38,8 @@ const translations = {
                 name: "Interner Name",
                 title: "Titel",
                 text: "Text",
+                firstColumn: "Erste Spalte",
+                secondColumn: "Zweite Spalte",
             },
         },
     },
@@ -106,6 +112,32 @@ export const getBlockListMigration: ContentfulMigrationGenerator = (
                 });
 
                 blockList.moveField("headline").afterField("name");
+            },
+            3: migration => {
+                const blockListEntry = migration.editContentType("blockListEntry");
+
+                blockListEntry
+                    .editField("text")
+                    .newId("firstColumn")
+                    .name(t.blockListEntry.fields.firstColumn);
+
+                blockListEntry.createField("secondColumn", {
+                    type: "RichText",
+                    name: t.blockListEntry.fields.secondColumn,
+                    validations: getRteValidation(RTE_TYPE_STYLED_FONT_AND_LIST),
+                });
+
+                const blockList = migration.editContentType("blockList");
+
+                blockList.createField("columnHeadings", {
+                    type: "Array",
+                    name: t.blockList.fields.columnHeadings,
+                    items: {
+                        type: "Symbol",
+                    },
+                });
+
+                blockList.moveField("columnHeadings").afterField("headline");
             },
         },
     };

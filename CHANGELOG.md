@@ -1,3 +1,9 @@
+5.6.0
+=====
+
+*   (feature) Add second column to `blockList.ts`.
+
+
 5.5.2
 =====
 
