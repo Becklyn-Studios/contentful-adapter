@@ -1,3 +1,9 @@
+5.7.0
+=====
+
+*   (feature) Allow archives for asset references.
+
+
 5.6.0
 =====
 

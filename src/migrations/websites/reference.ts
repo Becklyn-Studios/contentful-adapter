@@ -300,6 +300,25 @@ export const getReferenceMigration: ContentfulMigrationGenerator = (
                     },
                 ]);
             },
+            5: migration => {
+                const assetReference = migration.editContentType("assetReference");
+
+                assetReference.editField("asset").validations([
+                    {
+                        linkMimetypeGroup: [
+                            "image",
+                            "video",
+                            "plaintext",
+                            "pdfdocument",
+                            "spreadsheet",
+                            "plaintext",
+                            "attachment",
+                            "audio",
+                            "archive",
+                        ],
+                    },
+                ]);
+            },
         },
     };
 };
