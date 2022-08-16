@@ -10,6 +10,7 @@ const translations = {
                 overline: "Overline",
                 headline: "Headline",
                 text: "Text",
+                labeledLink: "Button",
             },
         },
     },
@@ -20,6 +21,7 @@ const translations = {
                 overline: "Overline",
                 headline: "Überschrift",
                 text: "Text",
+                labeledLink: "Button",
             },
         },
     },
@@ -75,6 +77,18 @@ export const getBlockTextMigration: ContentfulMigrationGenerator = (
 
                 blockText.editField("headline").required(true);
                 blockText.moveField("headline").afterField("overline");
+            },
+            4: migration => {
+                const blockText = migration.editContentType("blockText");
+
+                blockText.createField("labeledLink", {
+                    type: "Link",
+                    name: t.blockText.fields.labeledLink,
+                    linkType: "Entry",
+                    validations: [{ linkContentType: ["labeledLink"] }],
+                });
+
+                blockText.moveField("labeledLink").afterField("text");
             },
         },
     };

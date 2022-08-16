@@ -1,3 +1,10 @@
+5.8.0
+=====
+
+*   (feature) Add secondary labeled link to `blockTextImage`.
+*   (feature) Add labeled link to `blockText`.
+
+
 5.7.0
 =====
 

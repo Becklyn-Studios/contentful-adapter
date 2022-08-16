@@ -23,6 +23,7 @@ const translations = {
                 text: "Text",
                 image: "Image",
                 labeledLink: "Button",
+                secondaryLabeledLink: "Secondary Button",
                 version: {
                     name: "Version",
                     default: VERSION_BLOCK_TEXT_IMAGE.en.imageLeft,
@@ -43,6 +44,7 @@ const translations = {
                 text: "Text",
                 image: "Bild",
                 labeledLink: "Button",
+                secondaryLabeledLink: "Zweitrangiger Button",
                 version: {
                     name: "Version",
                     default: VERSION_BLOCK_TEXT_IMAGE.de.imageLeft,
@@ -139,6 +141,18 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
 
                 blockTextImage.editField("headline").required(true);
                 blockTextImage.moveField("headline").afterField("overline");
+            },
+            4: migration => {
+                const blockTextImage = migration.editContentType("blockTextImage");
+
+                blockTextImage.createField("secondaryLabeledLink", {
+                    type: "Link",
+                    name: t.blockTextImage.fields.secondaryLabeledLink,
+                    linkType: "Entry",
+                    validations: [{ linkContentType: ["labeledLink"] }],
+                });
+
+                blockTextImage.moveField("secondaryLabeledLink").afterField("labeledLink");
             },
         },
     };
