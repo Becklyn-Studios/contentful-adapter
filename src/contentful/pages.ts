@@ -2,9 +2,12 @@ import { ContentfulClientApi } from "contentful";
 import { ContentfulPage, OriginalPageData, SlugPage } from "./types";
 import { findAllEntries, findOneEntry } from "./api";
 
-export const loadPagePaths = async (client: ContentfulClientApi): Promise<Array<string[]>> => {
+export const loadPagePaths = async (
+    client: ContentfulClientApi,
+    contentType: string = "page"
+): Promise<Array<string[]>> => {
     const pages = await findAllEntries<SlugPage>(client, {
-        contentType: "page",
+        contentType,
         select: ["fields.slug"],
     });
 
@@ -13,10 +16,11 @@ export const loadPagePaths = async (client: ContentfulClientApi): Promise<Array<
 
 export const loadPageData = async (
     client: ContentfulClientApi,
-    slug: string
+    slug: string,
+    contentType: string = "page"
 ): Promise<OriginalPageData> => {
     const page = await findOneEntry<ContentfulPage>(client, {
-        contentType: "page",
+        contentType,
         where: {
             "fields.slug": slug,
         },

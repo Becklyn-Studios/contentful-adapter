@@ -30,17 +30,21 @@ export const getContentfulNormalizerService = async (
     themeValueMapping: Record<string, string> = {},
     versionValueMapping: Record<string, string> = {},
     referenceResolvers?: Record<string, InternalReferenceResolver>,
-    preview: boolean = false
+    preview: boolean = false,
+    pageContentType: string = "page"
 ): Promise<ContentfulNormalizerService> => {
     const contentfulClient = connectToContentfulDeliveryApi(config.clientConfig, preview);
     const pages = await findAllEntries<PageForCache>(contentfulClient, {
-        contentType: "page",
+        contentType: pageContentType,
         select: ["fields.slug", "fields.title"],
     });
     const pageCache = getPageCache(pages);
     let customNormalizers: Record<string, DataTypeNormalizer> = {};
 
-    const internalReferenceResolvers = getInternalReferenceResolvers(referenceResolvers);
+    const internalReferenceResolvers = getInternalReferenceResolvers(
+        referenceResolvers,
+        pageContentType
+    );
 
     return {
         allUiComponents: config.components,
@@ -79,14 +83,15 @@ export const getContentfulNormalizerService = async (
 };
 
 const getInternalReferenceResolvers = (
-    resolvers: Record<string, InternalReferenceResolver> = {}
+    resolvers: Record<string, InternalReferenceResolver> = {},
+    pageContentType: string = "page"
 ): Record<string, InternalReferenceResolver> => {
     const referenceResolvers: Record<string, InternalReferenceResolver> = {
         ...resolvers,
     };
 
-    if (!referenceResolvers["page"]) {
-        referenceResolvers["page"] = async (
+    if (!referenceResolvers[pageContentType]) {
+        referenceResolvers[pageContentType] = async (
             data: any,
             pageCache: PageCache
         ): Promise<string | null> => {

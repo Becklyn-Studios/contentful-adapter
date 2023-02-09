@@ -1,7 +1,14 @@
+5.9.0
+=====
+
+*   (feature) Add parameter for page content type id.
+
+
 5.8.1
 =====
 
 *   (internal) Update all dependencies.
+
 
 5.8.0
 =====

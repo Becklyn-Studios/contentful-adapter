@@ -36,7 +36,8 @@ export const getAssetFromContentful = (data?: ContentfulAsset | null): Asset | n
 
 export const getLabeledLinkFromContentful = async (
     pageCache: PageCache,
-    data?: Entry<any> | null
+    data?: Entry<any> | null,
+    pageContentType: string = "page"
 ): Promise<LabeledLink | null> => {
     if (!data) {
         return null;
@@ -49,7 +50,7 @@ export const getLabeledLinkFromContentful = async (
         inNewTab: false,
     };
 
-    if (ref.sys.contentType.sys.id === "page") {
+    if (ref.sys.contentType.sys.id === pageContentType) {
         reference.url = pageCache.getSlugOfPage(ref.sys.id);
     } else if (ref.sys.contentType.sys.id === "externalReference" && ref.fields.url) {
         reference.url = ref.fields.url;
