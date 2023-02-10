@@ -1,3 +1,9 @@
+5.9.1
+=====
+
+*   (improvement) Make react a peer dependency.
+
+
 5.9.0
 =====
 
