@@ -1,3 +1,8 @@
+5.9.2
+=====
+
+*   (bug) Fix dependency tree for config loader.
+
 5.9.1
 =====
 

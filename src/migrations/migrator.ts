@@ -1,6 +1,6 @@
-import { BackendLanguage, ContentfulClientConfig } from "../config/types";
-import { ContentfulComponentMigration, ContentfulMigrationGenerator } from "./types";
-import getMigration, { MIGRATIONS_MODEL_NAME } from "./migration";
+import { ContentfulClientConfig } from "../config/types";
+import { ContentfulComponentMigration } from "./types";
+import { MIGRATIONS_MODEL_NAME } from "./migration";
 import {
     connectToContentfulManagementApi,
     getDefaultLocale,
@@ -70,56 +70,4 @@ const runSingleMigration = async (
     await newVersionEntry.publish();
 
     console.log(`Saved ${migration.key} to ${MIGRATIONS_MODEL_NAME}`);
-};
-
-export const getMigrationsFromGenerators = async (
-    language: BackendLanguage,
-    generators?: ContentfulMigrationGenerator[]
-): Promise<ContentfulComponentMigration[]> => {
-    if (!generators) {
-        return [];
-    }
-
-    const migrations: ContentfulComponentMigration[] = [];
-    const migrationKeys: string[] = [];
-
-    generators.forEach(getMigration => {
-        const migrationFile = getMigration(language);
-
-        Object.keys(migrationFile.migrations).forEach(key => {
-            const migration = migrationFile.migrations[key];
-            const migrationKey = `${migrationFile.component}-${key}`;
-
-            if (migrationKeys.includes(migrationKey)) {
-                throw new Error(`Migration with migrationKey ${migrationKey} already exists`);
-            }
-
-            migrationKeys.push(migrationKey);
-            migrations.push({
-                key: migrationKey,
-                migration,
-            });
-        });
-    });
-
-    if (!migrationKeys.includes("migration-1")) {
-        const migrationFile = getMigration(language);
-
-        Object.keys(migrationFile.migrations).forEach(key => {
-            const migration = migrationFile.migrations[key];
-            const migrationKey = `${migrationFile.component}-${key}`;
-
-            if (migrationKeys.includes(migrationKey)) {
-                throw new Error(`Migration with migrationKey ${migrationKey} already exists`);
-            }
-
-            migrationKeys.push(migrationKey);
-            migrations.unshift({
-                key: migrationKey,
-                migration,
-            });
-        });
-    }
-
-    return migrations;
 };

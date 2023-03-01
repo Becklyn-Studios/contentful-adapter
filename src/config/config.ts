@@ -2,8 +2,8 @@ import findUp from "../../compiled/find-up";
 import { register } from "ts-node";
 import { config } from "dotenv";
 import { MaydContentfulAdapterConfig, MaydContentfulAdapterConfigFile } from "./types";
-import { getMigrationsFromGenerators } from "../migrations/migrator";
 import { getComponentDataConfig } from "./components";
+import { getMigrationsFromGenerators } from "../migrations/generator";
 
 export const TSCONFIG_FILE_NAME = "tsconfig.mayd-contentful.json";
 export const MAYD_CONFIG_FILE_NAME = "mayd-contentful.config.ts";
