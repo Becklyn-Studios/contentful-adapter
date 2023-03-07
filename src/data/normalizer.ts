@@ -11,7 +11,7 @@ import {
     TYPE_RAW,
     TYPE_RTE,
     TYPE_STRING,
-} from "@mayd/ui-types";
+} from "@becklyn/ui-types";
 import { getComponentKeyFromData, getDataFieldNames, getIdFromData, getValueOfField } from "./util";
 import { ContentfulNormalizerService } from "./service";
 import { normalizeAssetData } from "./asset";

@@ -17,7 +17,7 @@ import {
     TYPE_ASSET,
     TYPE_LABELED_LINK,
     TYPE_STRING,
-} from "@mayd/ui-types";
+} from "@becklyn/ui-types";
 import { normalizeAssetData } from "./asset";
 import { normalizeLabeledLink } from "./reference";
 import { normalizeDataForDataConfig } from "./normalizer";

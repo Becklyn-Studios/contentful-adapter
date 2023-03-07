@@ -11,7 +11,7 @@ import {
     TYPE_NUMBER,
     TYPE_RTE,
     TYPE_STRING,
-} from "@mayd/ui-types";
+} from "@becklyn/ui-types";
 import { ContentfulNormalizerService } from "./service";
 
 export const getDataFieldNames = (data: Entry<any>, dataConfig: ComponentDataConfig): string[] => {

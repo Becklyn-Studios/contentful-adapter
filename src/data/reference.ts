@@ -1,5 +1,5 @@
 import { ContentfulNormalizerService } from "./service";
-import { LabeledLink, LinkReference } from "@mayd/ui-types";
+import { LabeledLink, LinkReference } from "@becklyn/ui-types";
 import { findOneEntryBySys } from "../contentful/api";
 import { getValueOfField } from "./util";
 

@@ -1,7 +1,7 @@
-import { MaydContentfulAdapterConfigFile } from "@mayd/contentful-adapter";
+import { ContentfulAdapterConfigFile } from "@becklyn/contentful-adapter";
 
 // configure your project using this object.
-const config: MaydContentfulAdapterConfigFile = {
+const config: ContentfulAdapterConfigFile = {
     spaceId: process.env.CONTENTFUL_SPACE_ID ?? "",
     delivery: {
         accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN ?? "",

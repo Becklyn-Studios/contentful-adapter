@@ -1,5 +1,5 @@
 import { Asset as ContentfulAsset, Entry } from "contentful";
-import { Asset, LabeledLink, LinkReference } from "@mayd/ui-types";
+import { Asset, LabeledLink, LinkReference } from "@becklyn/ui-types";
 import { PageCache } from "./cache";
 
 export const getContentfulSelectString = (select?: string[]): string | null => {

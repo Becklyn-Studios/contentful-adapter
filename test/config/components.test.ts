@@ -1,5 +1,5 @@
 import { getComponentDataConfig } from "../../src";
-import { BaseComponentConfig } from "@mayd/ui-types";
+import { BaseComponentConfig } from "@becklyn/ui-types";
 
 test("getComponentDataConfig should normalize correctly", () => {
     const config: BaseComponentConfig = {

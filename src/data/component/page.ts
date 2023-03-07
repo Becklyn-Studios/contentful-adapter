@@ -1,4 +1,4 @@
-import { BaseComponentConfig, TYPE_BOOL, TYPE_STRING } from "@mayd/ui-types";
+import { BaseComponentConfig, TYPE_BOOL, TYPE_STRING } from "@becklyn/ui-types";
 
 export const getPageConfig = (contentComponentKeys: string[]): BaseComponentConfig => {
     return {
@@ -19,7 +19,7 @@ export const getPageConfig = (contentComponentKeys: string[]): BaseComponentConf
 };
 
 export const SeoConfig: BaseComponentConfig = {
-    key: "blockTabSectionTextImage",
+    key: "seo",
     data: {
         title: TYPE_STRING,
         description: TYPE_STRING,

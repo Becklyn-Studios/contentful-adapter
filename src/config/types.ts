@@ -1,4 +1,4 @@
-import { BaseComponentConfig, ComponentDataConfig } from "@mayd/ui-types";
+import { BaseComponentConfig, ComponentDataConfig } from "@becklyn/ui-types";
 import { ContentfulComponentMigration, ContentfulMigrationGenerator } from "../migrations/types";
 
 export type BackendLanguage = "de" | "en";
@@ -15,7 +15,7 @@ export interface ContentfulClientConfig {
     environmentId: "master" | "staging" | "integration" | string;
 }
 
-export interface MaydContentfulAdapterConfig {
+export interface ContentfulAdapterConfig {
     clientConfig: ContentfulClientConfig;
     backendLanguage: BackendLanguage;
     components: ContentfulComponentConfig[];
@@ -31,7 +31,7 @@ export interface UiComponentDataConfig {
     contentType: string;
 }
 
-export interface MaydContentfulAdapterConfigFile extends ContentfulClientConfig {
+export interface ContentfulAdapterConfigFile extends ContentfulClientConfig {
     backendLanguage?: BackendLanguage;
     components?: (UiComponentDataConfig | BaseComponentConfig)[];
     migrations?: ContentfulMigrationGenerator[];

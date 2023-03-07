@@ -1,4 +1,4 @@
-import { BaseComponentConfig, ComponentDataConfig, RelationType } from "@mayd/ui-types";
+import { BaseComponentConfig, ComponentDataConfig, RelationType } from "@becklyn/ui-types";
 import { ContentfulComponentConfig, UiComponentDataConfig } from "./types";
 import { isBaseComponentConfig, isRelationType } from "../data/util";
 

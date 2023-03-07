@@ -1,18 +1,18 @@
 import findUp from "../../compiled/find-up";
 import { register } from "ts-node";
 import { config } from "dotenv";
-import { MaydContentfulAdapterConfig, MaydContentfulAdapterConfigFile } from "./types";
+import { ContentfulAdapterConfig, ContentfulAdapterConfigFile } from "./types";
 import { getComponentDataConfig } from "./components";
 import { getMigrationsFromGenerators } from "../migrations/generator";
 
-export const TSCONFIG_FILE_NAME = "tsconfig.mayd-contentful.json";
-export const MAYD_CONFIG_FILE_NAME = "mayd-contentful.config.ts";
+export const TSCONFIG_FILE_NAME = "tsconfig.becklyn-contentful.json";
+export const CONFIG_FILE_NAME = "becklyn-contentful.config.ts";
 
-export const loadConfig = async (): Promise<MaydContentfulAdapterConfig> => {
-    const path = await findUp(MAYD_CONFIG_FILE_NAME);
+export const loadConfig = async (): Promise<ContentfulAdapterConfig> => {
+    const path = await findUp(CONFIG_FILE_NAME);
 
     if (!path) {
-        throw new Error(`Couldn't find ${MAYD_CONFIG_FILE_NAME}`);
+        throw new Error(`Couldn't find ${CONFIG_FILE_NAME}`);
     }
 
     config();
@@ -22,22 +22,22 @@ export const loadConfig = async (): Promise<MaydContentfulAdapterConfig> => {
         project: TSCONFIG_FILE_NAME,
     });
 
-    let configModule: MaydContentfulAdapterConfigFile;
+    let configModule: ContentfulAdapterConfigFile;
 
     try {
         const { default: module } = await import(path);
         configModule = module;
     } catch (error) {
         console.log(error);
-        throw new Error(`Failed to load ${MAYD_CONFIG_FILE_NAME}`);
+        throw new Error(`Failed to load ${CONFIG_FILE_NAME}`);
     }
 
     return await getConfigFromFile(configModule);
 };
 
 export const getConfigFromFile = async (
-    file: MaydContentfulAdapterConfigFile
-): Promise<MaydContentfulAdapterConfig> => {
+    file: ContentfulAdapterConfigFile
+): Promise<ContentfulAdapterConfig> => {
     const backendLanguage = file.backendLanguage ?? "en";
 
     return {

@@ -4,8 +4,8 @@ export { getComponentDataConfig } from "./config/components";
 export type {
     ContentfulClientConfig,
     ContentfulComponentConfig,
-    MaydContentfulAdapterConfig,
-    MaydContentfulAdapterConfigFile,
+    ContentfulAdapterConfig,
+    ContentfulAdapterConfigFile,
     UiComponentDataConfig,
     BackendLanguage,
 } from "./config/types";

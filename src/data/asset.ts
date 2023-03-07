@@ -1,4 +1,4 @@
-import { Asset } from "@mayd/ui-types";
+import { Asset } from "@becklyn/ui-types";
 import { ContentfulNormalizerService } from "./service";
 import { findOneAsset } from "../contentful/api";
 import { getValueOfField } from "./util";

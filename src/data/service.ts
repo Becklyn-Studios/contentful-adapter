@@ -1,5 +1,5 @@
 import { ContentfulClientApi } from "contentful";
-import { ContentfulComponentConfig, MaydContentfulAdapterConfig } from "../config/types";
+import { ContentfulComponentConfig, ContentfulAdapterConfig } from "../config/types";
 import { connectToContentfulDeliveryApi, findAllEntries } from "../contentful/api";
 import { getPageCache, PageCache } from "../contentful/cache";
 import { PageForCache } from "../contentful/types";
@@ -25,7 +25,7 @@ export type DataTypeNormalizer = (
 export type InternalReferenceResolver = (data: any, pageCache: PageCache) => Promise<string | null>;
 
 export const getContentfulNormalizerService = async (
-    config: MaydContentfulAdapterConfig,
+    config: ContentfulAdapterConfig,
     locale: string,
     themeValueMapping: Record<string, string> = {},
     versionValueMapping: Record<string, string> = {},
