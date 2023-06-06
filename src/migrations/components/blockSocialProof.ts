@@ -1,6 +1,14 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
 import { getRteValidation, RTE_TYPE_HEADLINE } from "../rte";
+import {
+    BLOCK_VARIANT_BLACK,
+    BLOCK_VARIANT_BRAND,
+    BLOCK_VARIANT_GRAY,
+    BLOCK_VARIANT_PRIMARY,
+    BLOCK_VARIANT_SECONDARY,
+    BLOCK_VARIANT_WHITE,
+} from "../constants/blockVariant";
 
 const translations = {
     en: {
@@ -9,6 +17,7 @@ const translations = {
             fields: {
                 headline: "Headline",
                 entries: "Entries",
+                variant: "Variant",
             },
         },
         blockSocialProofEntry: {
@@ -26,6 +35,7 @@ const translations = {
             fields: {
                 headline: "Überschrift",
                 entries: "Einträge",
+                variant: "Variante",
             },
         },
         blockSocialProofEntry: {
@@ -111,6 +121,28 @@ export const getBlockSocialProofMigration: ContentfulMigrationGenerator = (
                 });
 
                 blockSocialProof.moveField("headline").afterField("name");
+            },
+            3: migration => {
+                const blockSocialProof = migration.editContentType("blockSocialProof");
+
+                blockSocialProof.createField("variant", {
+                    type: "Symbol",
+                    name: t.blockSocialProof.fields.variant,
+                    validations: [
+                        {
+                            in: [
+                                BLOCK_VARIANT_BRAND,
+                                BLOCK_VARIANT_PRIMARY,
+                                BLOCK_VARIANT_SECONDARY,
+                                BLOCK_VARIANT_WHITE,
+                                BLOCK_VARIANT_BLACK,
+                                BLOCK_VARIANT_GRAY,
+                            ],
+                        },
+                    ],
+                });
+
+                blockSocialProof.changeFieldControl("variant", "builtin", "dropdown");
             },
         },
     };

@@ -1,6 +1,14 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "../rte";
+import { getRteValidation, RTE_TYPE_HEADLINE } from "../rte";
+import {
+    BLOCK_VARIANT_BLACK,
+    BLOCK_VARIANT_BRAND,
+    BLOCK_VARIANT_GRAY,
+    BLOCK_VARIANT_PRIMARY,
+    BLOCK_VARIANT_SECONDARY,
+    BLOCK_VARIANT_WHITE,
+} from "../constants/blockVariant";
 
 const translations = {
     en: {
@@ -9,6 +17,7 @@ const translations = {
             fields: {
                 headline: "Headline",
                 labeledLink: "Button",
+                variant: "Variant",
             },
         },
     },
@@ -18,6 +27,7 @@ const translations = {
             fields: {
                 headline: "Überschrift",
                 labeledLink: "Button",
+                variant: "Variante",
             },
         },
     },
@@ -64,6 +74,28 @@ export const getBlockRatingsSliderMigration: ContentfulMigrationGenerator = (
                 });
 
                 blockRatingsSlider.moveField("headline").afterField("name");
+            },
+            3: migration => {
+                const blockRatingsSlider = migration.editContentType("blockRatingsSlider");
+
+                blockRatingsSlider.createField("variant", {
+                    type: "Symbol",
+                    name: t.blockRatingsSlider.fields.variant,
+                    validations: [
+                        {
+                            in: [
+                                BLOCK_VARIANT_BRAND,
+                                BLOCK_VARIANT_PRIMARY,
+                                BLOCK_VARIANT_SECONDARY,
+                                BLOCK_VARIANT_WHITE,
+                                BLOCK_VARIANT_BLACK,
+                                BLOCK_VARIANT_GRAY,
+                            ],
+                        },
+                    ],
+                });
+
+                blockRatingsSlider.changeFieldControl("variant", "builtin", "dropdown");
             },
         },
     };
