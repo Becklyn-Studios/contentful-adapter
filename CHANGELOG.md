@@ -1,3 +1,8 @@
+# 6.1.0
+
+-   (internal) Updated `@contentful/rich-text-types`
+-   (feature) Added field for variant in `BlockSocialProof` and `BlockRatingsSlider`
+
 # 6.0.0
 
 -   (bc) Public release
