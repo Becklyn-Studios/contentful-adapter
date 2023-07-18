@@ -21,6 +21,14 @@ const translations = {
                 footnote: "Footnote",
             },
         },
+        rteIcon: {
+            name: "⚙️ Basic > RTE Icon",
+            fields: {
+                name: "Internal Name",
+                text: "Text",
+                icon: "Icon",
+            },
+        },
     },
     de: {
         rteMedia: {
@@ -37,6 +45,14 @@ const translations = {
                 name: "Interner Name",
                 text: "Text",
                 footnote: "Fußnote",
+            },
+        },
+        rteIcon: {
+            name: "⚙️ Basic > RTE Icon",
+            fields: {
+                name: "Internal Name",
+                text: "Text",
+                icon: "Icon",
             },
         },
     },
@@ -102,6 +118,34 @@ export const getRteBasicsMigration: ContentfulMigrationGenerator = (
                 });
 
                 rteQuote.displayField("name");
+            },
+            3: migration => {
+                const rteIcon = migration.createContentType("rteIcon", {
+                    name: t.rteIcon.name,
+                });
+
+                rteIcon.createField("name", {
+                    type: "Symbol",
+                    name: t.rteQuote.fields.name,
+                    required: true,
+                });
+
+                rteIcon.createField("text", {
+                    type: "RichText",
+                    name: t.rteQuote.fields.text,
+                    validations: getRteValidation(),
+                    required: true,
+                });
+
+                rteIcon.createField("icon", {
+                    type: "Link",
+                    name: t.rteIcon.fields.icon,
+                    linkType: "Asset",
+                    required: true,
+                    validations: [{ linkMimetypeGroup: ["image"] }],
+                });
+
+                rteIcon.displayField("name");
             },
         },
     };

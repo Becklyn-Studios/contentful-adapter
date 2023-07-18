@@ -57,7 +57,7 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
                 ],
                 [BLOCKS.EMBEDDED_ENTRY]: [
                     {
-                        linkContentType: ["rteQuote", "rteMedia"],
+                        linkContentType: ["rteQuote", "rteMedia", "rteIcon"],
                     },
                 ],
             },
