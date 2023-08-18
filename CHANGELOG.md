@@ -1,3 +1,7 @@
+# 6.2.0
+
+-   (feature) Add support for `Icon` RTE in `BlockTabSection`
+
 # 6.1.0
 
 -   (internal) Updated `@contentful/rich-text-types`
