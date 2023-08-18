@@ -1,6 +1,11 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "../rte";
+import {
+    getRteValidation,
+    RTE_TYPE_FULL,
+    RTE_TYPE_HEADLINE,
+    RTE_TYPE_STYLED_FONT_AND_LIST,
+} from "../rte";
 
 export const VERSION_BLOCK_TAB_SECTION_TEXT_IMAGE = {
     en: {
@@ -532,6 +537,15 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                 migration.deleteContentType("blockTabSectionTextColumns");
                 migration.deleteContentType("blockTabSectionTextImage");
                 migration.deleteContentType("blockTabSectionVideo");
+            },
+            13: migration => {
+                const blockTabSectionEntry = migration.editContentType("blockTabSectionEntry");
+
+                blockTabSectionEntry.editField("text", {
+                    type: "RichText",
+                    name: t.blockTabSectionTextImage.fields.text,
+                    validations: getRteValidation(RTE_TYPE_FULL),
+                });
             },
         },
     };
