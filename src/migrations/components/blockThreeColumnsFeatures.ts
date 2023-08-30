@@ -20,6 +20,9 @@ const translations = {
                 icon: "Icon",
                 headline: "Headline",
                 text: "Text",
+                backIcon: "Icon (Back)",
+                backHeadline: "Headline (Back)",
+                backText: "Text (Back)",
             },
         },
     },
@@ -39,6 +42,9 @@ const translations = {
                 icon: "Icon",
                 headline: "Überschrift",
                 text: "Text",
+                backIcon: "Icon (Rückseite)",
+                backHeadline: "Überschrift (Rückseite)",
+                backText: "Text (Rückseite)",
             },
         },
     },
@@ -143,6 +149,28 @@ export const getBlockThreeColumnsFeaturesMigration: ContentfulMigrationGenerator
                 );
 
                 blockThreeColumnsFeatures.editField("entries").validations([{ size: { max: 12 } }]);
+            },
+            4: migration => {
+                const blockThreeColumnsFeaturesEntry = migration.editContentType(
+                    "blockThreeColumnsFeaturesEntry"
+                );
+
+                blockThreeColumnsFeaturesEntry.createField("backIcon", {
+                    type: "Link",
+                    name: t.blockThreeColumnsFeaturesEntry.fields.backIcon,
+                    linkType: "Asset",
+                    validations: [{ linkMimetypeGroup: ["image"] }],
+                });
+
+                blockThreeColumnsFeaturesEntry.createField("backHeadline", {
+                    type: "RichText",
+                    name: t.blockThreeColumnsFeaturesEntry.fields.backHeadline,
+                });
+
+                blockThreeColumnsFeaturesEntry.createField("backText", {
+                    type: "RichText",
+                    name: t.blockThreeColumnsFeaturesEntry.fields.backText,
+                });
             },
         },
     };
