@@ -63,6 +63,7 @@ export {
     RTE_TYPE_STYLED_FONT_AND_LIST,
     RTE_TYPE_MINIMAL,
     RTE_TYPE_FULL,
+    RTE_TYPE_TABLE,
 } from "./migrations/rte";
 
 export { migrateBaseBlockFields } from "./migrations/components/block";
