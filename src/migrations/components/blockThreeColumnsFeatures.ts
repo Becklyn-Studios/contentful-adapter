@@ -165,11 +165,13 @@ export const getBlockThreeColumnsFeaturesMigration: ContentfulMigrationGenerator
                 blockThreeColumnsFeaturesEntry.createField("backHeadline", {
                     type: "RichText",
                     name: t.blockThreeColumnsFeaturesEntry.fields.backHeadline,
+                    validations: getRteValidation(RTE_TYPE_HEADLINE),
                 });
 
                 blockThreeColumnsFeaturesEntry.createField("backText", {
                     type: "RichText",
                     name: t.blockThreeColumnsFeaturesEntry.fields.backText,
+                    validations: getRteValidation(),
                 });
             },
         },
