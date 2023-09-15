@@ -33,7 +33,7 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
 
     let enabledNodeTypes =
         version === RTE_TYPE_TABLE
-            ? [BLOCKS.TABLE, BLOCKS.TABLE_ROW, BLOCKS.TABLE_CELL, BLOCKS.TABLE_HEADER_CELL]
+            ? [BLOCKS.TABLE]
             : version !== RTE_TYPE_MINIMAL && version !== RTE_TYPE_STYLED_FONT
             ? [INLINES.HYPERLINK, INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK, BLOCKS.UL_LIST]
             : [INLINES.HYPERLINK, INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK];
@@ -46,9 +46,6 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
             BLOCKS.HEADING_2,
             BLOCKS.HEADING_3,
             BLOCKS.TABLE,
-            BLOCKS.TABLE_ROW,
-            BLOCKS.TABLE_CELL,
-            BLOCKS.TABLE_HEADER_CELL,
         ];
     }
 
