@@ -1,3 +1,7 @@
+# 6.3.0
+
+-   (feature) Add support for back side fields on `BlockThreeColumnsFeaturesEntry`
+
 # 6.2.0
 
 -   (feature) Add support for `Icon` RTE in `BlockTabSection`
