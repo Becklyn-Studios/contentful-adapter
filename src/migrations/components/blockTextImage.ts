@@ -32,6 +32,7 @@ const translations = {
                         VERSION_BLOCK_TEXT_IMAGE.en.imageRight,
                     ],
                 },
+                isSeoHeadline: "Is seo headline?",
             },
         },
     },
@@ -53,6 +54,7 @@ const translations = {
                         VERSION_BLOCK_TEXT_IMAGE.de.imageRight,
                     ],
                 },
+                isSeoHeadline: "Ist SEO Überschrift?",
             },
         },
     },
@@ -153,6 +155,16 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
                 });
 
                 blockTextImage.moveField("secondaryLabeledLink").afterField("labeledLink");
+            },
+            5: migration => {
+                const blockTextImage = migration.editContentType("blockTextImage");
+
+                blockTextImage.createField("isSeoHeadline", {
+                    type: "Boolean",
+                    name: t.blockTextImage.fields.isSeoHeadline,
+                });
+
+                blockTextImage.moveField("isSeoHeadline").beforeField("headline");
             },
         },
     };

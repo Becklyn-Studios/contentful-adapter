@@ -10,6 +10,7 @@ const translations = {
                 overline: "Overline",
                 headline: "Headline",
                 entries: "Entries",
+                isSeoHeadline: "Is seo headline?",
             },
         },
         blockIconCardsEntry: {
@@ -29,6 +30,7 @@ const translations = {
                 overline: "Overline",
                 headline: "Überschrift",
                 entries: "Einträge",
+                isSeoHeadline: "Ist SEO Überschrift?",
             },
         },
         blockIconCardsEntry: {
@@ -130,6 +132,16 @@ export const getBlockIconCardsMigration: ContentfulMigrationGenerator = (
                 const blockIconCards = migration.editContentType("blockIconCards");
 
                 blockIconCards.moveField("headline").afterField("overline");
+            },
+            4: migration => {
+                const blockIconCards = migration.editContentType("blockIconCards");
+
+                blockIconCards.createField("isSeoHeadline", {
+                    type: "Boolean",
+                    name: t.blockIconCards.fields.isSeoHeadline,
+                });
+
+                blockIconCards.moveField("isSeoHeadline").beforeField("headline");
             },
         },
     };
