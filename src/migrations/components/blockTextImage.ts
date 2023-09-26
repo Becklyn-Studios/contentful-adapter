@@ -1,6 +1,11 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "./block";
-import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "../rte";
+import {
+    getRteValidation,
+    RTE_TYPE_FULL,
+    RTE_TYPE_HEADLINE,
+    RTE_TYPE_STYLED_FONT_AND_LIST,
+} from "../rte";
 
 export const VERSION_BLOCK_TEXT_IMAGE = {
     en: {
@@ -165,6 +170,15 @@ export const getBlockTextImageMigration: ContentfulMigrationGenerator = (
                 });
 
                 blockTextImage.moveField("isSeoHeadline").beforeField("headline");
+            },
+            6: migration => {
+                const blockTextImage = migration.editContentType("blockTextImage");
+
+                blockTextImage.editField("text", {
+                    type: "RichText",
+                    name: t.blockTextImage.fields.text,
+                    validations: getRteValidation(RTE_TYPE_FULL),
+                });
             },
         },
     };
