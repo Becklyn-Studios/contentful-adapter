@@ -29,6 +29,20 @@ const translations = {
                 icon: "Icon",
             },
         },
+        rteHint: {
+            name: "⚙️ Basic > RTE Hint",
+            fields: {
+                name: "Internal Name",
+                text: "Text",
+            },
+        },
+        rteImage: {
+            name: "⚙️ Basic > RTE Image",
+            fields: {
+                name: "Internal Name",
+                image: "image",
+            },
+        },
     },
     de: {
         rteMedia: {
@@ -53,6 +67,27 @@ const translations = {
                 name: "Internal Name",
                 text: "Text",
                 icon: "Icon",
+            },
+        },
+        rteHint: {
+            name: "⚙️ Basic > RTE Hinweis",
+            fields: {
+                name: "Internal Name",
+                text: "Text",
+            },
+        },
+        rteTag: {
+            name: "⚙️ Basic > RTE Tag",
+            fields: {
+                name: "Internal Name",
+                text: "Text",
+            },
+        },
+        rteImage: {
+            name: "⚙️ Basic > RTE Bild",
+            fields: {
+                name: "Internal Name",
+                image: "Bild",
             },
         },
     },
@@ -146,6 +181,45 @@ export const getRteBasicsMigration: ContentfulMigrationGenerator = (
                 });
 
                 rteIcon.displayField("name");
+            },
+            4: migration => {
+                const rteHint = migration.createContentType("rteHint", {
+                    name: t.rteHint.name,
+                });
+
+                rteHint.createField("name", {
+                    type: "Symbol",
+                    name: t.rteQuote.fields.name,
+                    required: true,
+                });
+
+                rteHint.createField("text", {
+                    type: "Text",
+                    name: t.rteQuote.fields.text,
+                    required: true,
+                });
+
+                rteHint.displayField("name");
+
+                const rteImage = migration.createContentType("rteImage", {
+                    name: t.rteImage.name,
+                });
+
+                rteImage.createField("name", {
+                    type: "Symbol",
+                    name: t.rteQuote.fields.name,
+                    required: true,
+                });
+
+                rteImage.createField("image", {
+                    type: "Link",
+                    name: t.rteImage.fields.image,
+                    linkType: "Asset",
+                    required: true,
+                    validations: [{ linkMimetypeGroup: ["image"] }],
+                });
+
+                rteImage.displayField("name");
             },
         },
     };

@@ -41,6 +41,7 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
     if (version === RTE_TYPE_FULL) {
         enabledNodeTypes = [
             ...enabledNodeTypes,
+            INLINES.EMBEDDED_ENTRY,
             BLOCKS.HR,
             BLOCKS.EMBEDDED_ENTRY,
             BLOCKS.HEADING_2,
@@ -61,7 +62,7 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
                 ],
                 [BLOCKS.EMBEDDED_ENTRY]: [
                     {
-                        linkContentType: ["rteQuote", "rteMedia", "rteIcon"],
+                        linkContentType: ["rteQuote", "rteMedia", "rteIcon", "rteHint", "rteImage"],
                     },
                 ],
             },
