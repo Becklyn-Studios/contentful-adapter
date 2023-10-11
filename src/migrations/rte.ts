@@ -6,6 +6,7 @@ export const RTE_TYPE_MINIMAL = "minimal";
 export const RTE_TYPE_STYLED_FONT = "styled-font";
 export const RTE_TYPE_STYLED_FONT_AND_LIST = "styled-font-list";
 export const RTE_TYPE_FULL = "full";
+export const RTE_TYPE_TABLE = "table";
 
 export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IValidation> => {
     if (version === RTE_TYPE_HEADLINE) {
@@ -31,17 +32,21 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
         version !== RTE_TYPE_MINIMAL ? [MARKS.BOLD, MARKS.ITALIC, MARKS.UNDERLINE] : [];
 
     let enabledNodeTypes =
-        version !== RTE_TYPE_MINIMAL && version !== RTE_TYPE_STYLED_FONT
+        version === RTE_TYPE_TABLE
+            ? [BLOCKS.TABLE]
+            : version !== RTE_TYPE_MINIMAL && version !== RTE_TYPE_STYLED_FONT
             ? [INLINES.HYPERLINK, INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK, BLOCKS.UL_LIST]
             : [INLINES.HYPERLINK, INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK];
 
     if (version === RTE_TYPE_FULL) {
         enabledNodeTypes = [
             ...enabledNodeTypes,
+            INLINES.EMBEDDED_ENTRY,
             BLOCKS.HR,
             BLOCKS.EMBEDDED_ENTRY,
             BLOCKS.HEADING_2,
             BLOCKS.HEADING_3,
+            BLOCKS.TABLE,
         ];
     }
 
@@ -57,7 +62,7 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
                 ],
                 [BLOCKS.EMBEDDED_ENTRY]: [
                     {
-                        linkContentType: ["rteQuote", "rteMedia", "rteIcon"],
+                        linkContentType: ["rteQuote", "rteMedia", "rteIcon", "rteHint", "rteImage"],
                     },
                 ],
             },

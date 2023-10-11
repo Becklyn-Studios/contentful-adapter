@@ -113,6 +113,10 @@ export const getRteData = async (
                 linkReferences = [...linkReferences, node.data];
                 return "";
             },
+            [INLINES.EMBEDDED_ENTRY]: node => {
+                entryReferences = [...entryReferences, node.data];
+                return "";
+            },
             [BLOCKS.EMBEDDED_ENTRY]: node => {
                 entryReferences = [...entryReferences, node.data];
                 return "";
