@@ -37,7 +37,7 @@ const translations = {
                         VERSION_BLOCK_TEXT_IMAGE.en.imageRight,
                     ],
                 },
-                isSeoHeadline: "Is seo headline?",
+                isSeoHeadline: "Is SEO headline?",
             },
         },
     },
