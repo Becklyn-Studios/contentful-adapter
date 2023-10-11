@@ -1,3 +1,13 @@
+# 6.4.0
+
+-   (feature) Add support for Table RTE type in RTE fields
+-   (feature) Add new RTE Type: Rte Image
+-   (feature) Add new RTE Type: Rte Hint
+-   (feature) Add new RTE Type: Rte Tag
+-   (improvement) Make headline type configurable in `BlockIconCards`
+-   (improvement) Make headline type configurable in `BlockTextImage`
+-   (improvement) Add support for `RteIcon` in `BlockTextImage`
+
 # 6.3.0
 
 -   (feature) Add support for back side fields on `BlockThreeColumnsFeaturesEntry`
