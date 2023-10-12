@@ -182,7 +182,6 @@ export const getBlockThreeColumnsFeaturesMigration: ContentfulMigrationGenerator
                 blockThreeColumnsFeaturesEntry.editField("backHeadline", {
                     type: "Symbol",
                     name: t.blockThreeColumnsFeaturesEntry.fields.headline,
-                    required: true,
                 });
             },
         },
