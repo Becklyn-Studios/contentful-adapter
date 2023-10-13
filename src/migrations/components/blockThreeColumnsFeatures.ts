@@ -174,6 +174,16 @@ export const getBlockThreeColumnsFeaturesMigration: ContentfulMigrationGenerator
                     validations: getRteValidation(),
                 });
             },
+            5: migration => {
+                const blockThreeColumnsFeaturesEntry = migration.editContentType(
+                    "blockThreeColumnsFeaturesEntry"
+                );
+
+                blockThreeColumnsFeaturesEntry.editField("backHeadline", {
+                    type: "Symbol",
+                    name: t.blockThreeColumnsFeaturesEntry.fields.headline,
+                });
+            },
         },
     };
 };
