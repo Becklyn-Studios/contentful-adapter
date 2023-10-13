@@ -179,10 +179,14 @@ export const getBlockThreeColumnsFeaturesMigration: ContentfulMigrationGenerator
                     "blockThreeColumnsFeaturesEntry"
                 );
 
-                blockThreeColumnsFeaturesEntry.editField("backHeadline", {
+                blockThreeColumnsFeaturesEntry.deleteField("backHeadline");
+
+                blockThreeColumnsFeaturesEntry.createField("backHeadline", {
                     type: "Symbol",
-                    name: t.blockThreeColumnsFeaturesEntry.fields.headline,
+                    name: t.blockThreeColumnsFeaturesEntry.fields.backHeadline,
                 });
+
+                blockThreeColumnsFeaturesEntry.moveField("backHeadline").beforeField("backText");
             },
         },
     };
