@@ -1,3 +1,7 @@
+# 6.4.1
+
+-   (bug) Fix type on `BlockThreeColumnsFeaturesEntry`
+
 # 6.4.0
 
 -   (feature) Add support for Table RTE type in RTE fields
