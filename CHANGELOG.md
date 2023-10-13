@@ -1,3 +1,7 @@
+# 6.4.2
+
+-   (bug) Fix invalid migration on `BlockThreeColumnsFeaturesEntry`
+
 # 6.4.1
 
 -   (bug) Fix type on `BlockThreeColumnsFeaturesEntry`
