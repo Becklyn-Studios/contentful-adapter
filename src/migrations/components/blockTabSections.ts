@@ -547,6 +547,19 @@ export const getBlockTabSectionsMigration: ContentfulMigrationGenerator = (
                     validations: getRteValidation(RTE_TYPE_FULL),
                 });
             },
+            14: migration => {
+                const blockTabSectionEntry = migration.editContentType("blockTabSectionEntry");
+
+                blockTabSectionEntry.editField("image", {
+                    type: "Link",
+                    name: t.blockTabSectionTextImage.fields.image,
+                    linkType: "Entry",
+                    validations: [{ linkContentType: ["imageAsset"] }],
+                    required: false,
+                });
+
+                blockTabSectionEntry.changeFieldControl("image", "builtin", "entryLinkEditor");
+            },
         },
     };
 };
