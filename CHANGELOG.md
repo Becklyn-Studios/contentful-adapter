@@ -1,3 +1,7 @@
+# 6.4.3
+
+-   (improvement) Make image on `BlockTabSections` optional
+
 # 6.4.2
 
 -   (bug) Fix invalid migration on `BlockThreeColumnsFeaturesEntry`
