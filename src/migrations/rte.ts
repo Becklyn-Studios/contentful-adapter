@@ -7,6 +7,7 @@ export const RTE_TYPE_STYLED_FONT = "styled-font";
 export const RTE_TYPE_STYLED_FONT_AND_LIST = "styled-font-list";
 export const RTE_TYPE_FULL = "full";
 export const RTE_TYPE_TABLE = "table";
+export const RTE_TYPE_MARKS = "marks";
 
 export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IValidation> => {
     if (version === RTE_TYPE_HEADLINE) {
@@ -28,8 +29,27 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
         ];
     }
 
+    if (version === RTE_TYPE_MARKS) {
+        return [
+            {
+                size: {
+                    max: 256,
+                },
+            },
+            {
+                enabledMarks: [MARKS.BOLD, MARKS.ITALIC, MARKS.UNDERLINE, MARKS.CODE],
+            },
+            {
+                enabledNodeTypes: [],
+            },
+            {
+                nodes: {},
+            },
+        ];
+    }
+
     const enabledMarks: string[] =
-        version !== RTE_TYPE_MINIMAL ? [MARKS.BOLD, MARKS.ITALIC, MARKS.UNDERLINE] : [];
+        version !== RTE_TYPE_MINIMAL ? [MARKS.BOLD, MARKS.ITALIC, MARKS.UNDERLINE, MARKS.CODE] : [];
 
     let enabledNodeTypes =
         version === RTE_TYPE_TABLE
