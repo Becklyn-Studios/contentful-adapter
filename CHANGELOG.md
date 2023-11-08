@@ -1,3 +1,8 @@
+# 6.4.4
+
+- (feature) Add new RTE type `RTE_TYPE_MARKS` which is like headline, but with all marks enabled.
+- (improvement) Allow code RTEs in default enabled marks
+
 # 6.4.3
 
 -   (improvement) Make image on `BlockTabSections` optional
