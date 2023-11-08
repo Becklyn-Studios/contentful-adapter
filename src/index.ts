@@ -64,6 +64,7 @@ export {
     RTE_TYPE_MINIMAL,
     RTE_TYPE_FULL,
     RTE_TYPE_TABLE,
+    RTE_TYPE_MARKS,
 } from "./migrations/rte";
 
 export { migrateBaseBlockFields } from "./migrations/components/block";
