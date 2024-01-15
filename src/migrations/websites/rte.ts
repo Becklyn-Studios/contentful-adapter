@@ -1,6 +1,11 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
 import { migrateBaseBlockFields } from "../components/block";
-import { getRteValidation, RTE_TYPE_HEADLINE, RTE_TYPE_STYLED_FONT_AND_LIST } from "../rte";
+import {
+    getRteValidation,
+    RTE_TYPE_HEADLINE,
+    RTE_TYPE_STYLED_FONT,
+    RTE_TYPE_STYLED_FONT_AND_LIST,
+} from "../rte";
 import migration from "../migration";
 
 const translations = {
@@ -220,6 +225,16 @@ export const getRteBasicsMigration: ContentfulMigrationGenerator = (
                 });
 
                 rteImage.displayField("name");
+            },
+            5: migration => {
+                const rteIcon = migration.editContentType("rteIcon");
+
+                rteIcon.editField("text", {
+                    type: "RichText",
+                    name: t.rteQuote.fields.text,
+                    validations: getRteValidation(RTE_TYPE_STYLED_FONT),
+                    required: true,
+                });
             },
         },
     };
