@@ -1,3 +1,7 @@
+# 6.4.5
+
+- (improvement) Allow marks to be set on RTE Icon text
+
 # 6.4.4
 
 - (feature) Add new RTE type `RTE_TYPE_MARKS` which is like headline, but with all marks enabled.
