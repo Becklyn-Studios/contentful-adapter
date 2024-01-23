@@ -97,6 +97,7 @@ export const normalizeDataForDataConfig = async (
     addThemeToData(outputData, data, service);
     addVersionToData(outputData, data, service);
     addAnchorDataToData(outputData, data, service);
+    await addNinetailed(outputData, data, service);
 
     outputData["id"] = getIdFromData(data);
     outputData["componentKey"] = getComponentKeyFromData(data, service);
@@ -118,6 +119,59 @@ export const normalizeDataForDataConfig = async (
     }
 
     return outputData;
+};
+
+const normalizeNtVariants = async (
+    variants: Entry<any>[],
+    service: ContentfulNormalizerService
+) => {
+    return await Promise.all(
+        variants.map(async (variant: any): Promise<Entry<any>> => {
+            return await normalizeData(variant, service);
+        })
+    );
+};
+
+const addNinetailed = async (
+    outputData: any,
+    data: Entry<any>,
+    service: ContentfulNormalizerService
+): Promise<void> => {
+    if (!data || !data.fields || !data.fields.nt_experiences) {
+        return;
+    }
+
+    const ntFieldData = getValueOfField(data.fields.nt_experiences, service.locale);
+
+    if (!ntFieldData) {
+        return;
+    }
+
+    let variants: Entry<any>[] = [];
+    const rawVariants: Record<string, Entry<any>> = {};
+
+    ntFieldData.forEach((data: Entry<any>) => {
+        variants = data.fields.nt_variants;
+
+        data.fields.nt_variants.forEach((variant: Entry<any>) => {
+            rawVariants[variant.sys.id] = variant;
+        });
+    });
+
+    const normalizedVariants = await normalizeNtVariants(variants, service);
+
+    outputData["ninetailed"] = ntFieldData.map((data: Entry<any>) => ({
+        ...data,
+        fields: {
+            ...data.fields,
+            nt_variants: normalizedVariants.map(function (variant: any) {
+                return {
+                    ...rawVariants[variant.id],
+                    ...variant,
+                };
+            }),
+        },
+    }));
 };
 
 const addThemeToData = (

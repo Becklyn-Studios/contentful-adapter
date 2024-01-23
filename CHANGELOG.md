@@ -1,3 +1,7 @@
+# 6.5.0
+
+- (feature) Add support for Ninetailed contentTypes.
+
 # 6.4.5
 
 - (improvement) Allow marks to be set on RTE Icon text
