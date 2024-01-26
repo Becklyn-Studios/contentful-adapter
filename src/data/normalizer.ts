@@ -97,7 +97,10 @@ export const normalizeDataForDataConfig = async (
     addThemeToData(outputData, data, service);
     addVersionToData(outputData, data, service);
     addAnchorDataToData(outputData, data, service);
-    await addNinetailed(outputData, data, service);
+
+    if (data.fields.nt_experiences) {
+        await addNinetailed(outputData, data, service);
+    }
 
     outputData["id"] = getIdFromData(data);
     outputData["componentKey"] = getComponentKeyFromData(data, service);
@@ -121,15 +124,30 @@ export const normalizeDataForDataConfig = async (
     return outputData;
 };
 
-const normalizeNtVariants = async (
-    variants: Entry<any>[],
-    service: ContentfulNormalizerService
-) => {
-    return await Promise.all(
-        variants.map(async (variant: any): Promise<Entry<any>> => {
-            return await normalizeData(variant, service);
-        })
-    );
+const normalizeVariant = async (variant: any, service: any): Promise<Entry<any>> => {
+    const { labeledLink } = variant.fields;
+    const reference = labeledLink.fields.reference.fields.reference;
+
+    if (reference) {
+        labeledLink.fields = {
+            label: labeledLink.fields.label,
+            reference: {
+                metadata: labeledLink.fields.reference.metadata,
+                sys: labeledLink.fields.reference.sys,
+                fields: {
+                    title: labeledLink.fields.reference.fields.title,
+                    reference: { sys: reference.sys },
+                    inNewTab: labeledLink.fields.reference.fields.inNewTab,
+                },
+            },
+        };
+    }
+
+    return await normalizeData(variant, service);
+};
+
+const processVariants = async (variants: any[], service: any): Promise<Entry<any>[]> => {
+    return await Promise.all(variants.map(variant => normalizeVariant(variant, service)));
 };
 
 const addNinetailed = async (
@@ -137,7 +155,7 @@ const addNinetailed = async (
     data: Entry<any>,
     service: ContentfulNormalizerService
 ): Promise<void> => {
-    if (!data || !data.fields || !data.fields.nt_experiences) {
+    if (!data || !data.fields) {
         return;
     }
 
@@ -151,6 +169,10 @@ const addNinetailed = async (
     const rawVariants: Record<string, Entry<any>> = {};
 
     ntFieldData.forEach((data: Entry<any>) => {
+        if (!data.fields.nt_variants) {
+            return;
+        }
+
         variants = data.fields.nt_variants;
 
         data.fields.nt_variants.forEach((variant: Entry<any>) => {
@@ -158,7 +180,7 @@ const addNinetailed = async (
         });
     });
 
-    const normalizedVariants = await normalizeNtVariants(variants, service);
+    const normalizedVariants = await processVariants(variants, service);
 
     outputData["ninetailed"] = ntFieldData.map((data: Entry<any>) => ({
         ...data,
