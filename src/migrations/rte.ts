@@ -55,8 +55,13 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
         version === RTE_TYPE_TABLE
             ? [BLOCKS.TABLE]
             : version !== RTE_TYPE_MINIMAL && version !== RTE_TYPE_STYLED_FONT
-            ? [INLINES.HYPERLINK, INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK, BLOCKS.UL_LIST]
-            : [INLINES.HYPERLINK, INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK];
+              ? [
+                    INLINES.HYPERLINK,
+                    INLINES.ENTRY_HYPERLINK,
+                    INLINES.ASSET_HYPERLINK,
+                    BLOCKS.UL_LIST,
+                ]
+              : [INLINES.HYPERLINK, INLINES.ENTRY_HYPERLINK, INLINES.ASSET_HYPERLINK];
 
     if (version === RTE_TYPE_FULL) {
         enabledNodeTypes = [
@@ -82,7 +87,14 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
                 ],
                 [BLOCKS.EMBEDDED_ENTRY]: [
                     {
-                        linkContentType: ["rteQuote", "rteMedia", "rteIcon", "rteHint", "rteImage"],
+                        linkContentType: [
+                            "rteMedia",
+                            "rteMediaSlider",
+                            "rteQuote",
+                            "rteIcon",
+                            "rteHint",
+                            "rteImage",
+                        ],
                     },
                 ],
             },
