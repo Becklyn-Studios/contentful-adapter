@@ -1,3 +1,7 @@
+# 6.5.0
+
+- (feature) Add RTE Media Slider, which takes multiple RTE media and wraps them in a slider (can be embedded into RTEs) 
+
 # 6.4.5
 
 - (improvement) Allow marks to be set on RTE Icon text
