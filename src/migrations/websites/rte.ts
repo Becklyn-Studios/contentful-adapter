@@ -1,12 +1,5 @@
 import { ContentfulComponentMigrations, ContentfulMigrationGenerator } from "../types";
-import { migrateBaseBlockFields } from "../components/block";
-import {
-    getRteValidation,
-    RTE_TYPE_HEADLINE,
-    RTE_TYPE_STYLED_FONT,
-    RTE_TYPE_STYLED_FONT_AND_LIST,
-} from "../rte";
-import migration from "../migration";
+import { getRteValidation, RTE_TYPE_STYLED_FONT } from "../rte";
 
 const translations = {
     en: {
@@ -16,6 +9,19 @@ const translations = {
                 name: "Internal Name",
                 media: "Media",
                 footnote: "Footnote",
+            },
+        },
+        rteMediaSlider: {
+            name: "⚙️ Basic > RTE Media > Slider",
+            fields: {
+                name: "Internal Name",
+                headline: "Headline",
+                media: "Media",
+                hasBigImages: {
+                    name: "Use big Images?",
+                    true: "Yes",
+                    false: "No",
+                },
             },
         },
         rteQuote: {
@@ -56,6 +62,19 @@ const translations = {
                 name: "Interner Name",
                 media: "Media",
                 footnote: "Fußnote",
+            },
+        },
+        rteMediaSlider: {
+            name: "⚙️ Basic > RTE Media > Slider",
+            fields: {
+                name: "Interner Name",
+                headline: "Überschrift",
+                media: "Media",
+                hasBigImages: {
+                    name: "Verwende große Bilder?",
+                    true: "Ja",
+                    false: "Nein",
+                },
             },
         },
         rteQuote: {
@@ -235,6 +254,45 @@ export const getRteBasicsMigration: ContentfulMigrationGenerator = (
                     validations: getRteValidation(RTE_TYPE_STYLED_FONT),
                     required: true,
                 });
+            },
+            6: migration => {
+                const slider = migration.createContentType("rteMediaSlider", {
+                    name: t.rteMediaSlider.name,
+                });
+
+                slider.createField("name", {
+                    type: "Symbol",
+                    name: t.rteMediaSlider.fields.name,
+                    required: true,
+                });
+
+                slider.createField("headline", {
+                    type: "Symbol",
+                    name: t.rteMediaSlider.fields.headline,
+                });
+
+                slider.createField("media", {
+                    type: "Array",
+                    name: t.rteMediaSlider.fields.media,
+                    items: {
+                        type: "Link",
+                        linkType: "Entry",
+                        validations: [{ linkContentType: ["rteMedia"] }],
+                    },
+                    required: true,
+                });
+
+                slider.createField("hasBigImages", {
+                    type: "Boolean",
+                    name: t.rteMediaSlider.fields.hasBigImages.name,
+                });
+
+                slider.changeFieldControl("hasBigImages", "builtin", "boolean", {
+                    trueLabel: t.rteMediaSlider.fields.hasBigImages.true,
+                    falseLabel: t.rteMediaSlider.fields.hasBigImages.false,
+                });
+
+                slider.displayField("name");
             },
         },
     };
