@@ -1,3 +1,7 @@
+# 6.6.0
+
+- (feature) Enable sub- & superscript in marks
+
 # 6.5.0
 
 - (feature) Add RTE Media Slider, which takes multiple RTE media and wraps them in a slider (can be embedded into RTEs) 
