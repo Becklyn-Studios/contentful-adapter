@@ -49,7 +49,16 @@ export const getRteValidation = (version: string = RTE_TYPE_MINIMAL): Array<IVal
     }
 
     const enabledMarks: string[] =
-        version !== RTE_TYPE_MINIMAL ? [MARKS.BOLD, MARKS.ITALIC, MARKS.UNDERLINE, MARKS.CODE] : [];
+        version !== RTE_TYPE_MINIMAL
+            ? [
+                  MARKS.BOLD,
+                  MARKS.ITALIC,
+                  MARKS.UNDERLINE,
+                  MARKS.CODE,
+                  MARKS.SUBSCRIPT,
+                  MARKS.SUPERSCRIPT,
+              ]
+            : [];
 
     let enabledNodeTypes =
         version === RTE_TYPE_TABLE
