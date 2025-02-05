@@ -87,13 +87,23 @@ const normalizeArrayRelationTypeData = async (
     }
 
     if (isArray(relatedType)) {
-        const normalizedData: any[] = [];
+        let normalizedData: any[] = [];
 
         for (let i = 0; i < data.length; i++) {
             const normalized = await normalizeDynamicDataConfigData(relatedType, data[i], service);
 
             if (normalized) {
                 normalizedData.push(normalized);
+            }
+
+            const normalizedDataCustomNormalizer = await normalizeDynamicDataCustomNormalizer(
+                relatedType,
+                data[i],
+                service
+            );
+
+            if (normalizedDataCustomNormalizer.length > 0) {
+                normalizedData = [...normalizedData, ...normalizedDataCustomNormalizer];
             }
         }
 
@@ -191,4 +201,27 @@ export const normalizeDynamicDataConfigData = async (
     }
 
     return await normalizeDataForDataConfig(fieldData, dataConfig, service);
+};
+
+const normalizeDynamicDataCustomNormalizer = async (
+    dataTypes: (string | BaseComponentConfig)[],
+    fieldData: any,
+    service: ContentfulNormalizerService
+): Promise<any | null> => {
+    const normalizedData: any[] = [];
+
+    for (const dataType of dataTypes) {
+        const normalizer =
+            "string" === typeof dataType ? service.getCustomNormalizer(dataType) : null;
+
+        if (normalizer) {
+            const value = await normalizer(fieldData, service);
+
+            if (value) {
+                normalizedData.push(value);
+            }
+        }
+    }
+
+    return normalizedData;
 };
