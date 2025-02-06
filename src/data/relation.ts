@@ -102,8 +102,8 @@ const normalizeArrayRelationTypeData = async (
                 service
             );
 
-            if (normalizedDataCustomNormalizer.length > 0) {
-                normalizedData = [...normalizedData, ...normalizedDataCustomNormalizer];
+            if (normalizedDataCustomNormalizer) {
+                normalizedData.push(normalizedDataCustomNormalizer);
             }
         }
 
@@ -208,8 +208,6 @@ const normalizeDynamicDataCustomNormalizer = async (
     fieldData: any,
     service: ContentfulNormalizerService
 ): Promise<any | null> => {
-    const normalizedData: any[] = [];
-
     for (const dataType of dataTypes) {
         const normalizer =
             "string" === typeof dataType ? service.getCustomNormalizer(dataType) : null;
@@ -218,10 +216,10 @@ const normalizeDynamicDataCustomNormalizer = async (
             const value = await normalizer(fieldData, service);
 
             if (value) {
-                normalizedData.push(value);
+                return value;
             }
         }
     }
 
-    return normalizedData;
+    return null;
 };
