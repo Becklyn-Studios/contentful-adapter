@@ -87,7 +87,7 @@ const normalizeArrayRelationTypeData = async (
     }
 
     if (isArray(relatedType)) {
-        let normalizedData: any[] = [];
+        const normalizedData: any[] = [];
 
         for (let i = 0; i < data.length; i++) {
             const normalized = await normalizeDynamicDataConfigData(relatedType, data[i], service);
