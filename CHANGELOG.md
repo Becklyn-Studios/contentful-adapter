@@ -1,3 +1,7 @@
+# 6.7.0
+
+- (improvement) Allow custom normalizer in multiple field
+
 # 6.6.0
 
 - (feature) Enable sub- & superscript in marks
